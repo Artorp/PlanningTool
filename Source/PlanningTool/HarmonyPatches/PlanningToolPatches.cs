@@ -16,6 +16,15 @@ namespace PlanningTool.HarmonyPatches
         }
     }
 
+    [HarmonyPatch(typeof(Game), "DestroyInstances")]
+    public class GameDestroyInstances
+    {
+        public static void Postfix()
+        {
+            PlanningToolInterface.DestroyInstance();
+        }
+    }
+
     [HarmonyPatch(typeof(PlayerController), "OnPrefabInit")]
     public class PlayerControllerOnPrefabInitPatch
     {
