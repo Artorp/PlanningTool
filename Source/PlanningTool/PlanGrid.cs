@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace PlanningTool
@@ -17,6 +16,11 @@ namespace PlanningTool
 
         public static void Clear()
         {
+            foreach (var gameObject in PlansDict.Values)
+            {
+                Object.Destroy(gameObject);
+            }
+
             PlansDict = null;
         }
 
@@ -26,8 +30,7 @@ namespace PlanningTool
             {
                 get
                 {
-                    GameObject go = null;
-                    PlansDict.TryGetValue(cell, out go);
+                    PlansDict.TryGetValue(cell, out var go);
                     return go;
                 }
                 set

@@ -1,9 +1,6 @@
-using System;
 using System.Reflection;
 using HarmonyLib;
-using PeterHan.PLib.UI;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace PlanningTool
 {
@@ -16,7 +13,6 @@ namespace PlanningTool
         protected override void OnPrefabInit()
         {
             base.OnPrefabInit();
-            Debug.Log("PlanningToolInterface.OnPrefabInit()");
             Instance = this;
 
             // populate all fields tagged with [SerializeField] (or public) in DragTool that is probably
@@ -56,13 +52,23 @@ namespace PlanningTool
                 // TODO: allow overwrite with different plan type (for now, only gray square)
                 return;
             }
+            var go = CreatePlanTile(cell);
+
+            SaveLoadPlans.Instance.PlanState[cell] = new SaveLoadPlans.PlanData
+            {
+                Cell = cell
+            };
+            PlanGrid.Plans[cell] = go;
+        }
+
+        public static GameObject CreatePlanTile(int cell)
+        {
             var go = PTObjectTemplates.CreatePlanningTileMesh("PlanOverlay");
             var pos = Grid.CellToPosCBC(cell, Grid.SceneLayer.TileFront);
             pos.z -= 0.1f;
             go.transform.localPosition = pos;
             go.SetActive(true);
-
-            PlanGrid.Plans[cell] = go;
+            return go;
         }
 
         protected override void OnActivateTool()

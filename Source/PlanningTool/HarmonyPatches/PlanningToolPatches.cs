@@ -4,6 +4,15 @@ using UnityEngine;
 
 namespace PlanningTool.HarmonyPatches
 {
+    [HarmonyPatch(typeof(SaveGame), "OnPrefabInit")]
+    public class SaveGame_OnPrefabInit_Patch
+    {
+        public static void Postfix(SaveGame __instance)
+        {
+            __instance.gameObject.AddOrGet<SaveLoadPlans>();
+        }
+    }
+
     [HarmonyPatch(typeof(Db), nameof(Db.Initialize))]
     public class Db_Initialize_Patch
     {
@@ -43,6 +52,7 @@ namespace PlanningTool.HarmonyPatches
             PlanningToolInterface.DestroyInstance();
             PlanningSubMenu.DestroyInstance();
             PlanGrid.Clear();
+            SaveLoadPlans.DestroyInstance();
         }
     }
 
@@ -83,8 +93,8 @@ namespace PlanningTool.HarmonyPatches
                 return;
             }
 
-            methodBuildRowToggles.Invoke(ToolMenu.Instance, new object[] { subMenu.planTools });
-            methodBuildToolToggles.Invoke(ToolMenu.Instance, new object[] { subMenu.planTools });
+            methodBuildRowToggles.Invoke(ToolMenu.Instance, new object[] { subMenu.PlanTools });
+            methodBuildToolToggles.Invoke(ToolMenu.Instance, new object[] { subMenu.PlanTools });
         }
     }
 

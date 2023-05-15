@@ -10,7 +10,7 @@ namespace PlanningTool
     {
         public static PlanningSubMenu Instance { private set; get; }
 
-        public List<ToolMenu.ToolCollection> planTools = new List<ToolMenu.ToolCollection>();
+        public List<ToolMenu.ToolCollection> PlanTools = new List<ToolMenu.ToolCollection>();
 
         public PlanningSubMenu()
         {
@@ -21,7 +21,7 @@ namespace PlanningTool
             }
             else
             {
-                Debug.LogWarning("PlanningSubMenu instantiated but singleton instance already exists??");
+                Debug.LogWarning("[PlanningTool] PlanningSubMenu instantiated but singleton instance already exists.");
             }
         }
 
@@ -32,8 +32,8 @@ namespace PlanningTool
 
         public void CreateSubmenuTools()
         {
-            planTools.Add(ToolMenu.CreateToolCollection(STRINGS.UI.TOOLS.DIG.NAME, "icon_action_dig", Action.Dig, "DigTool", STRINGS.UI.TOOLTIPS.DIGBUTTON, false));
-            planTools.Add(ToolMenu.CreateToolCollection(STRINGS.UI.TOOLS.CANCEL.NAME, "icon_action_cancel", Action.BuildingCancel, "CancelTool", STRINGS.UI.TOOLTIPS.CANCELBUTTON, false));
+            PlanTools.Add(ToolMenu.CreateToolCollection(STRINGS.UI.TOOLS.DIG.NAME, "icon_action_dig", Action.Dig, "DigTool", STRINGS.UI.TOOLTIPS.DIGBUTTON, false));
+            PlanTools.Add(ToolMenu.CreateToolCollection(STRINGS.UI.TOOLS.CANCEL.NAME, "icon_action_cancel", Action.BuildingCancel, "CancelTool", STRINGS.UI.TOOLTIPS.CANCELBUTTON, false));
         }
 
         public void InstantiateCollectionsUI()
@@ -42,7 +42,7 @@ namespace PlanningTool
             // as we want to have the planning tool active while using the sub menu
             var toolRow = Util.KInstantiateUI(ToolMenu.Instance.prefabToolRow, ToolMenu.Instance.gameObject, true);
             var toolSet = Util.KInstantiateUI(ToolMenu.Instance.sandboxToolSet, toolRow, true);
-            foreach (var tc in planTools)
+            foreach (var tc in PlanTools)
             {
                 tc.toggle = Util.KInstantiateUI(tc.tools.Count > 1 ? ToolMenu.Instance.collectionIconPrefab : ToolMenu.Instance.sandboxToolIconPrefab, toolSet, true);
                 KToggle component = tc.toggle.GetComponent<KToggle>();

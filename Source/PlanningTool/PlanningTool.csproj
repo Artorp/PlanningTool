@@ -93,6 +93,7 @@
         <Compile Include="PTAssets.cs" />
         <Compile Include="PTObjectTemplates.cs" />
         <Compile Include="PTStrings.cs" />
+        <Compile Include="SaveLoadPlans.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
