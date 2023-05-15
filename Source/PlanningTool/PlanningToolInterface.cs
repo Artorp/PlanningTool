@@ -24,7 +24,8 @@ namespace PlanningTool
 
             FieldInfo areaVisualizerField = AccessTools.Field(typeof(DragTool), "areaVisualizer");
 
-            visualizer = Util.KInstantiate(DigTool.Instance.visualizer, gameObject);
+            visualizer = Util.KInstantiate(DigTool.Instance.visualizer);
+            visualizerLayer = Grid.SceneLayer.Background;
             var avOriginal = areaVisualizerField.GetValue(DigTool.Instance) as GameObject;
             var av = Util.KInstantiate(avOriginal, gameObject);
             av.SetActive(false);

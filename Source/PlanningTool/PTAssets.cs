@@ -1,6 +1,5 @@
 using System.IO;
 using System.Reflection;
-using PeterHan.PLib.UI;
 using UnityEngine;
 
 namespace PlanningTool
@@ -12,7 +11,16 @@ namespace PlanningTool
         public const string RectangleImageAssemblyPath = "PlanningTool.Images.Rectangle.png";
         public static Sprite RectangleSprite;
 
+        public const string CirclePath = "Circle.png";
+        public static Material CircleMaterial;
+        public const string RectanglePath = "Rectangle.png";
         public static Material RectangleMaterial;
+        public const string SmallRectPath = "SmallRect.png";
+        public static Material SmallRectMaterial;
+        public const string SelectionOutlinePath = "SelectionOutline.png";
+        public static Material SelectionOutlineMaterial;
+
+        public static Shader SelectedShader;
 
         public static void Initialize()
         {
@@ -23,37 +31,57 @@ namespace PlanningTool
             }
 
             // TODO: check performance of both SpriteRenderer and MeshRenderer, use best one
-            RectangleSprite = PUIUtils.LoadSprite(RectangleImageAssemblyPath);
+            // RectangleSprite = PUIUtils.LoadSprite(RectangleImageAssemblyPath);
 
             // attempt to find suiting shader with blended transparency
+            InitializeShader();
+            var grey = new Color(0.96f, 0.96f, 0.96f, 0.5f);
+            var tex = LoadResourceFileTexture(CirclePath);
+            CircleMaterial = CreateMaterialWithTexture(tex, grey);
+            tex = LoadResourceFileTexture(RectanglePath);
+            RectangleMaterial = CreateMaterialWithTexture(tex, grey);
+            tex = LoadResourceFileTexture(SmallRectPath);
+            SmallRectMaterial = CreateMaterialWithTexture(tex, grey);
+            tex = LoadResourceFileTexture(SelectionOutlinePath);
+            SelectionOutlineMaterial = CreateMaterialWithTexture(tex, grey);
+
+            IsInitialized = true;
+        }
+
+        private static void InitializeShader()
+        {
             var blendedShader = Shader.Find("Klei/Area Visualizer");
             blendedShader = null;
             if (blendedShader == null)
             {
                 // Klei/BuildingCell is blended, but has a color tint
-                Debug.LogWarning("[PlanningTool] Unable to find shader 'Klei/Area Visualizer', attempting fallback shader 'Klei/BuildingCell'");
+                Debug.LogWarning(
+                    "[PlanningTool] Unable to find shader 'Klei/Area Visualizer', attempting fallback shader 'Klei/BuildingCell'");
                 blendedShader = Shader.Find("Klei/BuildingCell");
             }
 
             if (blendedShader == null)
             {
-                Debug.LogWarning("[PlanningTool] Unable to find shader 'Klei/BuildingCell', attempting fallback to non-blended shader 'Klei/Unlit Transparent'");
+                Debug.LogWarning(
+                    "[PlanningTool] Unable to find shader 'Klei/BuildingCell', attempting fallback to non-blended shader 'Klei/Unlit Transparent'");
                 blendedShader = Shader.Find("Klei/Unlit Transparent");
             }
 
             if (blendedShader == null)
             {
                 Debug.LogWarning("[PlanningTool] No suitable shader found, falling back to digPlacer material");
-                RectangleMaterial = new Material(Assets.instance.digPlacerAssets.materials[0]);
+                blendedShader = Assets.instance.digPlacerAssets.materials[0].shader;
             }
-            else
-            {
-                RectangleMaterial = new Material(blendedShader);
-            }
-            RectangleMaterial.mainTexture = LoadEmbeddedTexture(RectangleImageAssemblyPath);
-            RectangleMaterial.color = new Color(0.96f, 0.96f, 0.96f, 0.5f);
 
-            IsInitialized = true;
+            SelectedShader = blendedShader;
+        }
+
+        public static Material CreateMaterialWithTexture(Texture2D texture, Color color)
+        {
+            var material =  new Material(SelectedShader);
+            material.mainTexture = texture;
+            material.color = color;
+            return material;
         }
 
         public static Texture2D LoadEmbeddedTexture(string resourcePath)
@@ -84,6 +112,19 @@ namespace PlanningTool
             {
                 Debug.LogError($"Failed to load texture {RectangleImageAssemblyPath}: {e.Message}" );
             }
+
+            return texture;
+        }
+
+        public static Texture2D LoadResourceFileTexture(string fileName, TextureFormat textureFormat = TextureFormat.RGBA32)
+        {
+            string fullPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty, "Resources", fileName);
+            Texture2D texture = new Texture2D(2, 2, textureFormat, false)
+            {
+                filterMode = FilterMode.Trilinear
+            };
+            byte[] data = File.ReadAllBytes(fullPath);
+            texture.LoadImage(data);
 
             return texture;
         }
