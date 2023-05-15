@@ -4,8 +4,18 @@ using UnityEngine;
 
 namespace PlanningTool.HarmonyPatches
 {
+    [HarmonyPatch(typeof(Db), nameof(Db.Initialize))]
+    public class Db_Initialize_Patch
+    {
+        public static void Postfix()
+        {
+            PTAssets.Initialize();
+            PTObjectTemplates.CreateTemplates();
+        }
+    }
+
     [HarmonyPatch(typeof(ToolMenu), "CreateBasicTools")]
-    public class ToolMenuCreateBasicTools
+    public class ToolMenu_CreateBasicTools_Patch
     {
         public static void Postfix(ToolMenu __instance)
         {
@@ -17,16 +27,17 @@ namespace PlanningTool.HarmonyPatches
     }
 
     [HarmonyPatch(typeof(Game), "DestroyInstances")]
-    public class GameDestroyInstances
+    public class Game_DestroyInstances_Patch
     {
         public static void Postfix()
         {
             PlanningToolInterface.DestroyInstance();
+            PlanningSubMenu.DestroyInstance();
         }
     }
 
     [HarmonyPatch(typeof(PlayerController), "OnPrefabInit")]
-    public class PlayerControllerOnPrefabInitPatch
+    public class PlayerController_OnPrefabInit_Patch
     {
         public static void Postfix(PlayerController __instance)
         {
@@ -41,7 +52,7 @@ namespace PlanningTool.HarmonyPatches
     }
 
     [HarmonyPatch(typeof(ToolMenu), "OnPrefabInit")]
-    public class ToolMenuOnPrefabInit
+    public class ToolMenu_OnPrefabInit_Patch
     {
         public static void Postfix()
         {

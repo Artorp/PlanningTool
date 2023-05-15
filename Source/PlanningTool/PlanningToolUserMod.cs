@@ -18,7 +18,6 @@ namespace PlanningTool
             var pActionManager = new PActionManager();
             var planningToolPAction = pActionManager.CreateAction("planningtool.use_planning_tool", PTStrings.ACTION_PLANNING_TOOL_NAME);
             PlanningToolAction = planningToolPAction.GetKAction();
-
         }
     }
 }

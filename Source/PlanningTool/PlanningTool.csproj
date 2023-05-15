@@ -64,6 +64,10 @@
           <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
           <Private>False</Private>
         </Reference>
+        <Reference Include="UnityEngine.ImageConversionModule">
+          <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.ImageConversionModule.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
         <Reference Include="UnityEngine.InputLegacyModule">
           <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
           <Private>False</Private>
@@ -85,6 +89,8 @@
         <Compile Include="PlanningToolInterface.cs" />
         <Compile Include="PlanningToolUserMod.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="PTAssets.cs" />
+        <Compile Include="PTObjectTemplates.cs" />
         <Compile Include="PTStrings.cs" />
     </ItemGroup>
     <ItemGroup>

@@ -25,6 +25,10 @@ namespace PlanningTool
             }
         }
 
+        public static void DestroyInstance()
+        {
+            Instance = null;
+        }
 
         public void CreateSubmenuTools()
         {

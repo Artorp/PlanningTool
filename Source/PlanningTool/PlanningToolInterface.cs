@@ -47,57 +47,14 @@ namespace PlanningTool
 
         protected override void OnDragTool(int cell, int distFromOrigin)
         {
-            Debug.Log("PlanningToolInterface.OnDragTool with cell " + cell);
-            // InterfaceTool.ActiveConfig.DigAction.Uproot(cell);
-            // InterfaceTool.ActiveConfig.DigAction.Dig(cell, distFromOrigin);
             // TODO: manage this on my own implementation of Grid that keeps track of plans?
             // for now, just add gameobjects with custom texture
-            var go = new GameObject("PlanOverlay");
-            SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
-            sr.color = new Color(0.96f, 0.95f, 0.96f, 0.5f);
-            // TODO: move sprite loading to own class
-            Sprite sprite = PUIUtils.LoadSprite("PlanningTool.Images.Rectangle.png");
-            sr.sprite = sprite;
-            var pos = Grid.CellToPosCCC(cell, Grid.SceneLayer.TileFront);
+            var go = PTObjectTemplates.CreatePlanningTileMesh("PlanOverlay");
+            var pos = Grid.CellToPosCBC(cell, Grid.SceneLayer.TileFront);
+            pos.z -= 0.1f;
             go.transform.localPosition = pos;
-            go.transform.localScale = new Vector3(
-                Grid.CellSizeInMeters / (sprite.texture.width / sprite.pixelsPerUnit),
-                Grid.CellSizeInMeters / (sprite.texture.height / sprite.pixelsPerUnit)
-            );
+            go.SetActive(true);
 
-            go.SetLayerRecursively(LayerMask.NameToLayer("PlaceWithDepth"));
-
-            // TODO: use distFromOrigin as a delay
-            /*
-            float animationDelay = distFromOrigin * 0.02f;
-            go.AddComponent<EasingAnimations>().scales = new EasingAnimations.AnimationScales[2]
-            {
-                new EasingAnimations.AnimationScales()
-                {
-                    name = "ScaleUp",
-                    startScale = 0.0f,
-                    endScale = 1f,
-                    type = EasingAnimations.AnimationScales.AnimationType.EaseInOutBack,
-                    easingMultiplier = 5f
-                },
-                new EasingAnimations.AnimationScales()
-                {
-                    name = "ScaleDown",
-                    startScale = 1f,
-                    endScale = 0.0f,
-                    type = EasingAnimations.AnimationScales.AnimationType.EaseOutBack,
-                    easingMultiplier = 1f
-                }
-            };
-            go.AddOrGet<EasingAnimations>().PlayAnimation("ScaleUp", Mathf.Max(0.0f, animationDelay));
-            */
-
-            GameObject gameObject = Util.KInstantiate(Assets.GetPrefab(new Tag("DigPlacer")));
-            Debug.Log($"digPlacerAssets has {Assets.instance.digPlacerAssets.materials.Length} materials.");
-            var mat = Assets.instance.digPlacerAssets.materials[0];
-            Debug.Log($"color={mat.color} instanceable={mat.enableInstancing}");
-            Debug.Log($"tex={mat.mainTexture}, tex offset={mat.mainTextureOffset} tex scale={mat.mainTextureScale}");
-            Debug.Log($"tex dims: width={mat.mainTexture.width} height={mat.mainTexture.height}");
             // todo:
             // show grid when placing plan (like when placing building)
             // show the plan to be placed when in tool menu
