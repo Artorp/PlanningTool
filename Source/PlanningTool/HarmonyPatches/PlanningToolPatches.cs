@@ -88,4 +88,29 @@ namespace PlanningTool.HarmonyPatches
         }
     }
 
+    [HarmonyPatch(typeof(CancelTool), "OnDragTool")]
+    public class CancelTool_Patch
+    {
+        public static string PLANNINGTOOL_PLAN = nameof(PLANNINGTOOL_PLAN);
+
+        [HarmonyPatch("GetDefaultFilters")]
+        [HarmonyPostfix]
+        public static void GetDefaultFiltersPatch(Dictionary<string, ToolParameterMenu.ToggleState> filters)
+        {
+            filters.Add(PLANNINGTOOL_PLAN, ToolParameterMenu.ToggleState.Off);
+        }
+
+        [HarmonyPatch("OnDragTool")]
+        [HarmonyPostfix]
+        public static void OnDragToolPatch(int cell, CancelTool __instance)
+        {
+            var go = PlanGrid.Plans[cell];
+            if (go != null && __instance.IsActiveLayer(PLANNINGTOOL_PLAN))
+            {
+                PlanGrid.Plans[cell] = null;
+                Object.Destroy(go);
+            }
+        }
+    }
+
 }

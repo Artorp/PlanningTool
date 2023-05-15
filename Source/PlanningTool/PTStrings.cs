@@ -6,5 +6,7 @@ namespace PlanningTool
 
         public static LocString PLANNING_TOOL_NAME = "Planning";
         public static LocString PLANNING_TOOL_TOOLTIP = "Create a plan {0}";
+
+        public static LocString PLANNING_TOOL_FILTER_ITEM = "Plans";
     }
 }
