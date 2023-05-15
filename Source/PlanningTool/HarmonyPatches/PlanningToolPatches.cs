@@ -26,6 +26,15 @@ namespace PlanningTool.HarmonyPatches
         }
     }
 
+    [HarmonyPatch(typeof(GridSettings), nameof(GridSettings.Reset))]
+    public class GridSettings_Reset_Patch
+    {
+        public static void Postfix()
+        {
+            PlanGrid.Initialize();
+        }
+    }
+
     [HarmonyPatch(typeof(Game), "DestroyInstances")]
     public class Game_DestroyInstances_Patch
     {
@@ -33,6 +42,7 @@ namespace PlanningTool.HarmonyPatches
         {
             PlanningToolInterface.DestroyInstance();
             PlanningSubMenu.DestroyInstance();
+            PlanGrid.Clear();
         }
     }
 

@@ -22,6 +22,10 @@ namespace PlanningTool
             // populate all fields tagged with [SerializeField] (or public) in DragTool that is probably
             // set through the Unity inspector, using values from DigTool
 
+            // TODO:
+            // show grid effect when placing (like when placing building)
+            // show the plan to be placed when in tool menu
+
             FieldInfo areaVisualizerField = AccessTools.Field(typeof(DragTool), "areaVisualizer");
 
             visualizer = Util.KInstantiate(DigTool.Instance.visualizer, gameObject);
@@ -47,18 +51,18 @@ namespace PlanningTool
 
         protected override void OnDragTool(int cell, int distFromOrigin)
         {
-            // TODO: manage this on my own implementation of Grid that keeps track of plans?
-            // for now, just add gameobjects with custom texture
+            if (PlanGrid.Plans[cell] != null)
+            {
+                // TODO: allow overwrite with different plan type (for now, only gray square)
+                return;
+            }
             var go = PTObjectTemplates.CreatePlanningTileMesh("PlanOverlay");
             var pos = Grid.CellToPosCBC(cell, Grid.SceneLayer.TileFront);
             pos.z -= 0.1f;
             go.transform.localPosition = pos;
             go.SetActive(true);
 
-            // todo:
-            // show grid when placing plan (like when placing building)
-            // show the plan to be placed when in tool menu
-            // todo: only place icon if it doesn't exist in the grid, see DigTool.PlaceDig
+            PlanGrid.Plans[cell] = go;
         }
 
         protected override void OnActivateTool()

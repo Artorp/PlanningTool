@@ -84,6 +84,7 @@
     <ItemGroup>
         <Compile Include="CustomDragTool.cs" />
         <Compile Include="HarmonyPatches\PlanningToolPatches.cs" />
+        <Compile Include="PlanGrid.cs" />
         <Compile Include="PlanningSubMenu.cs" />
         <Compile Include="PlanningToolHoverCard.cs" />
         <Compile Include="PlanningToolInterface.cs" />
