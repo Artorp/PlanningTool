@@ -50,7 +50,8 @@ namespace PlanningTool.HarmonyPatches
         public static void Postfix()
         {
             PlanningToolInterface.DestroyInstance();
-            PlanningSubMenu.DestroyInstance();
+            PlanningToolBrushMenu.DestroyInstance();
+            PlanningToolSettings.DestroyInstance();
             PlanGrid.Clear();
             SaveLoadPlans.DestroyInstance();
         }
@@ -76,25 +77,9 @@ namespace PlanningTool.HarmonyPatches
     {
         public static void Postfix()
         {
-            // set up submenu
-            var subMenu = new PlanningSubMenu();
-            subMenu.CreateSubmenuTools();
-            subMenu.InstantiateCollectionsUI();
-            var methodBuildRowToggles = AccessTools.Method(typeof(ToolMenu), "BuildRowToggles");
-            if (methodBuildRowToggles == null)
-            {
-                Debug.LogWarning("ToolMenu.BuildRowToggles method not found!");
-                return;
-            }
-            var methodBuildToolToggles = AccessTools.Method(typeof(ToolMenu), "BuildToolToggles");
-            if (methodBuildToolToggles == null)
-            {
-                Debug.LogWarning("ToolMenu.BuildToolToggles method not found!");
-                return;
-            }
-
-            methodBuildRowToggles.Invoke(ToolMenu.Instance, new object[] { subMenu.PlanTools });
-            methodBuildToolToggles.Invoke(ToolMenu.Instance, new object[] { subMenu.PlanTools });
+            // set up planning tool submenu
+            var screen = ToolMenu.Instance.gameObject.AddComponent<PlanningToolBrushMenu>();
+            screen.Activate();
         }
     }
 
@@ -118,6 +103,7 @@ namespace PlanningTool.HarmonyPatches
             if (go != null && __instance.IsActiveLayer(PLANNINGTOOL_PLAN))
             {
                 PlanGrid.Plans[cell] = null;
+                SaveLoadPlans.Instance.PlanState.Remove(cell);
                 Object.Destroy(go);
             }
         }

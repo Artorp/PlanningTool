@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KSerialization;
@@ -10,12 +11,27 @@ namespace PlanningTool
         [Serialize]
         public Dictionary<int, PlanData> PlanState;
 
+        [Serialize] private float _activeFloat;
+        public event Action<float> OnActiveAlphaChange;
+
+        public float ActiveFloat
+        {
+            get => _activeFloat;
+            set
+            {
+                if (Math.Abs(_activeFloat - value) < 0.001f) return;
+                _activeFloat = value;
+                OnActiveAlphaChange.Signal(value);
+            }
+        }
+
         public static SaveLoadPlans Instance { get; private set; }
 
         public SaveLoadPlans()
         {
             PlanState = new Dictionary<int, PlanData>();
             Instance = this;
+            _activeFloat = 0.2f;
         }
 
         public static void DestroyInstance()
@@ -35,15 +51,30 @@ namespace PlanningTool
             Debug.Log($"[PlanningTool] Loading {PlanState.Count} saved plans from save file.");
             foreach (var item in PlanState.Values)
             {
-                PlanGrid.Plans[item.Cell] = PlanningToolInterface.CreatePlanTile(item.Cell);
+                PlanGrid.Plans[item.Cell] = PlanningToolInterface.CreatePlanTile(item);
             }
         }
 
         [SerializationConfig(MemberSerialization.OptIn)]
         public class PlanData
         {
-            [Serialize]
-            public int Cell;
+            [Serialize] public int Cell;
+            [Serialize] public PlanShape Shape;
+            [Serialize] public PlanColor Color;
+
+            public bool IsEquivalentTo(PlanData other)
+            {
+                if (ReferenceEquals(null, other)) return false;
+                if (ReferenceEquals(this, other)) return true;
+                return Cell == other.Cell && Shape == other.Shape && Color == other.Color;
+            }
+
+            public static bool IsEquivalent(PlanData first, PlanData second)
+            {
+                if (ReferenceEquals(first, second)) return true;
+                if (first is null) return false;
+                return first.IsEquivalentTo(second);
+            }
         }
     }
 }

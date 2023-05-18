@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace PlanningTool
 {
@@ -72,12 +74,44 @@ namespace PlanningTool
             return go;
         }
 
-        public static GameObject CreatePlanningTileMesh(string id)
+        public static GameObject CreatePlanningTileMesh(string id, SaveLoadPlans.PlanData planData)
         {
             var go = Object.Instantiate(planningTileMesh);
             go.name = id;
+            var meshRenderer = go.transform.Find("Mask").GetComponent<MeshRenderer>();
+            if (planData.Shape == PlanShape.Circle)
+            {
+                meshRenderer.sharedMaterial = PTAssets.CircleMaterial;
+            }
+            else if (planData.Shape == PlanShape.Diamond)
+            {
+                meshRenderer.sharedMaterial = PTAssets.DiamondMaterial;
+            }
+
+            var color = planData.Color.AsColor();
+            color.a = SaveLoadPlans.Instance.ActiveFloat;
+            meshRenderer.material.color = color;
+
             go.SetLayerRecursively(LayerMask.NameToLayer("PlaceWithDepth"));
             return go;
+        }
+
+        public static GameObject CreateSquareButton(string name, string sprite, GameObject parent)
+        {
+            var s = Assets.GetSprite((HashedString) sprite);
+            return CreateSquareButton(name, s, parent);
+        }
+
+        public static GameObject CreateSquareButton(string name, Sprite sprite, GameObject parent)
+        {
+            var button = Util.KInstantiateUI(ToolMenu.Instance.sandboxToolIconPrefab, parent, true);
+            button.name = name;
+            button.transform.Find("FG").GetComponent<Image>().sprite = sprite;
+            var lt = button.transform.Find("Text")?.GetComponent<LocText>();
+            if (lt != null) lt.text = name;
+            var tComp = button.GetComponent<KToggle>();
+            tComp.artExtension.animator = null;
+            return button;
         }
     }
 }
