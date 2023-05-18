@@ -32,6 +32,20 @@ namespace PlanningTool
             ppanel.Alignment = TextAnchor.LowerRight;
             ppanel.Spacing = 15;
 
+            var hideButton = PTObjectTemplates.CreateSquareButton("Hide / show plans", PTAssets.WhiteBGSprite, null);
+            hideButton.GetComponent<KToggle>().onValueChanged += b =>
+            {
+                SaveLoadPlans.Instance.HidePlans = b;
+            };
+            SaveLoadPlans.Instance.OnHidePlansChanged += b =>
+            {
+                foreach (var plan in PlanGrid.PlansDict.Values)
+                {
+                    plan.SetActive(!b);
+                }
+            };
+            ppanel.AddChild(new UIComponentWrapper(hideButton));
+
             var maxSliderValue = 20f;
             var alphaSlider = new PSliderSingle("ActiveAlphaSlider")
             {

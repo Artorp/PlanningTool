@@ -108,6 +108,7 @@
         <Compile Include="PTObjectTemplates.cs" />
         <Compile Include="PTStrings.cs" />
         <Compile Include="SaveLoadPlans.cs" />
+        <Compile Include="UIComponentWrapper.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />

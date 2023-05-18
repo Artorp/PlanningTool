@@ -25,6 +25,20 @@ namespace PlanningTool
             }
         }
 
+        [Serialize] private bool _hidePlans;
+        public event Action<bool> OnHidePlansChanged;
+
+        public bool HidePlans
+        {
+            get => _hidePlans;
+            set
+            {
+                if (value == _hidePlans) return;
+                _hidePlans = value;
+                OnHidePlansChanged.Signal(value);
+            }
+        }
+
         public static SaveLoadPlans Instance { get; private set; }
 
         public SaveLoadPlans()
@@ -32,6 +46,7 @@ namespace PlanningTool
             PlanState = new Dictionary<int, PlanData>();
             Instance = this;
             _activeFloat = 0.2f;
+            _hidePlans = false;
         }
 
         public static void DestroyInstance()
@@ -51,7 +66,9 @@ namespace PlanningTool
             Debug.Log($"[PlanningTool] Loading {PlanState.Count} saved plans from save file.");
             foreach (var item in PlanState.Values)
             {
-                PlanGrid.Plans[item.Cell] = PlanningToolInterface.CreatePlanTile(item);
+                var gameObject = PlanningToolInterface.CreatePlanTile(item);
+                PlanGrid.Plans[item.Cell] = gameObject;
+                gameObject.SetActive(!HidePlans);
             }
         }
 
