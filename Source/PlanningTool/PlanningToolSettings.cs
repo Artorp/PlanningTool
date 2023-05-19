@@ -78,6 +78,21 @@ namespace PlanningTool
         }
         public event Action<PlanShape> OnActiveShapeChange;
 
+        private PlanningToolMode _planningMode = PlanningToolMode.DragPlan;
+
+        public PlanningToolMode PlanningMode
+        {
+            get => _planningMode;
+            set
+            {
+                if (value == _planningMode) return;
+                _planningMode = value;
+                OnPlanningToolModeChanged.Signal(value);
+            }
+        }
+
+        public event Action<PlanningToolMode> OnPlanningToolModeChanged;
+
         public PlanningToolSettings()
         {
             Instance = this;
@@ -86,6 +101,11 @@ namespace PlanningTool
         public static void DestroyInstance()
         {
             Instance = null;
+        }
+
+        public enum PlanningToolMode
+        {
+            DragPlan, CopyArea, CutArea, PlaceClipboard
         }
     }
 }

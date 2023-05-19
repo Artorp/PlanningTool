@@ -11,16 +11,16 @@ namespace PlanningTool
         [Serialize]
         public Dictionary<int, PlanData> PlanState;
 
-        [Serialize] private float _activeFloat;
+        [Serialize] private float _activeAlpha;
         public event Action<float> OnActiveAlphaChange;
 
-        public float ActiveFloat
+        public float ActiveAlpha
         {
-            get => _activeFloat;
+            get => _activeAlpha;
             set
             {
-                if (Math.Abs(_activeFloat - value) < 0.001f) return;
-                _activeFloat = value;
+                if (Math.Abs(_activeAlpha - value) < 0.001f) return;
+                _activeAlpha = value;
                 OnActiveAlphaChange.Signal(value);
             }
         }
@@ -45,7 +45,7 @@ namespace PlanningTool
         {
             PlanState = new Dictionary<int, PlanData>();
             Instance = this;
-            _activeFloat = 0.2f;
+            _activeAlpha = 0.2f;
             _hidePlans = false;
         }
 

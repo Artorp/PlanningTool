@@ -74,7 +74,7 @@ namespace PlanningTool
             return go;
         }
 
-        public static GameObject CreatePlanningTileMesh(string id, SaveLoadPlans.PlanData planData)
+        public static GameObject CreatePlanningTileMesh(string id, SaveLoadPlans.PlanData planData, bool useActiveAlpha = true)
         {
             var go = Object.Instantiate(planningTileMesh);
             go.name = id;
@@ -89,7 +89,8 @@ namespace PlanningTool
             }
 
             var color = planData.Color.AsColor();
-            color.a = SaveLoadPlans.Instance.ActiveFloat;
+            if (useActiveAlpha)
+                color.a = SaveLoadPlans.Instance.ActiveAlpha;
             meshRenderer.material.color = color;
 
             go.SetLayerRecursively(LayerMask.NameToLayer("PlaceWithDepth"));

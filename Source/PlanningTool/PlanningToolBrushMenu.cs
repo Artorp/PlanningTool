@@ -32,6 +32,74 @@ namespace PlanningTool
             ppanel.Alignment = TextAnchor.LowerRight;
             ppanel.Spacing = 15;
 
+            var horizMisc = new PPanel("HorizontalMisc");
+            horizMisc.Direction = PanelDirection.Horizontal;
+            horizMisc.Alignment = TextAnchor.LowerRight;
+            ppanel.AddChild(horizMisc);
+
+            var pasteButton = PTObjectTemplates.CreateSquareButton("Paste", PTAssets.WhiteBGSprite, null);
+            var pasteButtonKToggle = pasteButton.GetComponent<KToggle>();
+            pasteButtonKToggle.onClick += () =>
+            {
+                if (pasteButtonKToggle.isOn && Settings.PlanningMode != PlanningToolSettings.PlanningToolMode.PlaceClipboard)
+                {
+                    Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.PlaceClipboard;
+                } else if (!pasteButtonKToggle.isOn &&
+                           Settings.PlanningMode != PlanningToolSettings.PlanningToolMode.DragPlan)
+                {
+                    Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.DragPlan;
+                }
+            };
+            Settings.OnPlanningToolModeChanged += mode =>
+            {
+                var isPasting = mode == PlanningToolSettings.PlanningToolMode.PlaceClipboard;
+                if (pasteButtonKToggle.isOn != isPasting)
+                    pasteButtonKToggle.isOn = isPasting;
+            };
+            horizMisc.AddChild(new UIComponentWrapper(pasteButton));
+
+            var cutButton = PTObjectTemplates.CreateSquareButton("Cut", PTAssets.WhiteBGSprite, null);
+            var cutButtonKToggle = cutButton.GetComponent<KToggle>();
+            cutButtonKToggle.onClick += () =>
+            {
+                if (cutButtonKToggle.isOn && Settings.PlanningMode != PlanningToolSettings.PlanningToolMode.CutArea)
+                {
+                    Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.CutArea;
+                } else if (!cutButtonKToggle.isOn &&
+                           Settings.PlanningMode != PlanningToolSettings.PlanningToolMode.DragPlan)
+                {
+                    Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.DragPlan;
+                }
+            };
+            Settings.OnPlanningToolModeChanged += mode =>
+            {
+                var isCopying = mode == PlanningToolSettings.PlanningToolMode.CutArea;
+                if (cutButtonKToggle.isOn != isCopying)
+                    cutButtonKToggle.isOn = isCopying;
+            };
+            horizMisc.AddChild(new UIComponentWrapper(cutButton));
+
+            var copyButton = PTObjectTemplates.CreateSquareButton("Copy", PTAssets.WhiteBGSprite, null);
+            var copyButtonKToggle = copyButton.GetComponent<KToggle>();
+            copyButtonKToggle.onClick += () =>
+            {
+                if (copyButtonKToggle.isOn && Settings.PlanningMode != PlanningToolSettings.PlanningToolMode.CopyArea)
+                {
+                    Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.CopyArea;
+                } else if (!copyButtonKToggle.isOn &&
+                           Settings.PlanningMode != PlanningToolSettings.PlanningToolMode.DragPlan)
+                {
+                    Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.DragPlan;
+                }
+            };
+            Settings.OnPlanningToolModeChanged += mode =>
+            {
+                var isCopying = mode == PlanningToolSettings.PlanningToolMode.CopyArea;
+                if (copyButtonKToggle.isOn != isCopying)
+                    copyButtonKToggle.isOn = isCopying;
+            };
+            horizMisc.AddChild(new UIComponentWrapper(copyButton));
+
             var hideButton = PTObjectTemplates.CreateSquareButton("Hide / show plans", PTAssets.WhiteBGSprite, null);
             hideButton.GetComponent<KToggle>().onValueChanged += b =>
             {
@@ -44,18 +112,18 @@ namespace PlanningTool
                     plan.SetActive(!b);
                 }
             };
-            ppanel.AddChild(new UIComponentWrapper(hideButton));
+            horizMisc.AddChild(new UIComponentWrapper(hideButton));
 
             var maxSliderValue = 20f;
             var alphaSlider = new PSliderSingle("ActiveAlphaSlider")
             {
-                InitialValue = SaveLoadPlans.Instance.ActiveFloat * maxSliderValue,
+                InitialValue = SaveLoadPlans.Instance.ActiveAlpha * maxSliderValue,
                 IntegersOnly = true,
                 MaxValue = maxSliderValue,
                 OnValueChanged = (source, value) =>
                 {
                     var valueScaled = value / maxSliderValue;
-                    SaveLoadPlans.Instance.ActiveFloat = valueScaled;
+                    SaveLoadPlans.Instance.ActiveAlpha = valueScaled;
                 }
             };
             SaveLoadPlans.Instance.OnActiveAlphaChange += f =>
@@ -69,7 +137,7 @@ namespace PlanningTool
                     material.color = color;
                 }
             };
-            ppanel.AddChild(alphaSlider);
+            horizMisc.AddChild(alphaSlider);
 
             row = ppanel.Build();
             row.transform.SetParent(transform, false);

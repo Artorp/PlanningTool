@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
+using TemplateClasses;
 using UnityEngine;
 
 namespace PlanningTool
@@ -9,6 +12,12 @@ namespace PlanningTool
         public static PlanningToolInterface Instance;
 
         private bool isInitialized;
+
+        public PlanClipboard Clipboard;
+
+        private GameObject _visualizerPlan;
+        private GameObject _visualizerClipboard;
+        private List<GameObject> _visualizerClipboardObjects = new List<GameObject>();
 
         public static void DestroyInstance() => Instance = null;
 
@@ -30,13 +39,17 @@ namespace PlanningTool
             // change visualizer to show current selected config
             var mr = visualizer.transform.Find("Mask").GetComponent<MeshRenderer>();
             mr.material = PTAssets.SelectionOutlineMaterial;
-            var visualizerPlan = PTObjectTemplates.CreatePlanningTileMesh("PlanPreview", new SaveLoadPlans.PlanData());
-            var visualizerMask = visualizerPlan.transform.Find("Mask");
+            _visualizerPlan = PTObjectTemplates.CreatePlanningTileMesh("PlanPreview", new SaveLoadPlans.PlanData());
+            var visualizerMask = _visualizerPlan.transform.Find("Mask");
             var vmPos = visualizerMask.position;
             vmPos.z -= 0.3f;
             visualizerMask.position = vmPos;
-            visualizerPlan.transform.SetParent(visualizer.transform, false);
-            visualizerPlan.SetActive(true);
+            _visualizerPlan.transform.SetParent(visualizer.transform, false);
+            _visualizerPlan.SetActive(true);
+
+            _visualizerClipboard = new GameObject("VisualizerClipboard");
+            _visualizerClipboard.transform.SetParent(visualizer.transform, false);
+            _visualizerClipboard.SetActive(false);
 
             visualizerLayer = Grid.SceneLayer.SceneMAX;
 
@@ -76,7 +89,118 @@ namespace PlanningTool
             visualizerPlanPreviewMaskMeshRenderer.material.color = col;
         }
 
+        public void RefreshClipboardVisualisationPreview()
+        {
+            if (_visualizerClipboard == null) return;
+            foreach (var go in _visualizerClipboardObjects)
+            {
+                go.SetActive(false);
+                Destroy(go);
+            }
+            _visualizerClipboardObjects.Clear();
+
+            if (!Clipboard.HasData()) return;
+
+            foreach (var element in Clipboard.Elements())
+            {
+                var cell = Grid.XYToCell(element.OffsetX, element.OffsetY);
+                var planData = new SaveLoadPlans.PlanData
+                {
+                    Cell = cell,
+                    Shape = element.Shape,
+                    Color = element.Color
+                };
+                var go = PTObjectTemplates.CreatePlanningTileMesh("ClipboardVisualisationPreview", planData, false);
+                var meshRenderer = go.transform.Find("Mask").GetComponent<MeshRenderer>();
+                var material = meshRenderer.material;
+                var col = material.color;
+                col.a = 0.6f;
+                material.color = col;
+                var pos = Grid.CellToPos(planData.Cell, 0f, 0f, 0f);
+                pos.z = -0.1f;
+                go.transform.localPosition = pos;
+                go.transform.SetParent(_visualizerClipboard.transform, false);
+                _visualizerClipboardObjects.Add(go);
+                go.SetActive(true);
+            }
+        }
+
         protected override void OnDragTool(int cell, int distFromOrigin)
+        {
+            if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.DragPlan)
+                ToolPlacePlan(cell);
+            else if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
+            {
+                ToolPlaceClipboard(cell);
+            }
+        }
+
+        private void ToolPlaceClipboard(int cell)
+        {
+            Grid.CellToXY(cell, out var originX, out var originY);
+
+            foreach (var element in Clipboard.Elements())
+            {
+                var x = originX + element.OffsetX;
+                var y = originY + element.OffsetY;
+                var elementCell = Grid.XYToCell(x, y);
+                var planData = new SaveLoadPlans.PlanData
+                {
+                    Cell = elementCell,
+                    Color = element.Color,
+                    Shape = element.Shape
+                };
+
+                PlacePlan(elementCell, planData);
+            }
+        }
+
+        protected override void OnDragComplete(Vector3 cursorDown, Vector3 cursorUp)
+        {
+            base.OnDragComplete(cursorDown, cursorUp);
+
+            if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.CopyArea || PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.CutArea)
+            {
+                // copy all plans between start and stop to clipboard, use cursorUp as origin
+                Grid.PosToXY(cursorUp, out var originX, out var originY);
+                var startX = originX;
+                var startY = originY;
+                Grid.PosToXY(cursorDown, out var endX, out var endY);
+                // loop over all values, start top left
+                if (startX > endX)
+                    Util.Swap(ref startX, ref endX);
+                if (startY > endY)
+                    Util.Swap(ref startY, ref endY);
+                Clipboard.Clear();
+                var isCutting = PlanningToolSettings.Instance.PlanningMode ==
+                                PlanningToolSettings.PlanningToolMode.CutArea;
+                for (int y = startY; y <= endY; y++)
+                {
+                    for (int x = startX; x <= endX; x++)
+                    {
+                        var cell = Grid.XYToCell(x, y);
+                        if (!SaveLoadPlans.Instance.PlanState.TryGetValue(cell, out var existingData))
+                            continue;
+                        Clipboard.AddPlan(existingData, originX, originY);
+                        if (isCutting)
+                        {
+                            SaveLoadPlans.Instance.PlanState.Remove(cell);
+                            var go = PlanGrid.Plans[cell];
+                            PlanGrid.Plans[cell] = null;
+                            go.SetActive(false);
+                            Destroy(go);
+                        }
+                    }
+                }
+
+                RefreshClipboardVisualisationPreview();
+
+                PlanningToolSettings.Instance.PlanningMode = PlanningToolSettings.PlanningToolMode.PlaceClipboard;
+            } else if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
+                PlanningToolSettings.Instance.PlanningMode = PlanningToolSettings.PlanningToolMode.DragPlan;
+        }
+
+        private static void ToolPlacePlan(int cell)
         {
             var planData = new SaveLoadPlans.PlanData
             {
@@ -85,6 +209,11 @@ namespace PlanningTool
                 Shape = PlanningToolSettings.Instance.ActiveShape
             };
 
+            PlacePlan(cell, planData);
+        }
+
+        private static void PlacePlan(int cell, SaveLoadPlans.PlanData planData)
+        {
             var cellOccupied = SaveLoadPlans.Instance.PlanState.TryGetValue(cell, out var existingData);
             if (cellOccupied)
             {
@@ -125,6 +254,32 @@ namespace PlanningTool
             {
                 PlanningToolSettings.Instance.OnActiveColorChange += color => RefreshVisualizerPreview();
                 PlanningToolSettings.Instance.OnActiveShapeChange += shape => RefreshVisualizerPreview();
+                Clipboard = new PlanClipboard();
+                PlanningToolSettings.Instance.OnPlanningToolModeChanged += toolMode =>
+                {
+                    // TODO: add visualizer depending on mode
+                    // TODO: remove debug log
+                    Debug.Log("Planning mode changed to " + Enum.GetName(typeof(PlanningToolSettings.PlanningToolMode), toolMode));
+                    if (toolMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
+                    {
+                        SetMode(Mode.Brush);
+                        _visualizerClipboard.SetActive(true);
+                    }
+                    else
+                    {
+                        SetMode(Mode.Box);
+                        _visualizerClipboard.SetActive(false);
+                    }
+
+                    if (toolMode == PlanningToolSettings.PlanningToolMode.DragPlan)
+                    {
+                        _visualizerPlan.SetActive(true);
+                    }
+                    else
+                    {
+                        _visualizerPlan.SetActive(false);
+                    }
+                };
                 isInitialized = true;
             }
         }
