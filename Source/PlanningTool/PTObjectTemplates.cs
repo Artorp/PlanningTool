@@ -74,21 +74,21 @@ namespace PlanningTool
             return go;
         }
 
-        public static GameObject CreatePlanningTileMesh(string id, SaveLoadPlans.PlanData planData, bool useActiveAlpha = true)
+        public static GameObject CreatePlanningTileMesh(string id, PlanShape shape, PlanColor planColor, bool useActiveAlpha = true)
         {
             var go = Object.Instantiate(planningTileMesh);
             go.name = id;
             var meshRenderer = go.transform.Find("Mask").GetComponent<MeshRenderer>();
-            if (planData.Shape == PlanShape.Circle)
+            if (shape == PlanShape.Circle)
             {
                 meshRenderer.sharedMaterial = PTAssets.CircleMaterial;
             }
-            else if (planData.Shape == PlanShape.Diamond)
+            else if (shape == PlanShape.Diamond)
             {
                 meshRenderer.sharedMaterial = PTAssets.DiamondMaterial;
             }
 
-            var color = planData.Color.AsColor();
+            var color = planColor.AsColor();
             if (useActiveAlpha)
                 color.a = SaveLoadPlans.Instance.ActiveAlpha;
             meshRenderer.material.color = color;

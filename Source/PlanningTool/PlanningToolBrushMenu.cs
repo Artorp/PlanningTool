@@ -12,7 +12,7 @@ namespace PlanningTool
 
         public PlanningToolSettings Settings;
 
-        // public override float GetSortKey() => 50f;  // TODO: increase when PlanningTool is active to hijack inputs
+        public override float GetSortKey() => PlanningToolInterface.Instance.ToolActive ? 50f : base.GetSortKey();
 
         public GameObject row;
         private List<PlanColor> _planColors;
@@ -214,5 +214,50 @@ namespace PlanningTool
             tg.EnsureValidState();
         }
 
+        public override void OnKeyDown(KButtonEvent e)
+        {
+            if (!e.Consumed && PlanningToolInterface.Instance.ToolActive &&
+                Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
+            {
+                var action = e.GetAction();
+                var keyCode = e.Controller.GetInputForAction(action);
+                if (keyCode == KKeyCode.Q)
+                {
+                    e.TryConsume(action);
+                    PlanningToolInterface.Instance.Clipboard.Rotate(false);
+                    PlanningToolInterface.Instance.RefreshClipboardVisualisationPreview();
+                } else if (keyCode == KKeyCode.E)
+                {
+                    e.TryConsume(action);
+                    PlanningToolInterface.Instance.Clipboard.Rotate(true);
+                    PlanningToolInterface.Instance.RefreshClipboardVisualisationPreview();
+                } else if (keyCode == KKeyCode.F)
+                {
+                    e.TryConsume(action);
+                    PlanningToolInterface.Instance.Clipboard.Flip(true);
+                    PlanningToolInterface.Instance.RefreshClipboardVisualisationPreview();
+                }
+            }
+            base.OnKeyDown(e);
+        }
+
+        public override void OnKeyUp(KButtonEvent e)
+        {
+            if (!e.Consumed && PlanningToolInterface.Instance.ToolActive &&
+                Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard ||
+                Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CopyArea ||
+                Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CutArea)
+            {
+                var action = e.GetAction();
+                var keyCode = e.Controller.GetInputForAction(action);
+                if (keyCode == KKeyCode.Mouse1)
+                {
+                    // cancel while placing clipboard or other submenu tools should just go back to drag mode
+                    e.TryConsume(action);
+                    Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.DragPlan;
+                }
+            }
+            base.OnKeyUp(e);
+        }
     }
 }

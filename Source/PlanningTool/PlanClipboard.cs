@@ -41,6 +41,63 @@ namespace PlanningTool
                 yield return element;
             }
         }
+
+        public void Rotate(bool clockwise)
+        {
+            // modify offsetX and offsetY of each element to rotate
+            var rotated = new List<PlanClipboardElement>(_clipboardContent.Count);
+
+            foreach (var element in _clipboardContent)
+            {
+                var newElement = new PlanClipboardElement()
+                {
+                    Color = element.Color,
+                    Shape = element.Shape
+                };
+                if (clockwise)
+                {
+                    newElement.OffsetX = element.OffsetY;
+                    newElement.OffsetY = -element.OffsetX;
+                }
+                else
+                {
+                    newElement.OffsetX = -element.OffsetY;
+                    newElement.OffsetY = element.OffsetX;
+                }
+                rotated.Add(newElement);
+            }
+
+            _clipboardContent.Clear();
+            _clipboardContent.AddRange(rotated);
+        }
+
+        public void Flip(bool horizontally)
+        {
+            var flipped = new List<PlanClipboardElement>(_clipboardContent.Count);
+
+            foreach (var element in _clipboardContent)
+            {
+                var newElement = new PlanClipboardElement()
+                {
+                    Color = element.Color,
+                    Shape = element.Shape
+                };
+                if (horizontally)
+                {
+                    newElement.OffsetX = -element.OffsetX;
+                    newElement.OffsetY = element.OffsetY;
+                }
+                else
+                {
+                    newElement.OffsetX = element.OffsetX;
+                    newElement.OffsetY = -element.OffsetY;
+                }
+                flipped.Add(newElement);
+            }
+
+            _clipboardContent.Clear();
+            _clipboardContent.AddRange(flipped);
+        }
     }
 
     public class PlanClipboardElement

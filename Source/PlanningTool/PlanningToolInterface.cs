@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
-using TemplateClasses;
 using UnityEngine;
 
 namespace PlanningTool
@@ -19,6 +18,23 @@ namespace PlanningTool
         private GameObject _visualizerClipboard;
         private List<GameObject> _visualizerClipboardObjects = new List<GameObject>();
 
+        private bool _toolActive;
+
+        public bool ToolActive
+        {
+            get => _toolActive;
+            set
+            {
+                if (_toolActive != value)
+                {
+                    _toolActive = value;
+                    OnToolActive.Signal(value);
+                }
+            }
+        }
+
+        public event Action<bool> OnToolActive;
+
         public static void DestroyInstance() => Instance = null;
 
         protected override void OnPrefabInit()
@@ -31,7 +47,6 @@ namespace PlanningTool
 
             // TODO:
             // show grid effect when placing (like when placing building)
-            // show the plan to be placed when in tool menu
 
             FieldInfo areaVisualizerField = AccessTools.Field(typeof(DragTool), "areaVisualizer");
 
@@ -39,7 +54,7 @@ namespace PlanningTool
             // change visualizer to show current selected config
             var mr = visualizer.transform.Find("Mask").GetComponent<MeshRenderer>();
             mr.material = PTAssets.SelectionOutlineMaterial;
-            _visualizerPlan = PTObjectTemplates.CreatePlanningTileMesh("PlanPreview", new SaveLoadPlans.PlanData());
+            _visualizerPlan = PTObjectTemplates.CreatePlanningTileMesh("PlanPreview", PlanShape.Rectangle, PlanColor.Gray);
             var visualizerMask = _visualizerPlan.transform.Find("Mask");
             var vmPos = visualizerMask.position;
             vmPos.z -= 0.3f;
@@ -103,21 +118,13 @@ namespace PlanningTool
 
             foreach (var element in Clipboard.Elements())
             {
-                var cell = Grid.XYToCell(element.OffsetX, element.OffsetY);
-                var planData = new SaveLoadPlans.PlanData
-                {
-                    Cell = cell,
-                    Shape = element.Shape,
-                    Color = element.Color
-                };
-                var go = PTObjectTemplates.CreatePlanningTileMesh("ClipboardVisualisationPreview", planData, false);
+                var go = PTObjectTemplates.CreatePlanningTileMesh("ClipboardVisualisationPreview", element.Shape, element.Color, false);
                 var meshRenderer = go.transform.Find("Mask").GetComponent<MeshRenderer>();
                 var material = meshRenderer.material;
                 var col = material.color;
                 col.a = 0.6f;
                 material.color = col;
-                var pos = Grid.CellToPos(planData.Cell, 0f, 0f, 0f);
-                pos.z = -0.1f;
+                var pos = new Vector3(element.OffsetX, element.OffsetY, -0.1f);
                 go.transform.localPosition = pos;
                 go.transform.SetParent(_visualizerClipboard.transform, false);
                 _visualizerClipboardObjects.Add(go);
@@ -239,7 +246,7 @@ namespace PlanningTool
 
         public static GameObject CreatePlanTile(SaveLoadPlans.PlanData planData)
         {
-            var go = PTObjectTemplates.CreatePlanningTileMesh("PlanOverlay", planData);
+            var go = PTObjectTemplates.CreatePlanningTileMesh("PlanOverlay", planData.Shape, planData.Color);
             var pos = Grid.CellToPosCBC(planData.Cell, Grid.SceneLayer.TileFront);
             pos.z -= 0.1f;
             go.transform.localPosition = pos;
@@ -257,9 +264,6 @@ namespace PlanningTool
                 Clipboard = new PlanClipboard();
                 PlanningToolSettings.Instance.OnPlanningToolModeChanged += toolMode =>
                 {
-                    // TODO: add visualizer depending on mode
-                    // TODO: remove debug log
-                    Debug.Log("Planning mode changed to " + Enum.GetName(typeof(PlanningToolSettings.PlanningToolMode), toolMode));
                     if (toolMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
                     {
                         SetMode(Mode.Brush);
@@ -282,11 +286,16 @@ namespace PlanningTool
                 };
                 isInitialized = true;
             }
+
+            ToolActive = true;
+            KScreenManager.Instance.RefreshStack();
         }
 
         protected override void OnDeactivateTool(InterfaceTool new_tool)
         {
             base.OnDeactivateTool(new_tool);
+            ToolActive = false;
+            KScreenManager.Instance.RefreshStack();
         }
     }
 }
