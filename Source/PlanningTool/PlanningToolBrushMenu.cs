@@ -17,6 +17,8 @@ namespace PlanningTool
         public GameObject row;
         private List<PlanColor> _planColors;
 
+        private GameObject _horizMisc;
+
         public static void DestroyInstance() => Instance = null;
 
         protected override void OnSpawn()
@@ -35,7 +37,29 @@ namespace PlanningTool
             var horizMisc = new PPanel("HorizontalMisc");
             horizMisc.Direction = PanelDirection.Horizontal;
             horizMisc.Alignment = TextAnchor.LowerRight;
+            horizMisc.OnRealize += realized => _horizMisc = realized;
             ppanel.AddChild(horizMisc);
+
+            var sampleButton = PTObjectTemplates.CreateSquareButton("Sample", PTAssets.WhiteBGSprite, null);
+            var sampleButtonKToggle = sampleButton.GetComponent<KToggle>();
+            sampleButtonKToggle.onClick += () =>
+            {
+                if (sampleButtonKToggle.isOn && Settings.PlanningMode != PlanningToolSettings.PlanningToolMode.SamplePlan)
+                {
+                    Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.SamplePlan;
+                } else if (!sampleButtonKToggle.isOn &&
+                           Settings.PlanningMode != PlanningToolSettings.PlanningToolMode.DragPlan)
+                {
+                    Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.DragPlan;
+                }
+            };
+            Settings.OnPlanningToolModeChanged += mode =>
+            {
+                var isSampling = mode == PlanningToolSettings.PlanningToolMode.SamplePlan;
+                if (sampleButtonKToggle.isOn != isSampling)
+                    sampleButtonKToggle.isOn = isSampling;
+            };
+            horizMisc.AddChild(new UIComponentWrapper(sampleButton));
 
             var pasteButton = PTObjectTemplates.CreateSquareButton("Paste", PTAssets.WhiteBGSprite, null);
             var pasteButtonKToggle = pasteButton.GetComponent<KToggle>();
@@ -149,7 +173,7 @@ namespace PlanningTool
             {
                 Direction = PanelDirection.Horizontal
             }.Build();
-            toggleParent.transform.SetParent(row.transform, false);
+            toggleParent.transform.SetParent(_horizMisc.transform, false);
             var tg = toggleParent.AddComponent<ToggleGroup>();
             tg.allowSwitchOff = false;
 
@@ -212,6 +236,8 @@ namespace PlanningTool
             }
 
             tg.EnsureValidState();
+
+            row.SetActive(false);
         }
 
         public override void OnKeyDown(KButtonEvent e)
@@ -244,9 +270,10 @@ namespace PlanningTool
         public override void OnKeyUp(KButtonEvent e)
         {
             if (!e.Consumed && PlanningToolInterface.Instance.ToolActive &&
-                Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard ||
-                Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CopyArea ||
-                Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CutArea)
+                (Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard ||
+                 Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CopyArea ||
+                 Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CutArea ||
+                 Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.SamplePlan))
             {
                 var action = e.GetAction();
                 var keyCode = e.Controller.GetInputForAction(action);

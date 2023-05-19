@@ -19,6 +19,14 @@ namespace PlanningTool
         private List<GameObject> _visualizerClipboardObjects = new List<GameObject>();
 
         private bool _toolActive;
+        /// <summary>
+        /// Due to DragTool not being intended to be using Brush mode, changing mode can cause multiple drag events
+        /// to happen for the same action. Brush OnDragTool is in OnLeftClickDown while Box is in OnLeftClickUp,
+        /// causing a single click of brush that changes mode to box, to also trigger the box tool's OnDragTool
+        /// as well as OnDragComplete.
+        /// Workaround: just flag this bool if changing mode while handling an click event.
+        /// </summary>
+        private bool _skipFurtherEventsThisClick;
 
         public bool ToolActive
         {
@@ -134,12 +142,29 @@ namespace PlanningTool
 
         protected override void OnDragTool(int cell, int distFromOrigin)
         {
+            if (_skipFurtherEventsThisClick)
+                return;
             if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.DragPlan)
                 ToolPlacePlan(cell);
             else if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
             {
                 ToolPlaceClipboard(cell);
             }
+            else if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.SamplePlan)
+            {
+                ToolSamplePlan(cell);
+            }
+        }
+
+        private void ToolSamplePlan(int cell)
+        {
+            if (SaveLoadPlans.Instance.PlanState.TryGetValue(cell, out var planData))
+            {
+                PlanningToolSettings.Instance.ActiveShape = planData.Shape;
+                PlanningToolSettings.Instance.ActiveColor = planData.Color;
+            }
+            PlanningToolSettings.Instance.PlanningMode = PlanningToolSettings.PlanningToolMode.DragPlan;
+            _skipFurtherEventsThisClick = true;
         }
 
         private void ToolPlaceClipboard(int cell)
@@ -164,6 +189,10 @@ namespace PlanningTool
 
         protected override void OnDragComplete(Vector3 cursorDown, Vector3 cursorUp)
         {
+            if (_skipFurtherEventsThisClick)
+            {
+                return;
+            }
             base.OnDragComplete(cursorDown, cursorUp);
 
             if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.CopyArea || PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.CutArea)
@@ -203,8 +232,7 @@ namespace PlanningTool
                 RefreshClipboardVisualisationPreview();
 
                 PlanningToolSettings.Instance.PlanningMode = PlanningToolSettings.PlanningToolMode.PlaceClipboard;
-            } else if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
-                PlanningToolSettings.Instance.PlanningMode = PlanningToolSettings.PlanningToolMode.DragPlan;
+            }
         }
 
         private static void ToolPlacePlan(int cell)
@@ -269,6 +297,10 @@ namespace PlanningTool
                         SetMode(Mode.Brush);
                         _visualizerClipboard.SetActive(true);
                     }
+                    else if (toolMode == PlanningToolSettings.PlanningToolMode.SamplePlan)
+                    {
+                        SetMode(Mode.Brush);
+                    }
                     else
                     {
                         SetMode(Mode.Box);
@@ -289,6 +321,7 @@ namespace PlanningTool
 
             ToolActive = true;
             KScreenManager.Instance.RefreshStack();
+            PlanningToolBrushMenu.Instance.row.SetActive(true);
         }
 
         protected override void OnDeactivateTool(InterfaceTool new_tool)
@@ -296,6 +329,13 @@ namespace PlanningTool
             base.OnDeactivateTool(new_tool);
             ToolActive = false;
             KScreenManager.Instance.RefreshStack();
+            PlanningToolBrushMenu.Instance.row.SetActive(false);
+        }
+
+        public override void OnLeftClickUp(Vector3 cursor_pos)
+        {
+            base.OnLeftClickUp(cursor_pos);
+            _skipFurtherEventsThisClick = false;
         }
     }
 }
