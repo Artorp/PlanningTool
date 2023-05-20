@@ -129,7 +129,7 @@ namespace PlanningTool
         public static Texture2D LoadResourceFileTexture(string fileName, TextureFormat textureFormat = TextureFormat.RGBA32)
         {
             string fullPath = AsInResourceFolder(fileName);
-            Texture2D texture = new Texture2D(2, 2, textureFormat, false)
+            Texture2D texture = new Texture2D(2, 2, textureFormat, true)
             {
                 filterMode = FilterMode.Trilinear
             };

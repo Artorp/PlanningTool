@@ -18,6 +18,7 @@ namespace PlanningTool
         private List<PlanColor> _planColors;
 
         private GameObject _horizMisc;
+        private GameObject _sliderText;
 
         public static void DestroyInstance() => Instance = null;
 
@@ -138,15 +139,28 @@ namespace PlanningTool
             };
             horizMisc.AddChild(new UIComponentWrapper(hideButton));
 
+            var sliderParent = new PPanel("SliderParent")
+            {
+                Direction = PanelDirection.Vertical,
+                Spacing = 5
+            };
+
+            var sliderText = new PLabel("sliderText");
+            sliderText.Text = $"Transparency:\n{SaveLoadPlans.Instance.ActiveAlpha:0.00}";
+            sliderText.OnRealize += realized => _sliderText = realized;
+            sliderParent.AddChild(sliderText);
+
             var maxSliderValue = 20f;
             var alphaSlider = new PSliderSingle("ActiveAlphaSlider")
             {
                 InitialValue = SaveLoadPlans.Instance.ActiveAlpha * maxSliderValue,
                 IntegersOnly = true,
                 MaxValue = maxSliderValue,
+                MinValue = 1f,
                 OnValueChanged = (source, value) =>
                 {
                     var valueScaled = value / maxSliderValue;
+                    _sliderText.GetComponentInChildren<LocText>().text = $"Transparency:\n{valueScaled:0.00}";
                     SaveLoadPlans.Instance.ActiveAlpha = valueScaled;
                 }
             };
@@ -161,7 +175,8 @@ namespace PlanningTool
                     material.color = color;
                 }
             };
-            horizMisc.AddChild(alphaSlider);
+            sliderParent.AddChild(alphaSlider);
+            horizMisc.AddChild(sliderParent);
 
             row = ppanel.Build();
             row.transform.SetParent(transform, false);
@@ -169,13 +184,11 @@ namespace PlanningTool
 
             // try to add buttons like sandbox tools
 
-            var toggleParent = new PPanel("ColorShapeGroup")
+            var toggleParent = new PPanel("ShapeButtons")
             {
                 Direction = PanelDirection.Horizontal
             }.Build();
             toggleParent.transform.SetParent(_horizMisc.transform, false);
-            var tg = toggleParent.AddComponent<ToggleGroup>();
-            tg.allowSwitchOff = false;
 
             var planShapes = new List<PlanShape>() { PlanShape.Rectangle, PlanShape.Circle, PlanShape.Diamond };
             var planSprites = new List<Sprite>()
@@ -192,21 +205,25 @@ namespace PlanningTool
                 var kToggle = shapeButton.GetComponent<KToggle>();
                 if (i == 0)
                     kToggle.isOn = true;
-                kToggle.group = tg;
-                kToggle.onValueChanged += b =>
+                kToggle.onClick += () =>
                 {
-                    if (b)
+                    if (kToggle.isOn && Settings.ActiveShape != planShape)
                         Settings.ActiveShape = planShape;
+                };
+                Settings.OnActiveShapeChange += shape =>
+                {
+                    if (shape == planShape && !kToggle.isOn)
+                        kToggle.isOn = true;
+                    else if (shape != planShape && kToggle.isOn)
+                        kToggle.isOn = false;
                 };
             }
 
-            toggleParent = new PPanel("ColorToggleGroup")
+            toggleParent = new PPanel("ColorButtons")
             {
                 Direction = PanelDirection.Horizontal
             }.Build();
             toggleParent.transform.SetParent(row.transform, false);
-            tg = toggleParent.AddComponent<ToggleGroup>();
-            tg.allowSwitchOff = false;
 
             _planColors = new List<PlanColor>()
             {
@@ -227,15 +244,19 @@ namespace PlanningTool
                 var kToggle = colorButton.GetComponent<KToggle>();
                 if (i == 0)
                     kToggle.isOn = true;
-                kToggle.group = tg;
-                kToggle.onValueChanged += b =>
+                kToggle.onClick += () =>
                 {
-                    if (b)
+                    if (kToggle.isOn && Settings.ActiveColor != planColor)
                         Settings.ActiveColor = planColor;
                 };
+                Settings.OnActiveColorChange += color =>
+                {
+                    if (color == planColor && !kToggle.isOn)
+                        kToggle.isOn = true;
+                    else if (color != planColor && kToggle.isOn)
+                        kToggle.isOn = false;
+                };
             }
-
-            tg.EnsureValidState();
 
             row.SetActive(false);
         }
