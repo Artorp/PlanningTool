@@ -280,6 +280,7 @@ namespace PlanningTool
                 if (keyCode == KKeyCode.Mouse1)
                 {
                     // cancel while placing clipboard or other submenu tools should just go back to drag mode
+                    PlaySound(GlobalAssets.GetSound("Tile_Cancel"));
                     Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.DragPlan;
                     if (PlanningToolInterface.Instance.Dragging)
                         PlanningToolInterface.Instance.CancelDragging();

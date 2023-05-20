@@ -30,6 +30,8 @@ namespace PlanningTool
         /// </summary>
         private bool _skipFurtherEventsThisClick;
 
+        private int _cellLastDragThisClick;
+
         public bool ToolActive
         {
             get => _toolActive;
@@ -91,6 +93,9 @@ namespace PlanningTool
             // clipboard area visualiser
             _clipboardAreaVisualizer = Util.KInstantiate(avOriginal, _visualizerClipboard);
             _clipboardAreaVisualizer.SetActive(true);
+            var cavPos = _clipboardAreaVisualizer.transform.localPosition;
+            cavPos.y += Grid.HalfCellSizeInMeters;
+            _clipboardAreaVisualizer.transform.localPosition = cavPos;
             _clipboardAreaVisualizer.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
 
 
@@ -182,6 +187,7 @@ namespace PlanningTool
             {
                 ToolSamplePlan(cell);
             }
+            _cellLastDragThisClick = cell;
         }
 
         private void ToolSamplePlan(int cell)
@@ -197,6 +203,11 @@ namespace PlanningTool
 
         private void ToolPlaceClipboard(int cell)
         {
+            if (_cellLastDragThisClick == cell)
+            {
+                return;
+            }
+
             Grid.CellToXY(cell, out var originX, out var originY);
 
             foreach (var element in Clipboard.Elements())
@@ -216,6 +227,8 @@ namespace PlanningTool
 
                 PlacePlan(elementCell, planData);
             }
+
+            PlaySound(GlobalAssets.GetSound(GetConfirmSound()));
         }
 
         protected override void OnDragComplete(Vector3 cursorDown, Vector3 cursorUp)
@@ -370,6 +383,7 @@ namespace PlanningTool
         {
             base.OnLeftClickUp(cursor_pos);
             _skipFurtherEventsThisClick = false;
+            _cellLastDragThisClick = -1;
         }
     }
 }
