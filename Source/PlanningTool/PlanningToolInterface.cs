@@ -18,6 +18,8 @@ namespace PlanningTool
         private GameObject _visualizerClipboard;
         private List<GameObject> _visualizerClipboardObjects = new List<GameObject>();
 
+        public GameObject _clipboardAreaVisualizer;
+
         private bool _toolActive;
         /// <summary>
         /// Due to DragTool not being intended to be using Brush mode, changing mode can cause multiple drag events
@@ -86,6 +88,12 @@ namespace PlanningTool
             var areaColor = (Color32)areaColourField.GetValue(DigTool.Instance);
             av.GetComponent<Renderer>().material.color = areaColor;
 
+            // clipboard area visualiser
+            _clipboardAreaVisualizer = Util.KInstantiate(avOriginal, _visualizerClipboard);
+            _clipboardAreaVisualizer.SetActive(true);
+            _clipboardAreaVisualizer.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+
+
             var boxCursorField = AccessTools.Field(typeof(DragTool), "boxCursor");
             boxCursorField.SetValue(this, boxCursorField.GetValue(DigTool.Instance));
             var areaVisualizerTextPrefabField = AccessTools.Field(typeof(DragTool), "areaVisualizerTextPrefab");
@@ -138,6 +146,26 @@ namespace PlanningTool
                 _visualizerClipboardObjects.Add(go);
                 go.SetActive(true);
             }
+
+            if (_clipboardAreaVisualizer != null)
+            {
+                Vector2Int bottomLeft = new Vector2Int(int.MaxValue, int.MaxValue);
+                Vector2Int topRight = new Vector2Int(int.MinValue, int.MinValue);
+                foreach (var element in Clipboard.Elements())
+                {
+                    var elementPos = new Vector2Int(element.OffsetX, element.OffsetY);
+                    bottomLeft = Vector2Int.Min(bottomLeft, elementPos);
+                    topRight = Vector2Int.Max(topRight, elementPos);
+                }
+                // since parent transform is visualizer as CBC, adjust points to cover whole area
+                Vector2 bottomLeftF = new Vector2(bottomLeft.x - Grid.HalfCellSizeInMeters, bottomLeft.y);
+                Vector2 topRightF = new Vector2(topRight.x + Grid.HalfCellSizeInMeters, topRight.y + Grid.CellSizeInMeters);
+                var spriteSize = topRightF - bottomLeftF;
+                var spriteCenter = (bottomLeftF + topRightF) / 2f;
+                _clipboardAreaVisualizer.transform.SetLocalPosition(spriteCenter);
+                _clipboardAreaVisualizer.GetComponent<SpriteRenderer>().size = spriteSize;
+            }
+
         }
 
         protected override void OnDragTool(int cell, int distFromOrigin)
@@ -176,6 +204,9 @@ namespace PlanningTool
                 var x = originX + element.OffsetX;
                 var y = originY + element.OffsetY;
                 var elementCell = Grid.XYToCell(x, y);
+                if (!Grid.IsValidCell(elementCell) ||
+                    !Grid.IsVisible(elementCell))
+                    continue;
                 var planData = new SaveLoadPlans.PlanData
                 {
                     Cell = elementCell,
@@ -228,6 +259,8 @@ namespace PlanningTool
                         }
                     }
                 }
+
+                Clipboard.AdjustOffsetsToElements();
 
                 RefreshClipboardVisualisationPreview();
 
@@ -300,6 +333,7 @@ namespace PlanningTool
                     else if (toolMode == PlanningToolSettings.PlanningToolMode.SamplePlan)
                     {
                         SetMode(Mode.Brush);
+                        _visualizerClipboard.SetActive(false);
                     }
                     else
                     {

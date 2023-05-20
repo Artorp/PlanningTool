@@ -98,6 +98,44 @@ namespace PlanningTool
             _clipboardContent.Clear();
             _clipboardContent.AddRange(flipped);
         }
+
+        /// <summary>
+        /// Make sure the origin/pivot of the clipboard is within the bounding box of all plans.
+        /// </summary>
+        public void AdjustOffsetsToElements()
+        {
+            if (_clipboardContent.Count == 0) return;
+            // Find the min and max of x and y offsets
+            var minX = int.MaxValue;
+            var maxX = int.MinValue;
+            var minY = int.MaxValue;
+            var maxY = int.MinValue;
+            foreach (var element in _clipboardContent)
+            {
+                if (element.OffsetX < minX) minX = element.OffsetX;
+                if (element.OffsetX > maxX) maxX = element.OffsetX;
+                if (element.OffsetY < minY) minY = element.OffsetY;
+                if (element.OffsetY > maxY) maxY = element.OffsetY;
+            }
+
+            // Check if the origin is within the bounding box
+            if (minX <= 0 && maxX >= 0 && minY <= 0 && maxY >= 0) return; // No need to adjust
+
+            // Calculate the delta to move the origin
+            var deltaX = 0;
+            var deltaY = 0;
+            if (minX > 0) deltaX = -minX; // Move left
+            else if (maxX < 0) deltaX = -maxX; // Move right
+            if (minY > 0) deltaY = -minY; // Move down
+            else if (maxY < 0) deltaY = -maxY; // Move up
+
+            // Adjust the offsets by the delta
+            foreach (var element in _clipboardContent)
+            {
+                element.OffsetX += deltaX;
+                element.OffsetY += deltaY;
+            }
+        }
     }
 
     public class PlanClipboardElement
