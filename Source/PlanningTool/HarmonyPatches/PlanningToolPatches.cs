@@ -29,7 +29,7 @@ namespace PlanningTool.HarmonyPatches
         public static void Postfix(ToolMenu __instance)
         {
             __instance.basicTools.Insert(0,
-                ToolMenu.CreateToolCollection(PTStrings.PLANNING_TOOL_NAME, "icon_action_dig",
+                ToolMenu.CreateToolCollection(PTStrings.PLANNING_TOOL_NAME, PTAssets.IconToolPlanning.name,
                     PlanningToolUserMod.PlanningToolAction, nameof(PlanningToolInterface),
                     string.Format(PTStrings.PLANNING_TOOL_TOOLTIP, "{Hotkey}"), true));
         }

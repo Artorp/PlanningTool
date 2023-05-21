@@ -41,7 +41,7 @@ namespace PlanningTool
             horizMisc.OnRealize += realized => _horizMisc = realized;
             ppanel.AddChild(horizMisc);
 
-            var sampleButton = PTObjectTemplates.CreateSquareButton("Sample", PTAssets.WhiteBGSprite, null);
+            var sampleButton = PTObjectTemplates.CreateSquareButton("Sample", Assets.GetSprite((HashedString) "sample"), null);
             var sampleButtonKToggle = sampleButton.GetComponent<KToggle>();
             sampleButtonKToggle.onClick += () =>
             {
@@ -62,7 +62,7 @@ namespace PlanningTool
             };
             horizMisc.AddChild(new UIComponentWrapper(sampleButton));
 
-            var pasteButton = PTObjectTemplates.CreateSquareButton("Paste", PTAssets.WhiteBGSprite, null);
+            var pasteButton = PTObjectTemplates.CreateSquareButton("Paste", PTAssets.IconToolPaste, null);
             var pasteButtonKToggle = pasteButton.GetComponent<KToggle>();
             pasteButtonKToggle.onClick += () =>
             {
@@ -83,7 +83,7 @@ namespace PlanningTool
             };
             horizMisc.AddChild(new UIComponentWrapper(pasteButton));
 
-            var cutButton = PTObjectTemplates.CreateSquareButton("Cut", PTAssets.WhiteBGSprite, null);
+            var cutButton = PTObjectTemplates.CreateSquareButton("Cut", PTAssets.IconToolCut, null);
             var cutButtonKToggle = cutButton.GetComponent<KToggle>();
             cutButtonKToggle.onClick += () =>
             {
@@ -104,7 +104,7 @@ namespace PlanningTool
             };
             horizMisc.AddChild(new UIComponentWrapper(cutButton));
 
-            var copyButton = PTObjectTemplates.CreateSquareButton("Copy", PTAssets.WhiteBGSprite, null);
+            var copyButton = PTObjectTemplates.CreateSquareButton("Copy", PTAssets.IconToolCopy, null);
             var copyButtonKToggle = copyButton.GetComponent<KToggle>();
             copyButtonKToggle.onClick += () =>
             {
@@ -125,7 +125,7 @@ namespace PlanningTool
             };
             horizMisc.AddChild(new UIComponentWrapper(copyButton));
 
-            var hideButton = PTObjectTemplates.CreateSquareButton("Hide / show plans", PTAssets.WhiteBGSprite, null);
+            var hideButton = PTObjectTemplates.CreateSquareButton("Hide / show plans", PTAssets.IconToolHideShow, null);
             hideButton.GetComponent<KToggle>().onValueChanged += b =>
             {
                 SaveLoadPlans.Instance.HidePlans = b;
@@ -136,6 +136,7 @@ namespace PlanningTool
                 {
                     plan.SetActive(!b);
                 }
+                hideButton.transform.Find("FG").GetComponent<Image>().sprite = b ? PTAssets.IconToolHideShowHidden : PTAssets.IconToolHideShow;
             };
             horizMisc.AddChild(new UIComponentWrapper(hideButton));
 

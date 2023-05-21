@@ -29,6 +29,18 @@ namespace PlanningTool
         public static Texture2D CursorPipette;
         public const string CursorPipetteInvalidPath = "cursor_pipette_invalid.png";
         public static Texture2D CursorPipetteInvalid;
+        public const string IconToolPlanningPath = "tool_planning.png";
+        public static Sprite IconToolPlanning;
+        public const string IconToolHideShowPath = "tool_hide_show.png";
+        public static Sprite IconToolHideShow;
+        public const string IconToolHideShowHiddenPath = "tool_hide_show_hidden.png";
+        public static Sprite IconToolHideShowHidden;
+        public const string IconToolCopyPath = "tool_copy.png";
+        public static Sprite IconToolCopy;
+        public const string IconToolCutPath = "tool_cut.png";
+        public static Sprite IconToolCut;
+        public const string IconToolPastePath = "tool_paste.png";
+        public static Sprite IconToolPaste;
 
         public static Shader SelectedShader;
 
@@ -60,6 +72,14 @@ namespace PlanningTool
             CursorPlanning = LoadResourceFileTexture(CursorPlanningPath);
             CursorPipette = LoadResourceFileTexture(CursorPipettePath);
             CursorPipetteInvalid = LoadResourceFileTexture(CursorPipetteInvalidPath);
+            IconToolPlanning = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolPlanningPath));
+            IconToolPlanning.name = "PlanningTool.tool_planning";
+            Assets.Sprites.Add(IconToolPlanning.name, IconToolPlanning);
+            IconToolHideShow = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolHideShowPath));
+            IconToolHideShowHidden = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolHideShowHiddenPath));
+            IconToolCopy = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolCopyPath));
+            IconToolCut = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolCutPath));
+            IconToolPaste = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolPastePath));
 
             IsInitialized = true;
         }
