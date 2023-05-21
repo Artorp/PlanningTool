@@ -209,6 +209,9 @@ namespace PlanningTool
                 {
                     if (kToggle.isOn && Settings.ActiveShape != planShape)
                         Settings.ActiveShape = planShape;
+                    // don't allow the user to deselect this button
+                    if (!kToggle.isOn)
+                        kToggle.isOn = true;
                 };
                 Settings.OnActiveShapeChange += shape =>
                 {
@@ -248,6 +251,9 @@ namespace PlanningTool
                 {
                     if (kToggle.isOn && Settings.ActiveColor != planColor)
                         Settings.ActiveColor = planColor;
+                    // don't allow the user to deselect this button
+                    if (!kToggle.isOn)
+                        kToggle.isOn = true;
                 };
                 Settings.OnActiveColorChange += color =>
                 {

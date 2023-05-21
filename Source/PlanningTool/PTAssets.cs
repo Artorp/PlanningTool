@@ -23,6 +23,13 @@ namespace PlanningTool
         public const string WhiteBGPath = "White_16x16.png";
         public static Sprite WhiteBGSprite;
 
+        public const string CursorPlanningPath = "cursor_arrow_planning.png";
+        public static Texture2D CursorPlanning;
+        public const string CursorPipettePath = "cursor_pipette.png";
+        public static Texture2D CursorPipette;
+        public const string CursorPipetteInvalidPath = "cursor_pipette_invalid.png";
+        public static Texture2D CursorPipetteInvalid;
+
         public static Shader SelectedShader;
 
         public static void Initialize()
@@ -50,6 +57,9 @@ namespace PlanningTool
             tex = LoadResourceFileTexture(SelectionOutlinePath);
             SelectionOutlineMaterial = CreateMaterialWithTexture(tex, grey);
             WhiteBGSprite = PUIUtils.LoadSpriteFile(AsInResourceFolder(WhiteBGPath));
+            CursorPlanning = LoadResourceFileTexture(CursorPlanningPath);
+            CursorPipette = LoadResourceFileTexture(CursorPipettePath);
+            CursorPipetteInvalid = LoadResourceFileTexture(CursorPipetteInvalidPath);
 
             IsInitialized = true;
         }

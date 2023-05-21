@@ -12,6 +12,9 @@ namespace PlanningTool
 
         private bool isInitialized;
 
+        protected Texture2D defaultCursor;
+        protected Vector2 defaultCursorOffset;
+
         public PlanClipboard Clipboard;
 
         private GameObject _visualizerPlan;
@@ -31,6 +34,7 @@ namespace PlanningTool
         private bool _skipFurtherEventsThisClick;
 
         private int _cellLastDragThisClick;
+        private int _prevMouseMoveCell;
 
         public bool ToolActive
         {
@@ -56,9 +60,6 @@ namespace PlanningTool
 
             // populate all fields tagged with [SerializeField] (or public) in DragTool that is probably
             // set through the Unity inspector, using values from DigTool
-
-            // TODO:
-            // show grid effect when placing (like when placing building)
 
             FieldInfo areaVisualizerField = AccessTools.Field(typeof(DragTool), "areaVisualizer");
 
@@ -86,9 +87,7 @@ namespace PlanningTool
             areaVisualizerField.SetValue(this, av);
             areaVisualizerSpriteRenderer = av.GetComponent<SpriteRenderer>();
             av.transform.SetParent(transform);
-            FieldInfo areaColourField = AccessTools.Field(typeof(DragTool), "areaColour");
-            var areaColor = (Color32)areaColourField.GetValue(DigTool.Instance);
-            av.GetComponent<Renderer>().material.color = areaColor;
+            av.GetComponent<Renderer>().material.color = new Color(0.231f, 0.525f, 0.984f);
 
             // clipboard area visualiser
             _clipboardAreaVisualizer = Util.KInstantiate(avOriginal, _visualizerClipboard);
@@ -98,15 +97,23 @@ namespace PlanningTool
             _clipboardAreaVisualizer.transform.localPosition = cavPos;
             _clipboardAreaVisualizer.GetComponent<Renderer>().material.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
 
-
-            var boxCursorField = AccessTools.Field(typeof(DragTool), "boxCursor");
-            boxCursorField.SetValue(this, boxCursorField.GetValue(DigTool.Instance));
+            defaultCursor = PTAssets.CursorPlanning;
+            defaultCursorOffset = new Vector2(2f, 2f);
+            SetAllCursors(defaultCursor, defaultCursorOffset);
             var areaVisualizerTextPrefabField = AccessTools.Field(typeof(DragTool), "areaVisualizerTextPrefab");
             areaVisualizerTextPrefabField.SetValue(this, areaVisualizerTextPrefabField.GetValue(DigTool.Instance));
 
             var pthc = gameObject.AddComponent<PlanningToolHoverCard>();
             pthc.ToolName = "Planning";
             pthc.ActionName = "Set plan";
+        }
+
+        private void SetAllCursors(Texture2D newCursor, Vector2 newOffset)
+        {
+            cursor = newCursor;
+            cursorOffset = newOffset;
+            var boxCursorField = AccessTools.Field(typeof(DragTool), "boxCursor");
+            boxCursorField.SetValue(this, newCursor);
         }
 
         public void RefreshVisualizerPreview()
@@ -338,6 +345,8 @@ namespace PlanningTool
                 Clipboard = new PlanClipboard();
                 PlanningToolSettings.Instance.OnPlanningToolModeChanged += toolMode =>
                 {
+
+                    SetAllCursors(defaultCursor, defaultCursorOffset);
                     if (toolMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
                     {
                         SetMode(Mode.Brush);
@@ -345,6 +354,7 @@ namespace PlanningTool
                     }
                     else if (toolMode == PlanningToolSettings.PlanningToolMode.SamplePlan)
                     {
+                        SetAllCursors(PTAssets.CursorPipette, defaultCursorOffset);
                         SetMode(Mode.Brush);
                         _visualizerClipboard.SetActive(false);
                     }
@@ -369,6 +379,7 @@ namespace PlanningTool
             ToolActive = true;
             KScreenManager.Instance.RefreshStack();
             PlanningToolBrushMenu.Instance.row.SetActive(true);
+            GridCompositor.Instance.ToggleMajor(true);
         }
 
         protected override void OnDeactivateTool(InterfaceTool new_tool)
@@ -377,6 +388,7 @@ namespace PlanningTool
             ToolActive = false;
             KScreenManager.Instance.RefreshStack();
             PlanningToolBrushMenu.Instance.row.SetActive(false);
+            GridCompositor.Instance.ToggleMajor(false);
         }
 
         public override void OnLeftClickUp(Vector3 cursor_pos)
@@ -384,6 +396,31 @@ namespace PlanningTool
             base.OnLeftClickUp(cursor_pos);
             _skipFurtherEventsThisClick = false;
             _cellLastDragThisClick = -1;
+        }
+
+        public override void OnMouseMove(Vector3 cursorPos)
+        {
+            base.OnMouseMove(cursorPos);
+            var cell = Grid.PosToCell(cursorPos);
+
+            if (cell != _prevMouseMoveCell && ToolActive && PlanningToolSettings.Instance.PlanningMode ==
+                PlanningToolSettings.PlanningToolMode.SamplePlan)
+            {
+                RefreshSampleCursor(cell);
+            }
+
+            _prevMouseMoveCell = cell;
+        }
+
+        private void RefreshSampleCursor(int cell)
+        {
+            var hasPlan = PlanGrid.PlansDict.ContainsKey(cell);
+            var nextCursor = hasPlan ? PTAssets.CursorPipette : PTAssets.CursorPipetteInvalid;
+            if (cursor != nextCursor)
+            {
+                SetAllCursors(nextCursor, defaultCursorOffset);
+                SetCursor(nextCursor, defaultCursorOffset, CursorMode.Auto);
+            }
         }
     }
 }
