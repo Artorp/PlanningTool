@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HarmonyLib;
 using PeterHan.PLib.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +37,11 @@ namespace PlanningTool
             row.transform.SetParent(transform, false);
             row.transform.SetSiblingIndex(row.transform.GetSiblingIndex() - 2); // move to just below the priority screen (todo: find priority screen by name, then move it)
 
+            // tooltip header text style
+            var TooltipHeaderField = AccessTools.Field(typeof(ToolMenu), "TooltipHeader");
+            var toolmenuHeaderStyleSetting = TooltipHeaderField.GetValue(ToolMenu.Instance) as TextStyleSetting;
+            var tooltipHeaderStyle = Instantiate(toolmenuHeaderStyleSetting);
+
             // first row: visibility and transparency
             var visibilityRow = new PPanel("VisibilityRow")
             {
@@ -46,6 +52,9 @@ namespace PlanningTool
             visibilityRow.transform.SetParent(row.transform, false);
 
             var hideButton = PTObjectTemplates.CreateSquareButton("Hide / show", PTAssets.IconToolHideShow, null);
+            var hideButtonToolTip = hideButton.GetComponent<ToolTip>();
+            hideButtonToolTip.AddMultiStringTooltip("Hide / Show Plans", tooltipHeaderStyle);
+            hideButtonToolTip.AddMultiStringTooltip("Toggle visibility of placed plans", null);
             hideButton.GetComponent<KToggle>().onValueChanged += b =>
             {
                 SaveLoadPlans.Instance.HidePlans = b;
@@ -87,7 +96,8 @@ namespace PlanningTool
                     var valueScaled = value / maxSliderValue;
                     sliderText.GetComponentInChildren<LocText>().text = $"Transparency:\n{valueScaled:0.00}";
                     SaveLoadPlans.Instance.ActiveAlpha = valueScaled;
-                }
+                },
+                ToolTip = "Change the transparency of plans"
             }.Build();
             SaveLoadPlans.Instance.OnActiveAlphaChange += f =>
             {
@@ -120,13 +130,13 @@ namespace PlanningTool
             shapeButtons.transform.SetParent(miscToolsRow.transform, false);
 
             var planShapes = new List<PlanShape>() { PlanShape.Rectangle, PlanShape.Circle, PlanShape.Diamond };
-            var planSprites = new List<Sprite>()
+            var planShapeSprites = new List<Sprite>()
                 { PTAssets.RectangleSprite, PTAssets.CircleSprite, PTAssets.DiamondSprite };
             for (int i = 0; i < planShapes.Count; i++)
             {
                 var planShape = planShapes[i];
 
-                var shapeButton = PTObjectTemplates.CreateSquareButton(Enum.GetName(typeof(PlanShape), planShape), planSprites[i], shapeButtons);
+                var shapeButton = PTObjectTemplates.CreateSquareButton(Enum.GetName(typeof(PlanShape), planShape), planShapeSprites[i], shapeButtons);
                 var image = shapeButton.transform.Find("FG")?.GetComponent<Image>();
                 if (image)
                     image.color = PlanColor.Gray.AsColor();
@@ -158,6 +168,9 @@ namespace PlanningTool
             verticalBar.transform.SetParent(miscToolsRow.transform, false);
 
             var copyButton = PTObjectTemplates.CreateSquareButton("Copy", PTAssets.IconToolCopy, null);
+            var copyButtonToolTip = copyButton.GetComponent<ToolTip>();
+            copyButtonToolTip.AddMultiStringTooltip("Copy", tooltipHeaderStyle);
+            copyButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString("Copy plans {Hotkey}", ToolKeyBindings.CopyPlanAction.GetKAction()), null);
             var copyButtonKToggle = copyButton.GetComponent<KToggle>();
             copyButtonKToggle.onClick += () =>
             {
@@ -179,6 +192,9 @@ namespace PlanningTool
             copyButton.transform.SetParent(miscToolsRow.transform, false);
 
             var cutButton = PTObjectTemplates.CreateSquareButton("Cut", PTAssets.IconToolCut, null);
+            var cutButtonToolTip = cutButton.GetComponent<ToolTip>();
+            cutButtonToolTip.AddMultiStringTooltip("Cut", tooltipHeaderStyle);
+            cutButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString("Cut plans {Hotkey}", ToolKeyBindings.CutPlanAction.GetKAction()), null);
             var cutButtonKToggle = cutButton.GetComponent<KToggle>();
             cutButtonKToggle.onClick += () =>
             {
@@ -200,6 +216,9 @@ namespace PlanningTool
             cutButton.transform.SetParent(miscToolsRow.transform, false);
 
             var pasteButton = PTObjectTemplates.CreateSquareButton("Paste", PTAssets.IconToolPaste, null);
+            var pasteButtonToolTip = pasteButton.GetComponent<ToolTip>();
+            pasteButtonToolTip.AddMultiStringTooltip("Paste", tooltipHeaderStyle);
+            pasteButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString("Paste previously copied plans {Hotkey}", ToolKeyBindings.PastePlanAction.GetKAction()), null);
             var pasteButtonKToggle = pasteButton.GetComponent<KToggle>();
             pasteButtonKToggle.onClick += () =>
             {
@@ -221,6 +240,9 @@ namespace PlanningTool
             pasteButton.transform.SetParent(miscToolsRow.transform, false);
 
             var sampleButton = PTObjectTemplates.CreateSquareButton("Sample", Assets.GetSprite((HashedString) "sample"), null);
+            var sampleButtonToolTip = sampleButton.GetComponent<ToolTip>();
+            sampleButtonToolTip.AddMultiStringTooltip("Sample", tooltipHeaderStyle);
+            sampleButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString("Copy shape and color from already placed plan {Hotkey}", ToolKeyBindings.SampleToolAction.GetKAction()), null);
             var sampleButtonKToggle = sampleButton.GetComponent<KToggle>();
             sampleButtonKToggle.onClick += () =>
             {
@@ -293,11 +315,6 @@ namespace PlanningTool
             if (e.Consumed)
                 return;
 
-            if (e.TryConsume(ToolKeyBindings.SampleToolAction.GetKAction()))
-            {
-                Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.SamplePlan;
-            }
-
             if (!e.Consumed && PlanningToolInterface.Instance.ToolActive &&
                 Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
             {
@@ -317,6 +334,34 @@ namespace PlanningTool
                     PlanningToolInterface.Instance.RefreshClipboardVisualisationPreview();
                 }
             }
+
+            if (e.TryConsume(ToolKeyBindings.SampleToolAction.GetKAction()))
+            {
+                Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.SamplePlan;
+            }
+            else if (e.TryConsume(ToolKeyBindings.CopyPlanAction.GetKAction()))
+            {
+                Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.CopyArea;
+            }
+            else if (e.TryConsume(ToolKeyBindings.CutPlanAction.GetKAction()))
+            {
+                Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.CutArea;
+            }
+            else if (e.TryConsume(ToolKeyBindings.PastePlanAction.GetKAction()))
+            {
+                Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.PlaceClipboard;
+            }
+            else if (e.TryConsume(ToolKeyBindings.SwitchShapeAction.GetKAction()))
+            {
+                // todo: change shape here
+                Debug.Log("[PlanningTool] Change plan shape button pressed");
+            }
+            else if (e.TryConsume(ToolKeyBindings.SwitchColorAction.GetKAction()))
+            {
+                // todo: change color here
+                Debug.Log("[PlanningTool] Change plan color button pressed");
+            }
+
             if (e.Consumed)
                 return;
             base.OnKeyDown(e);
