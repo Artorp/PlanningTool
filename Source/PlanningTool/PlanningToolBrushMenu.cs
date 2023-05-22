@@ -17,6 +17,7 @@ namespace PlanningTool
 
         public GameObject row;
         private List<PlanColor> _planColors;
+        private List<PlanShape> _planShapes;
 
         public static void DestroyInstance() => Instance = null;
 
@@ -129,12 +130,12 @@ namespace PlanningTool
             }.Build();
             shapeButtons.transform.SetParent(miscToolsRow.transform, false);
 
-            var planShapes = new List<PlanShape>() { PlanShape.Rectangle, PlanShape.Circle, PlanShape.Diamond };
+            _planShapes = new List<PlanShape>() { PlanShape.Rectangle, PlanShape.Circle, PlanShape.Diamond };
             var planShapeSprites = new List<Sprite>()
                 { PTAssets.RectangleSprite, PTAssets.CircleSprite, PTAssets.DiamondSprite };
-            for (int i = 0; i < planShapes.Count; i++)
+            for (int i = 0; i < _planShapes.Count; i++)
             {
-                var planShape = planShapes[i];
+                var planShape = _planShapes[i];
 
                 var shapeButton = PTObjectTemplates.CreateSquareButton(Enum.GetName(typeof(PlanShape), planShape), planShapeSprites[i], shapeButtons);
                 var image = shapeButton.transform.Find("FG")?.GetComponent<Image>();
@@ -353,13 +354,17 @@ namespace PlanningTool
             }
             else if (e.TryConsume(ToolKeyBindings.SwitchShapeAction.GetKAction()))
             {
-                // todo: change shape here
-                Debug.Log("[PlanningTool] Change plan shape button pressed");
+                // TODO: Change how shape is changed, for now just select next
+                var currentShapeIndex = _planShapes.IndexOf(PlanningToolSettings.Instance.ActiveShape);
+                var nextShape = _planShapes[(currentShapeIndex + 1) % _planShapes.Count];
+                PlanningToolSettings.Instance.ActiveShape = nextShape;
             }
             else if (e.TryConsume(ToolKeyBindings.SwitchColorAction.GetKAction()))
             {
-                // todo: change color here
-                Debug.Log("[PlanningTool] Change plan color button pressed");
+                // TODO: change how color is changed, for now just select next
+                var currentColorIndex = _planColors.IndexOf(PlanningToolSettings.Instance.ActiveColor);
+                var nextColor = _planColors[(currentColorIndex + 1) % _planColors.Count];
+                PlanningToolSettings.Instance.ActiveColor = nextColor;
             }
 
             if (e.Consumed)

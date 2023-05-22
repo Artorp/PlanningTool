@@ -104,8 +104,6 @@ namespace PlanningTool
             areaVisualizerTextPrefabField.SetValue(this, areaVisualizerTextPrefabField.GetValue(DigTool.Instance));
 
             var pthc = gameObject.AddComponent<PlanningToolHoverCard>();
-            pthc.ToolName = "Planning";
-            pthc.ActionName = "Set plan";
         }
 
         private void SetAllCursors(Texture2D newCursor, Vector2 newOffset)
