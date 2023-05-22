@@ -44,6 +44,10 @@
           <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
           <Private>False</Private>
         </Reference>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Newtonsoft.Json.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
         <Reference Include="PLib, Version=4.13.0.0, Culture=neutral, processorArchitecture=MSIL">
           <HintPath>packages\PLib.4.13.0\lib\net471\PLib.dll</HintPath>
         </Reference>
@@ -108,6 +112,7 @@
         <Compile Include="PTObjectTemplates.cs" />
         <Compile Include="PTStrings.cs" />
         <Compile Include="SaveLoadPlans.cs" />
+        <Compile Include="ToolKeyBindings.cs" />
         <Compile Include="UIComponentWrapper.cs" />
     </ItemGroup>
     <ItemGroup>

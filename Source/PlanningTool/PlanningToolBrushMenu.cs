@@ -290,28 +290,35 @@ namespace PlanningTool
 
         public override void OnKeyDown(KButtonEvent e)
         {
+            if (e.Consumed)
+                return;
+
+            if (e.TryConsume(ToolKeyBindings.SampleToolAction.GetKAction()))
+            {
+                Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.SamplePlan;
+            }
+
             if (!e.Consumed && PlanningToolInterface.Instance.ToolActive &&
                 Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
             {
-                var action = e.GetAction();
-                var keyCode = e.Controller.GetInputForAction(action);
-                if (keyCode == KKeyCode.Q)
+                if (e.TryConsume(ToolKeyBindings.ClipBoardRotateCCWAction.GetKAction()))
                 {
-                    e.TryConsume(action);
                     PlanningToolInterface.Instance.Clipboard.Rotate(false);
                     PlanningToolInterface.Instance.RefreshClipboardVisualisationPreview();
-                } else if (keyCode == KKeyCode.E)
+                }
+                else if (e.TryConsume(ToolKeyBindings.ClipBoardRotateCWAction.GetKAction()))
                 {
-                    e.TryConsume(action);
                     PlanningToolInterface.Instance.Clipboard.Rotate(true);
                     PlanningToolInterface.Instance.RefreshClipboardVisualisationPreview();
-                } else if (keyCode == KKeyCode.F)
+                }
+                else if (e.TryConsume(ToolKeyBindings.ClipBoardFlipAction.GetKAction()))
                 {
-                    e.TryConsume(action);
                     PlanningToolInterface.Instance.Clipboard.Flip(true);
                     PlanningToolInterface.Instance.RefreshClipboardVisualisationPreview();
                 }
             }
+            if (e.Consumed)
+                return;
             base.OnKeyDown(e);
         }
 

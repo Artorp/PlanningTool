@@ -20,6 +20,7 @@ namespace PlanningTool.HarmonyPatches
         {
             PTAssets.Initialize();
             PTObjectTemplates.CreateTemplates();
+            ToolKeyBindings.SetActionsIgnoreConflicts();
         }
     }
 
@@ -30,7 +31,7 @@ namespace PlanningTool.HarmonyPatches
         {
             __instance.basicTools.Insert(0,
                 ToolMenu.CreateToolCollection(PTStrings.PLANNING_TOOL_NAME, PTAssets.IconToolPlanning.name,
-                    PlanningToolUserMod.PlanningToolAction, nameof(PlanningToolInterface),
+                    ToolKeyBindings.PlanningToolAction.GetKAction(), nameof(PlanningToolInterface),
                     string.Format(PTStrings.PLANNING_TOOL_TOOLTIP, "{Hotkey}"), true));
         }
     }
