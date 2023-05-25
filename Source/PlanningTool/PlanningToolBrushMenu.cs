@@ -277,6 +277,52 @@ namespace PlanningTool
             };
             sampleButton.transform.SetParent(miscToolsRow.transform, false);
 
+            var exportButton = PTObjectTemplates.CreateSquareButton("Export", PTAssets.IconToolExport, null);
+            var exportButtonToolTip = exportButton.GetComponent<ToolTip>();
+            exportButtonToolTip.AddMultiStringTooltip("Export", tooltipHeaderStyle);
+            exportButtonToolTip.AddMultiStringTooltip("Place the plan currently on the game's clipboard to your system's clipboard", null);
+            var exportButtonKToggle = exportButton.GetComponent<KToggle>();
+            exportButtonKToggle.onClick += () =>
+            {
+                StartCoroutine(TurnKToggleOff(exportButtonKToggle, 0.05f));
+                PlanningToolInterface.Instance.Clipboard.ExportToSystemClipboard();
+            };
+            exportButton.transform.SetParent(miscToolsRow.transform, false);
+
+            var importButton = PTObjectTemplates.CreateSquareButton("Import", PTAssets.IconToolImport, null);
+            var importButtonToolTip = importButton.GetComponent<ToolTip>();
+            importButtonToolTip.AddMultiStringTooltip("Export", tooltipHeaderStyle);
+            importButtonToolTip.AddMultiStringTooltip(
+                "Attempt to import a plan from the system's clipboard to the game's clipboard\n" +
+                "Import errors are logged to the game's player.log file.", null);
+            var importButtonKToggle = importButton.GetComponent<KToggle>();
+            importButtonKToggle.onClick += () =>
+            {
+                StartCoroutine(TurnKToggleOff(importButtonKToggle, 0.05f));
+                try
+                {
+                    PlanningToolInterface.Instance.Clipboard.ImportFromSystemClipboard();
+                    PlanningToolInterface.Instance.RefreshClipboardVisualisationPreview();
+                    if (PlanningToolInterface.Instance.Clipboard.HasData())
+                        Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.PlaceClipboard;
+                }
+                catch (DeserializationException e)
+                {
+                    // Invalid string was on the system clipboard
+                    var warningMessage =
+                        $"[PlanningTool] Encountered {e.Errors.Count} errors while attempting to parse string from clipboard:";
+                    foreach (var error in e.Errors)
+                    {
+                        warningMessage += $"\n{error}";
+                    }
+
+                    warningMessage += "\nThe string that was attempted to be parsed was:\n" + e.StringToDeserialize;
+                    Debug.LogWarning(warningMessage);
+                    PlaySound(GlobalAssets.GetSound("redalert_on"));
+                }
+            };
+            importButton.transform.SetParent(miscToolsRow.transform, false);
+
             // third row, color buttons
 
             var colorButtons = new PPanel("ColorButtons")
@@ -322,6 +368,13 @@ namespace PlanningTool
             }
 
             row.SetActive(false);
+        }
+
+        private IEnumerator<WaitForSecondsRealtime> TurnKToggleOff(KToggle kToggle, float afterSecondsUnscaled)
+        {
+            yield return new WaitForSecondsRealtime(afterSecondsUnscaled);
+            if (kToggle.isOn)
+                kToggle.isOn = false;
         }
 
         public override void OnKeyDown(KButtonEvent e)

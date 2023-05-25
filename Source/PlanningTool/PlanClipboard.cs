@@ -1,4 +1,8 @@
+using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using UnityEngine;
 
 namespace PlanningTool
 {
@@ -136,13 +140,53 @@ namespace PlanningTool
                 element.OffsetY += deltaY;
             }
         }
+
+        public void ExportToSystemClipboard()
+        {
+            var jsonContent = JsonConvert.SerializeObject(_clipboardContent);
+            GUIUtility.systemCopyBuffer = jsonContent;
+        }
+
+        public void ImportFromSystemClipboard()
+        {
+            var jsonContent = GUIUtility.systemCopyBuffer;
+            var errors = new List<string>();
+            var output = JsonConvert.DeserializeObject<List<PlanClipboardElement>>(jsonContent, new JsonSerializerSettings()
+            {
+                Error = (sender, args) =>
+                {
+                    errors.Add(args.ErrorContext.Error.Message);
+                    args.ErrorContext.Handled = true;
+                }
+            });
+            if (errors.Count != 0)
+            {
+                throw new DeserializationException("Deserialization failed", errors, jsonContent);
+            }
+            _clipboardContent.Clear();
+            _clipboardContent.AddRange(output);
+        }
     }
 
     public class PlanClipboardElement
     {
         public int OffsetX;
         public int OffsetY;
+        [JsonConverter(typeof(StringEnumConverter))]
         public PlanShape Shape;
+        [JsonConverter(typeof(StringEnumConverter))]
         public PlanColor Color;
+    }
+
+    public class DeserializationException : Exception
+    {
+        public List<string> Errors { get; }
+        public string StringToDeserialize { get; }
+
+        public DeserializationException(string message, List<string> errors, string stringToSerialize) : base(message)
+        {
+            Errors = errors;
+            StringToDeserialize = stringToSerialize;
+        }
     }
 }

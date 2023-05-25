@@ -41,6 +41,10 @@ namespace PlanningTool
         public static Sprite IconToolCut;
         public const string IconToolPastePath = "tool_paste.png";
         public static Sprite IconToolPaste;
+        public const string IconToolImportPath = "tool_import.png";
+        public static Sprite IconToolImport;
+        public const string IconToolExportPath = "tool_export.png";
+        public static Sprite IconToolExport;
 
         public static string RadialMenuElementPath = "radial_menu_element.png";
         public static Texture2D RadialMenuElement;
@@ -83,6 +87,8 @@ namespace PlanningTool
             IconToolCopy = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolCopyPath));
             IconToolCut = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolCutPath));
             IconToolPaste = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolPastePath));
+            IconToolImport = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolImportPath));
+            IconToolExport = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolExportPath));
             RadialMenuElement = LoadResourceFileTexture(RadialMenuElementPath);
 
             IsInitialized = true;
