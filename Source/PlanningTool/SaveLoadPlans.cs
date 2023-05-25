@@ -45,7 +45,7 @@ namespace PlanningTool
         {
             PlanState = new Dictionary<int, PlanData>();
             Instance = this;
-            _activeAlpha = 0.2f;
+            _activeAlpha = 0.4f;
             _hidePlans = false;
         }
 
