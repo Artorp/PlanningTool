@@ -16,10 +16,20 @@ namespace PlanningTool
         public override float GetSortKey() => PlanningToolInterface.Instance.ToolActive ? 50f : base.GetSortKey();
 
         public GameObject row;
+        public GameObject RadialMenuObject;
+        public RadialMenu RadialMenu;
         private List<PlanColor> _planColors;
         private List<PlanShape> _planShapes;
+        private List<Sprite> _planShapeSprites;
 
-        public static void DestroyInstance() => Instance = null;
+        public static void DestroyInstance() {
+            if (Instance.RadialMenuObject != null)
+            {
+                Instance.RadialMenuObject.transform.SetParent(null);
+                Instance.RadialMenuObject = null;
+            }
+            Instance = null;
+        }
 
         protected override void OnSpawn()
         {
@@ -27,6 +37,9 @@ namespace PlanningTool
             Instance = this;
 
             Settings = new PlanningToolSettings();
+
+            RadialMenuObject = new GameObject("RadialMenu");
+            RadialMenu = RadialMenuObject.AddComponent<RadialMenu>();
 
             row = new PPanel("PlanningToolBrushMenuPanel")
             {
@@ -131,13 +144,13 @@ namespace PlanningTool
             shapeButtons.transform.SetParent(miscToolsRow.transform, false);
 
             _planShapes = new List<PlanShape>() { PlanShape.Rectangle, PlanShape.Circle, PlanShape.Diamond };
-            var planShapeSprites = new List<Sprite>()
+            _planShapeSprites = new List<Sprite>()
                 { PTAssets.RectangleSprite, PTAssets.CircleSprite, PTAssets.DiamondSprite };
             for (int i = 0; i < _planShapes.Count; i++)
             {
                 var planShape = _planShapes[i];
 
-                var shapeButton = PTObjectTemplates.CreateSquareButton(Enum.GetName(typeof(PlanShape), planShape), planShapeSprites[i], shapeButtons);
+                var shapeButton = PTObjectTemplates.CreateSquareButton(Enum.GetName(typeof(PlanShape), planShape), _planShapeSprites[i], shapeButtons);
                 var image = shapeButton.transform.Find("FG")?.GetComponent<Image>();
                 if (image)
                     image.color = PlanColor.Gray.AsColor();
@@ -354,17 +367,51 @@ namespace PlanningTool
             }
             else if (e.TryConsume(ToolKeyBindings.SwitchShapeAction.GetKAction()))
             {
-                // TODO: Change how shape is changed, for now just select next
-                var currentShapeIndex = _planShapes.IndexOf(PlanningToolSettings.Instance.ActiveShape);
-                var nextShape = _planShapes[(currentShapeIndex + 1) % _planShapes.Count];
-                PlanningToolSettings.Instance.ActiveShape = nextShape;
+                if (RadialMenu.IsStarted)
+                    RadialMenu.CancelMenu();
+                var radialOptions = new List<RadialMenuOption>();
+                for (var i = 0; i < _planShapes.Count; i++)
+                {
+                    var planShape = _planShapes[i];
+
+                    radialOptions.Add(new RadialMenuOption
+                    {
+                        WasSelected = PlanningToolSettings.Instance.ActiveShape == planShape,
+                        Icon = _planShapeSprites[i],
+                        Label = Enum.GetName(typeof(PlanShape), planShape),
+                        Color = Color.Lerp(Color.black, Color.white, 0.1f),
+                        HighlightColor = Color.Lerp(Color.black, Color.white, 0.3f)
+                    });
+                }
+
+                RadialMenu.StartMenu(radialOptions, i =>
+                {
+                    var nextShape = _planShapes[i];
+                    PlanningToolSettings.Instance.ActiveShape = nextShape;
+                });
             }
             else if (e.TryConsume(ToolKeyBindings.SwitchColorAction.GetKAction()))
             {
-                // TODO: change how color is changed, for now just select next
-                var currentColorIndex = _planColors.IndexOf(PlanningToolSettings.Instance.ActiveColor);
-                var nextColor = _planColors[(currentColorIndex + 1) % _planColors.Count];
-                PlanningToolSettings.Instance.ActiveColor = nextColor;
+                if (RadialMenu.IsStarted)
+                    RadialMenu.CancelMenu();
+                var radialOptions = new List<RadialMenuOption>();
+                foreach (var planColor in _planColors)
+                {
+                    var color = planColor.AsColor();
+                    var highlightColor = Color.Lerp(color, Color.white, 0.5f);
+                    radialOptions.Add(new RadialMenuOption
+                    {
+                        Color = planColor.AsColor(),
+                        HighlightColor = highlightColor,
+                        WasSelected = PlanningToolSettings.Instance.ActiveColor == planColor
+                    });
+                }
+
+                RadialMenu.StartMenu(radialOptions, i =>
+                {
+                    var nextColor = _planColors[i];
+                    PlanningToolSettings.Instance.ActiveColor = nextColor;
+                });
             }
 
             if (e.Consumed)
@@ -374,15 +421,37 @@ namespace PlanningTool
 
         public override void OnKeyUp(KButtonEvent e)
         {
-            if (!e.Consumed && PlanningToolInterface.Instance.ToolActive &&
-                (Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard ||
-                 Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CopyArea ||
-                 Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CutArea ||
-                 Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.SamplePlan))
+            if (e.Consumed)
+                return;
+            if (RadialMenu.IsStarted)
             {
-                var action = e.GetAction();
-                var keyCode = e.Controller.GetInputForAction(action);
-                if (keyCode == KKeyCode.Mouse1)
+                if (e.TryConsume(Action.MouseRight))
+                {
+                    RadialMenu.CancelMenu();
+                    return;
+                }
+
+                if (e.TryConsume(ToolKeyBindings.SwitchColorAction.GetKAction()))
+                {
+                    RadialMenu.MakeSelection();
+                    return;
+                }
+
+                if (e.TryConsume(ToolKeyBindings.SwitchShapeAction.GetKAction()))
+                {
+                    RadialMenu.MakeSelection();
+                    return;
+                }
+            }
+            var action = e.GetAction();
+            var keyCode = e.Controller.GetInputForAction(action);
+            if (keyCode == KKeyCode.Mouse1)
+            {
+                if (PlanningToolInterface.Instance.ToolActive &&
+                    (Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard ||
+                     Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CopyArea ||
+                     Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CutArea ||
+                     Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.SamplePlan))
                 {
                     // cancel while placing clipboard or other submenu tools should just go back to drag mode
                     PlaySound(GlobalAssets.GetSound("Tile_Cancel"));
@@ -390,6 +459,7 @@ namespace PlanningTool
                     if (PlanningToolInterface.Instance.Dragging)
                         PlanningToolInterface.Instance.CancelDragging();
                     e.TryConsume(action);
+                    return;
                 }
             }
             base.OnKeyUp(e);

@@ -42,6 +42,9 @@ namespace PlanningTool
         public const string IconToolPastePath = "tool_paste.png";
         public static Sprite IconToolPaste;
 
+        public static string RadialMenuElementPath = "radial_menu_element.png";
+        public static Texture2D RadialMenuElement;
+
         public static Shader SelectedShader;
 
         public static void Initialize()
@@ -80,6 +83,7 @@ namespace PlanningTool
             IconToolCopy = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolCopyPath));
             IconToolCut = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolCutPath));
             IconToolPaste = PUIUtils.LoadSpriteFile(AsInResourceFolder(IconToolPastePath));
+            RadialMenuElement = LoadResourceFileTexture(RadialMenuElementPath);
 
             IsInitialized = true;
         }
