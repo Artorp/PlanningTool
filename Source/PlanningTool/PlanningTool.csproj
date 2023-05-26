@@ -139,6 +139,8 @@
       <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Directory.Build.props" />
+      <Content Include="ILRepack.Config.props" />
       <Content Include="ILRepack.targets" />
       <Content Include="mod.yaml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>

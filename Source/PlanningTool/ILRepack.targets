@@ -15,7 +15,7 @@
                 InputAssemblies="@(InputAssemblies)"
                 TargetKind="Dll"
                 OutputFile="$(OutputPath)\$(AssemblyName).dll"
-                LibraryPath="C:\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\"
+                LibraryPath="$(OxygenNotIncludedDllsPath)"
         />
 
     </Target>

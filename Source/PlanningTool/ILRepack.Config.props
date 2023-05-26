@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <TargetPlatformVersion>4</TargetPlatformVersion>
+        <TargetPlatformDirectory>$(windir)\Microsoft.NET\Framework64\v4.0.30319</TargetPlatformDirectory>
+    </PropertyGroup>
+</Project>
