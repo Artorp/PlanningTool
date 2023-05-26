@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<!--  From: https://github.com/ravibpatel/ILRepack.Lib.MSBuild.Task  -->
+    <Target Name="ILRepacker" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+
+        <ItemGroup>
+            <InputAssemblies Include="$(OutputPath)\PlanningTool.dll" />
+            <InputAssemblies Include="$(OutputPath)\PLib.dll" />
+        </ItemGroup>
+
+        <ILRepack
+                Parallel="true"
+                Internalize="true"
+                InternalizeExclude=""
+                InputAssemblies="@(InputAssemblies)"
+                TargetKind="Dll"
+                OutputFile="$(OutputPath)\$(AssemblyName).dll"
+                LibraryPath="C:\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\"
+        />
+
+    </Target>
+</Project>
