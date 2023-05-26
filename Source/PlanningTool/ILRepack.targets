@@ -18,5 +18,16 @@
                 LibraryPath="$(OxygenNotIncludedDllsPath)"
         />
 
+        <!-- Delete files from release after merge -->
+        <ItemGroup>
+            <FilesToDelete Include="$(TargetDir)PlanningTool.pdb" />
+            <FilesToDelete Include="$(TargetDir)PLib.dll" />
+            <FilesToDelete Include="$(TargetDir)PLib.xml" />
+        </ItemGroup>
+        <Delete Files="@(FilesToDelete)">
+            <Output TaskParameter="DeletedFiles" ItemName="DeletedList" />
+        </Delete>
+        <Message Text="Deleted files: '@(DeletedList)'" />
+
     </Target>
 </Project>

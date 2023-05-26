@@ -215,16 +215,5 @@
     <Target Name="AfterBuild">
     </Target>
     -->
-    <Target Name="AfterBuild" DependsOnTargets="ILRepacker" Condition="'$(Configuration)' == 'Release'">
-        <ItemGroup>
-            <FilesToDelete Include="$(TargetDir)PlanningTool.pdb" />
-            <FilesToDelete Include="$(TargetDir)PLib.dll" />
-            <FilesToDelete Include="$(TargetDir)PLib.xml" />
-        </ItemGroup>
-        <Delete Files="@(FilesToDelete)">
-            <Output TaskParameter="DeletedFiles" ItemName="DeletedList" />
-        </Delete>
-        <Message Text="Deleted files: '@(DeletedList)'" />
-    </Target>
 
 </Project>
