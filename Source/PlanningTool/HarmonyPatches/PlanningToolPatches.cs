@@ -84,7 +84,7 @@ namespace PlanningTool.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(CancelTool), "OnDragTool")]
+    [HarmonyPatch(typeof(CancelTool))]
     public class CancelTool_Patch
     {
         public static string PLANNINGTOOL_PLAN = nameof(PLANNINGTOOL_PLAN);
@@ -107,6 +107,31 @@ namespace PlanningTool.HarmonyPatches
                 SaveLoadPlans.Instance.PlanState.Remove(cell);
                 Object.Destroy(go);
             }
+        }
+
+        [HarmonyPatch("OnPrefabInit")]
+        [HarmonyPostfix]
+        public static void OnPrefabInitPatch(CancelTool __instance, Dictionary<string, ToolParameterMenu.ToggleState> ___filterTargets, Dictionary<string, ToolParameterMenu.ToggleState> ___overlayFilterTargets, ref Dictionary<string, ToolParameterMenu.ToggleState> ___currentFilterTargets)
+        {
+            var resetFilterMethod = AccessTools.Method(typeof(CancelTool), "ResetFilter",
+                new[] { typeof(Dictionary<string, ToolParameterMenu.ToggleState>) });
+            if (resetFilterMethod == null)
+            {
+                Debug.LogWarning("[PlanningTool] Unable to find CancelTool.ResetFilter");
+                return;
+            }
+
+            if (___filterTargets == null || ___overlayFilterTargets == null || ___currentFilterTargets == null)
+            {
+                Debug.LogWarning("[PlanningTool] Fields in CancelTool do not match expected values, should all be initialized at this point.");
+                return;
+            }
+
+            // PlanningToolInterface.SelectPlansAsToolFilter modifies overlayFilterTargets but it is not populated until the tool is selected for the first time,
+            // so populate it earlier to allow changes to stick on first tool switch.
+            // Note: ResetFilter assigns currentFilterTargets to the called filter dict, so reassign it back to filterTargets (shouldn't affect anything anyway)
+            resetFilterMethod.Invoke(__instance, new object[]{___overlayFilterTargets});
+            ___currentFilterTargets = ___filterTargets;
         }
     }
 

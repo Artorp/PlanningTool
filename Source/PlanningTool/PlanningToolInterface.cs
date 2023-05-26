@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
+using PlanningTool.HarmonyPatches;
 using UnityEngine;
 
 namespace PlanningTool
@@ -387,6 +388,46 @@ namespace PlanningTool
             KScreenManager.Instance.RefreshStack();
             PlanningToolBrushMenu.Instance.row.SetActive(false);
             GridCompositor.Instance.ToggleMajor(false);
+            AdjustCancelFilterIfNeeded(new_tool);
+        }
+
+        private static void AdjustCancelFilterIfNeeded(InterfaceTool new_tool)
+        {
+            if (new_tool.name != CancelTool.Instance.name || !ModOptions.Options.SwitchPlanFilter) return;
+            var overlayFilterTargetsField = AccessTools.Field(typeof(CancelTool), "overlayFilterTargets");
+            if (overlayFilterTargetsField == null)
+            {
+                Debug.LogWarning("[PlanningTool] CancelTool.overlayFilterTargets not found.");
+                return;
+            }
+
+            if (!(overlayFilterTargetsField.GetValue(CancelTool.Instance) is Dictionary<string, ToolParameterMenu.ToggleState> overlayFilterTargets))
+            {
+                Debug.LogWarning("[PlanningTool] CancelTool.filterTargets not able to be retrieved.");
+                return;
+            }
+
+            if (overlayFilterTargets.Count == 0)
+            {
+                // shouldn't happen, as it is initialized in PlanningToolPatches CancelTool_Patch.OnPrefabInitPatch
+                Debug.LogWarning("[PlanningTool] CancelTool.overlayFilterTargets is not yet initialized, won't change setting.");
+                return;
+            }
+
+            if (!CancelTool.Instance.IsActiveLayer(CancelTool_Patch.PLANNINGTOOL_PLAN))
+            {
+                var targetKey = ModOptions.Options.AutoSwitchTo == ModOptions.AutoSwitchTarget.Plans
+                    ? CancelTool_Patch.PLANNINGTOOL_PLAN
+                    : ToolParameterMenu.FILTERLAYERS.ALL;
+                var keys = new List<string>(overlayFilterTargets.Keys);
+                foreach (var targetsKey in keys)
+                {
+                    overlayFilterTargets[targetsKey] = targetsKey == targetKey
+                        ? ToolParameterMenu.ToggleState.On
+                        : ToolParameterMenu.ToggleState.Off;
+                }
+            }
+
         }
 
         public override void OnLeftClickUp(Vector3 cursor_pos)

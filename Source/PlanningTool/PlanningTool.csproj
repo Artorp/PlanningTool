@@ -116,6 +116,7 @@
     <ItemGroup>
         <Compile Include="CustomDragTool.cs" />
         <Compile Include="HarmonyPatches\PlanningToolPatches.cs" />
+        <Compile Include="ModOptions.cs" />
         <Compile Include="PlanClipboard.cs" />
         <Compile Include="PlanGrid.cs" />
         <Compile Include="PlanningToolBrushMenu.cs" />

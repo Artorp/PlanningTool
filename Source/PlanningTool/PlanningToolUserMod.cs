@@ -3,6 +3,7 @@ using KMod;
 using PeterHan.PLib.Actions;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Database;
+using PeterHan.PLib.Options;
 using PlanningTool.HarmonyPatches;
 
 namespace PlanningTool
@@ -13,11 +14,18 @@ namespace PlanningTool
         {
             base.OnLoad(harmony);
             PUtil.InitLibrary(true);
-            new PLocalization().Initialize(harmony);
+            new PLocalization().Register();
+            new POptions().RegisterOptions(this, typeof(ModOptions));
             var pActionManager = new PActionManager();
             ToolKeyBindings.SetupPActionsOnLoad(pActionManager);
 
             AddStrings();
+            ModOptions.LoadOptions();
+
+#if false
+            // will create *.pot next to dll, move to source directory manually
+            PTStrings.GenerateTemplate();
+#endif
         }
 
         private static void AddStrings()
