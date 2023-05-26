@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,24 +12,24 @@ namespace PlanningTool
             switch (PlanningToolSettings.Instance.PlanningMode)
             {
                 case PlanningToolSettings.PlanningToolMode.DragPlan:
-                    ToolName = "Planning";
-                    ActionName = "Place plan";
+                    ToolName = PTStrings.PLANNING_TOOL_NAME;
+                    ActionName = PTStrings.HOVER_CARD.PLANNING_ACTION_NAME;
                     break;
                 case PlanningToolSettings.PlanningToolMode.CopyArea:
-                    ToolName = "Copy";
-                    ActionName = "Copy plans";
+                    ToolName = PTStrings.BRUSH_MENU.COPY_BUTTON_LABEL;
+                    ActionName = PTStrings.HOVER_CARD.COPY_ACTION_NAME;
                     break;
                 case PlanningToolSettings.PlanningToolMode.CutArea:
-                    ToolName = "Cut";
-                    ActionName = "Cut plans";
+                    ToolName = PTStrings.BRUSH_MENU.CUT_BUTTON_LABEL;
+                    ActionName = PTStrings.HOVER_CARD.CUT_ACTION_NAME;
                     break;
                 case PlanningToolSettings.PlanningToolMode.PlaceClipboard:
-                    ToolName = "Paste";
-                    ActionName = "Paste plans";
+                    ToolName = PTStrings.BRUSH_MENU.PASTE_BUTTON_LABEL;
+                    ActionName = PTStrings.HOVER_CARD.PASTE_ACTION_NAME;
                     break;
                 case PlanningToolSettings.PlanningToolMode.SamplePlan:
-                    ToolName = "Sample";
-                    ActionName = "Sample plan";
+                    ToolName = PTStrings.BRUSH_MENU.SAMPLE_BUTTON_LABEL;
+                    ActionName = PTStrings.HOVER_CARD.SAMPLE_ACTION_NAME;
                     break;
             }
         }
@@ -70,26 +71,26 @@ namespace PlanningTool
             if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.DragPlan)
             {
                 drawer.NewLine(34);
-                drawer.DrawText(GameUtil.ReplaceHotkeyString("{Hotkey} - Copy", ToolKeyBindings.CopyPlanAction.GetKAction()), standard);
+                drawer.DrawText(GameUtil.ReplaceHotkeyString(PTStrings.HOVER_CARD.COPY_HOTKEY, ToolKeyBindings.CopyPlanAction.GetKAction()), standard);
                 drawer.NewLine();
-                drawer.DrawText(GameUtil.ReplaceHotkeyString("{Hotkey} - Cut", ToolKeyBindings.CutPlanAction.GetKAction()), standard);
+                drawer.DrawText(GameUtil.ReplaceHotkeyString(PTStrings.HOVER_CARD.CUT_HOTKEY, ToolKeyBindings.CutPlanAction.GetKAction()), standard);
                 drawer.NewLine();
-                drawer.DrawText(GameUtil.ReplaceHotkeyString("{Hotkey} - Paste", ToolKeyBindings.PastePlanAction.GetKAction()), standard);
+                drawer.DrawText(GameUtil.ReplaceHotkeyString(PTStrings.HOVER_CARD.PASTE_HOTKEY, ToolKeyBindings.PastePlanAction.GetKAction()), standard);
                 drawer.NewLine();
-                drawer.DrawText(GameUtil.ReplaceHotkeyString("{Hotkey} - Sample", ToolKeyBindings.SampleToolAction.GetKAction()), standard);
+                drawer.DrawText(GameUtil.ReplaceHotkeyString(PTStrings.HOVER_CARD.SAMPLE_HOTKEY, ToolKeyBindings.SampleToolAction.GetKAction()), standard);
                 drawer.NewLine();
-                drawer.DrawText(GameUtil.ReplaceHotkeyString("{Hotkey} - Switch shape", ToolKeyBindings.SwitchShapeAction.GetKAction()), standard);
+                drawer.DrawText(GameUtil.ReplaceHotkeyString(PTStrings.HOVER_CARD.SWITCH_SHAPE_HOTKEY, ToolKeyBindings.SwitchShapeAction.GetKAction()), standard);
                 drawer.NewLine();
-                drawer.DrawText(GameUtil.ReplaceHotkeyString("{Hotkey} - Switch color", ToolKeyBindings.SwitchColorAction.GetKAction()), standard);
+                drawer.DrawText(GameUtil.ReplaceHotkeyString(PTStrings.HOVER_CARD.SWITCH_COLOR_HOTKEY, ToolKeyBindings.SwitchColorAction.GetKAction()), standard);
             } else if (PlanningToolSettings.Instance.PlanningMode ==
                        PlanningToolSettings.PlanningToolMode.PlaceClipboard)
             {
                 drawer.NewLine(34);
-                drawer.DrawText(GameUtil.ReplaceHotkeyString("{Hotkey} - Rotate left", ToolKeyBindings.ClipBoardRotateCCWAction.GetKAction()), standard);
+                drawer.DrawText(GameUtil.ReplaceHotkeyString(PTStrings.HOVER_CARD.ROTATE_LEFT_HOTKEY, ToolKeyBindings.ClipBoardRotateCCWAction.GetKAction()), standard);
                 drawer.NewLine();
-                drawer.DrawText(GameUtil.ReplaceHotkeyString("{Hotkey} - Rotate right", ToolKeyBindings.ClipBoardRotateCWAction.GetKAction()), standard);
+                drawer.DrawText(GameUtil.ReplaceHotkeyString(PTStrings.HOVER_CARD.ROTATE_RIGHT_HOTKEY, ToolKeyBindings.ClipBoardRotateCWAction.GetKAction()), standard);
                 drawer.NewLine();
-                drawer.DrawText(GameUtil.ReplaceHotkeyString("{Hotkey} - Flip horizontally", ToolKeyBindings.ClipBoardFlipAction.GetKAction()), standard);
+                drawer.DrawText(GameUtil.ReplaceHotkeyString(PTStrings.HOVER_CARD.FLIP_HORIZONTALLY_HOTKEY, ToolKeyBindings.ClipBoardFlipAction.GetKAction()), standard);
             }
         }
     }

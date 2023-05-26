@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Collections.Generic;
+using HarmonyLib;
 using KMod;
 using PeterHan.PLib.Actions;
 using PeterHan.PLib.Core;
@@ -18,14 +19,20 @@ namespace PlanningTool
             new POptions().RegisterOptions(this, typeof(ModOptions));
             var pActionManager = new PActionManager();
             ToolKeyBindings.SetupPActionsOnLoad(pActionManager);
-
-            AddStrings();
             ModOptions.LoadOptions();
 
 #if false
             // will create *.pot next to dll, move to source directory manually
             PTStrings.GenerateTemplate();
 #endif
+        }
+
+        public static void OnDbInitialized()
+        {
+            AddStrings();
+            PTAssets.Initialize();
+            PTObjectTemplates.CreateTemplates();
+            ToolKeyBindings.SetActionsIgnoreConflicts();
         }
 
         private static void AddStrings()

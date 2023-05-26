@@ -16,9 +16,10 @@ namespace PlanningTool
         public static PAction SampleToolAction { get; private set; }
         public static PAction SwitchShapeAction { get; private set; }
         public static PAction SwitchColorAction { get; private set; }
+        public static PAction HideShowAction { get; private set; }
 
         private static HashSet<Action> _actionsShouldIgnoreBindingConflicts = new HashSet<Action>();
-        private static List<string[]> _stringsToAdd = new List<string[]>();
+        private static List<(string, LocString)> _stringsToAdd = new List<(string, LocString)>();
 
         /// <summary>
         /// Must be called during UserMod2.OnLoad
@@ -44,13 +45,15 @@ namespace PlanningTool
                 PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SWITCH_SHAPE, new PKeyBinding(KKeyCode.Alpha1));
             SwitchColorAction = _createNonConflict(actionManager, "planningtool.switch_color",
                 PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SWITCH_COLOR, new PKeyBinding(KKeyCode.Alpha2));
+            HideShowAction = _createNonConflict(actionManager, "planningtool.hide_show",
+                PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.HIDE_SHOW);
         }
 
         private static PAction _createNonConflict(PActionManager actionManager, string identifier, LocString title, PKeyBinding binding = null)
         {
             var pAction = actionManager.CreateAction(identifier, title, binding);
             _actionsShouldIgnoreBindingConflicts.Add(pAction.GetKAction());
-            _stringsToAdd.Add(new []{"STRINGS.INPUT_BINDINGS.PLANNING_TOOL_ACTIVE." + pAction.GetKAction(), (string) title});
+            _stringsToAdd.Add(("STRINGS.INPUT_BINDINGS.PLANNING_TOOL_ACTIVE." + pAction.GetKAction(), title));
             return pAction;
         }
 
@@ -90,9 +93,13 @@ namespace PlanningTool
         public static void AddStrings()
         {
             Strings.Add("STRINGS.INPUT_BINDINGS.PLANNING_TOOL_ACTIVE.NAME", PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.GROUP_NAME);
-            foreach (var stringToAdd in _stringsToAdd)
+            Strings.Add("STRINGS.INPUT_BINDINGS.PLIB." + PlanningToolAction.GetKAction(), PTStrings.ACTION_PLANNING_TOOL_NAME);
+            foreach (var (stringKey, locString) in _stringsToAdd)
             {
-                Strings.Add(stringToAdd);
+                // since strings have been translated at this point but the LocString instance added to the list wasn't replaced,
+                // use the LocString key (that was added when localization was initialized) to look up the now translated
+                // text
+                Strings.Add(stringKey, Strings.Get(locString.key));
             }
         }
     }

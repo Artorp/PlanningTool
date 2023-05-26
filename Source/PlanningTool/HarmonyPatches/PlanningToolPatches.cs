@@ -18,9 +18,7 @@ namespace PlanningTool.HarmonyPatches
     {
         public static void Postfix()
         {
-            PTAssets.Initialize();
-            PTObjectTemplates.CreateTemplates();
-            ToolKeyBindings.SetActionsIgnoreConflicts();
+            PlanningToolUserMod.OnDbInitialized();
         }
     }
 

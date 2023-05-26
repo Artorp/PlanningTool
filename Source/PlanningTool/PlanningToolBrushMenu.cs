@@ -65,10 +65,12 @@ namespace PlanningTool
             }.Build();
             visibilityRow.transform.SetParent(row.transform, false);
 
-            var hideButton = PTObjectTemplates.CreateSquareButton("Hide / show", PTAssets.IconToolHideShow, null);
+            var hideButton = PTObjectTemplates.CreateSquareButton(PTStrings.BRUSH_MENU.HIDE_BUTTON_LABEL, PTAssets.IconToolHideShow, null);
             var hideButtonToolTip = hideButton.GetComponent<ToolTip>();
-            hideButtonToolTip.AddMultiStringTooltip("Hide / Show Plans", tooltipHeaderStyle);
-            hideButtonToolTip.AddMultiStringTooltip("Toggle visibility of placed plans", null);
+            hideButtonToolTip.AddMultiStringTooltip(PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_HEADER, tooltipHeaderStyle);
+            hideButtonToolTip.AddMultiStringTooltip(
+                GameUtil.ReplaceHotkeyString(PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_BODY,
+                    ToolKeyBindings.HideShowAction.GetKAction()), null);
             hideButton.GetComponent<KToggle>().onValueChanged += b =>
             {
                 SaveLoadPlans.Instance.HidePlans = b;
@@ -94,7 +96,7 @@ namespace PlanningTool
 
             var sliderText = new PLabel("sliderText")
             {
-                Text = $"Transparency:\n{SaveLoadPlans.Instance.ActiveAlpha:0.00}"
+                Text = string.Format(PTStrings.BRUSH_MENU.SLIDER_TEXT, SaveLoadPlans.Instance.ActiveAlpha)
             }.Build();
             sliderText.transform.SetParent(sliderParent.transform, false);
 
@@ -108,10 +110,10 @@ namespace PlanningTool
                 OnValueChanged = (source, value) =>
                 {
                     var valueScaled = value / maxSliderValue;
-                    sliderText.GetComponentInChildren<LocText>().text = $"Transparency:\n{valueScaled:0.00}";
+                    sliderText.GetComponentInChildren<LocText>().text = string.Format(PTStrings.BRUSH_MENU.SLIDER_TEXT, valueScaled);
                     SaveLoadPlans.Instance.ActiveAlpha = valueScaled;
                 },
-                ToolTip = "Change the transparency of plans"
+                ToolTip = PTStrings.BRUSH_MENU.SLIDER_TOOLTIP
             }.Build();
             SaveLoadPlans.Instance.OnActiveAlphaChange += f =>
             {
@@ -150,7 +152,7 @@ namespace PlanningTool
             {
                 var planShape = _planShapes[i];
 
-                var shapeButton = PTObjectTemplates.CreateSquareButton(Enum.GetName(typeof(PlanShape), planShape), _planShapeSprites[i], shapeButtons);
+                var shapeButton = PTObjectTemplates.CreateSquareButton(planShape.AsLocString(), _planShapeSprites[i], shapeButtons);
                 var image = shapeButton.transform.Find("FG")?.GetComponent<Image>();
                 if (image)
                     image.color = PlanColor.Gray.AsColor();
@@ -181,10 +183,10 @@ namespace PlanningTool
             }.BuildWithFixedSize(new Vector2(3f, 42f));
             verticalBar.transform.SetParent(miscToolsRow.transform, false);
 
-            var copyButton = PTObjectTemplates.CreateSquareButton("Copy", PTAssets.IconToolCopy, null);
+            var copyButton = PTObjectTemplates.CreateSquareButton(PTStrings.BRUSH_MENU.COPY_BUTTON_LABEL, PTAssets.IconToolCopy, null);
             var copyButtonToolTip = copyButton.GetComponent<ToolTip>();
-            copyButtonToolTip.AddMultiStringTooltip("Copy", tooltipHeaderStyle);
-            copyButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString("Copy plans {Hotkey}", ToolKeyBindings.CopyPlanAction.GetKAction()), null);
+            copyButtonToolTip.AddMultiStringTooltip(PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_HEADER, tooltipHeaderStyle);
+            copyButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString(PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_BODY, ToolKeyBindings.CopyPlanAction.GetKAction()), null);
             var copyButtonKToggle = copyButton.GetComponent<KToggle>();
             copyButtonKToggle.onClick += () =>
             {
@@ -205,10 +207,10 @@ namespace PlanningTool
             };
             copyButton.transform.SetParent(miscToolsRow.transform, false);
 
-            var cutButton = PTObjectTemplates.CreateSquareButton("Cut", PTAssets.IconToolCut, null);
+            var cutButton = PTObjectTemplates.CreateSquareButton(PTStrings.BRUSH_MENU.CUT_BUTTON_LABEL, PTAssets.IconToolCut, null);
             var cutButtonToolTip = cutButton.GetComponent<ToolTip>();
-            cutButtonToolTip.AddMultiStringTooltip("Cut", tooltipHeaderStyle);
-            cutButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString("Cut plans {Hotkey}", ToolKeyBindings.CutPlanAction.GetKAction()), null);
+            cutButtonToolTip.AddMultiStringTooltip(PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_HEADER, tooltipHeaderStyle);
+            cutButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString(PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_BODY, ToolKeyBindings.CutPlanAction.GetKAction()), null);
             var cutButtonKToggle = cutButton.GetComponent<KToggle>();
             cutButtonKToggle.onClick += () =>
             {
@@ -229,10 +231,10 @@ namespace PlanningTool
             };
             cutButton.transform.SetParent(miscToolsRow.transform, false);
 
-            var pasteButton = PTObjectTemplates.CreateSquareButton("Paste", PTAssets.IconToolPaste, null);
+            var pasteButton = PTObjectTemplates.CreateSquareButton(PTStrings.BRUSH_MENU.PASTE_BUTTON_LABEL, PTAssets.IconToolPaste, null);
             var pasteButtonToolTip = pasteButton.GetComponent<ToolTip>();
-            pasteButtonToolTip.AddMultiStringTooltip("Paste", tooltipHeaderStyle);
-            pasteButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString("Paste previously copied plans {Hotkey}", ToolKeyBindings.PastePlanAction.GetKAction()), null);
+            pasteButtonToolTip.AddMultiStringTooltip(PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_HEADER, tooltipHeaderStyle);
+            pasteButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString(PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_BODY, ToolKeyBindings.PastePlanAction.GetKAction()), null);
             var pasteButtonKToggle = pasteButton.GetComponent<KToggle>();
             pasteButtonKToggle.onClick += () =>
             {
@@ -253,10 +255,10 @@ namespace PlanningTool
             };
             pasteButton.transform.SetParent(miscToolsRow.transform, false);
 
-            var sampleButton = PTObjectTemplates.CreateSquareButton("Sample", Assets.GetSprite((HashedString) "sample"), null);
+            var sampleButton = PTObjectTemplates.CreateSquareButton(PTStrings.BRUSH_MENU.SAMPLE_BUTTON_LABEL, Assets.GetSprite((HashedString) "sample"), null);
             var sampleButtonToolTip = sampleButton.GetComponent<ToolTip>();
-            sampleButtonToolTip.AddMultiStringTooltip("Sample", tooltipHeaderStyle);
-            sampleButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString("Copy shape and color from already placed plan {Hotkey}", ToolKeyBindings.SampleToolAction.GetKAction()), null);
+            sampleButtonToolTip.AddMultiStringTooltip(PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_HEADER, tooltipHeaderStyle);
+            sampleButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString(PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_BODY, ToolKeyBindings.SampleToolAction.GetKAction()), null);
             var sampleButtonKToggle = sampleButton.GetComponent<KToggle>();
             sampleButtonKToggle.onClick += () =>
             {
@@ -277,10 +279,10 @@ namespace PlanningTool
             };
             sampleButton.transform.SetParent(miscToolsRow.transform, false);
 
-            var exportButton = PTObjectTemplates.CreateSquareButton("Export", PTAssets.IconToolExport, null);
+            var exportButton = PTObjectTemplates.CreateSquareButton(PTStrings.BRUSH_MENU.EXPORT_BUTTON_LABEL, PTAssets.IconToolExport, null);
             var exportButtonToolTip = exportButton.GetComponent<ToolTip>();
-            exportButtonToolTip.AddMultiStringTooltip("Export", tooltipHeaderStyle);
-            exportButtonToolTip.AddMultiStringTooltip("Place the plan currently on the game's clipboard to your system's clipboard", null);
+            exportButtonToolTip.AddMultiStringTooltip(PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_HEADER, tooltipHeaderStyle);
+            exportButtonToolTip.AddMultiStringTooltip(PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_BODY, null);
             var exportButtonKToggle = exportButton.GetComponent<KToggle>();
             exportButtonKToggle.onClick += () =>
             {
@@ -289,12 +291,10 @@ namespace PlanningTool
             };
             exportButton.transform.SetParent(miscToolsRow.transform, false);
 
-            var importButton = PTObjectTemplates.CreateSquareButton("Import", PTAssets.IconToolImport, null);
+            var importButton = PTObjectTemplates.CreateSquareButton(PTStrings.BRUSH_MENU.IMPORT_BUTTON_LABEL, PTAssets.IconToolImport, null);
             var importButtonToolTip = importButton.GetComponent<ToolTip>();
-            importButtonToolTip.AddMultiStringTooltip("Export", tooltipHeaderStyle);
-            importButtonToolTip.AddMultiStringTooltip(
-                "Attempt to import a plan from the system's clipboard to the game's clipboard\n" +
-                "Import errors are logged to the game's player.log file.", null);
+            importButtonToolTip.AddMultiStringTooltip(PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_HEADER, tooltipHeaderStyle);
+            importButtonToolTip.AddMultiStringTooltip(PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_BODY, null);
             var importButtonKToggle = importButton.GetComponent<KToggle>();
             importButtonKToggle.onClick += () =>
             {
@@ -340,7 +340,7 @@ namespace PlanningTool
             {
                 var planColor = _planColors[i];
 
-                var colorButton = PTObjectTemplates.CreateSquareButton(Enum.GetName(typeof(PlanColor), planColor), PTAssets.WhiteBGSprite, colorButtons);
+                var colorButton = PTObjectTemplates.CreateSquareButton(planColor.AsLocString(), PTAssets.WhiteBGSprite, colorButtons);
                 var image = colorButton.transform.Find("FG")?.GetComponent<Image>();
                 if (image)
                 {
@@ -402,7 +402,11 @@ namespace PlanningTool
                 }
             }
 
-            if (e.TryConsume(ToolKeyBindings.SampleToolAction.GetKAction()))
+            if (e.TryConsume(ToolKeyBindings.HideShowAction.GetKAction()))
+            {
+                SaveLoadPlans.Instance.HidePlans = !SaveLoadPlans.Instance.HidePlans;
+            }
+            else if (e.TryConsume(ToolKeyBindings.SampleToolAction.GetKAction()))
             {
                 Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.SamplePlan;
             }
@@ -431,7 +435,7 @@ namespace PlanningTool
                     {
                         WasSelected = PlanningToolSettings.Instance.ActiveShape == planShape,
                         Icon = _planShapeSprites[i],
-                        Label = Enum.GetName(typeof(PlanShape), planShape),
+                        Label = planShape.AsLocString(),
                         Color = Color.Lerp(Color.black, Color.white, 0.1f),
                         HighlightColor = Color.Lerp(Color.black, Color.white, 0.3f)
                     });

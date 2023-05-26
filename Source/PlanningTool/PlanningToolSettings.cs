@@ -40,11 +40,54 @@ namespace PlanningTool
             ColorMap.TryGetValue(PlanColor.Gray, out var gray);
             return gray;
         }
+
+        public static LocString AsLocString(this PlanColor planColor)
+        {
+            if (planColor == PlanColor.Gray)
+                return PTStrings.COLORS.GRAY;
+            if (planColor == PlanColor.Blue)
+                return PTStrings.COLORS.BLUE;
+            if (planColor == PlanColor.Green)
+                return PTStrings.COLORS.GREEN;
+            if (planColor == PlanColor.Red)
+                return PTStrings.COLORS.RED;
+            if (planColor == PlanColor.Cyan)
+                return PTStrings.COLORS.CYAN;
+            if (planColor == PlanColor.Magenta)
+                return PTStrings.COLORS.MAGENTA;
+            if (planColor == PlanColor.Violet)
+                return PTStrings.COLORS.VIOLET;
+            if (planColor == PlanColor.Orange)
+                return PTStrings.COLORS.ORANGE;
+            if (planColor == PlanColor.Yellow)
+                return PTStrings.COLORS.YELLOW;
+            if (planColor == PlanColor.White)
+                return PTStrings.COLORS.WHITE;
+            if (planColor == PlanColor.Black)
+                return PTStrings.COLORS.BLACK;
+            Debug.LogWarning("[PlanningTool] Color with enum value " + planColor + " not recognized, returning default text");
+            return PTStrings.COLORS.GRAY;
+        }
     }
 
     public enum PlanShape
     {
         Rectangle, Circle, Diamond
+    }
+
+    public static class PlanShapeExtension
+    {
+        public static LocString AsLocString(this PlanShape planShape)
+        {
+            if (planShape == PlanShape.Rectangle)
+                return PTStrings.SHAPES.RECTANGLE;
+            if (planShape == PlanShape.Circle)
+                return PTStrings.SHAPES.CIRCLE;
+            if (planShape == PlanShape.Diamond)
+                return PTStrings.SHAPES.DIAMOND;
+            Debug.LogWarning("[PlanningTool] Shape with enum value " + planShape + " not recognized, returning default text");
+            return PTStrings.SHAPES.RECTANGLE;
+        }
     }
 
     public class PlanningToolSettings
