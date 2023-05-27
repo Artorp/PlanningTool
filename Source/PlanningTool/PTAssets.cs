@@ -59,9 +59,6 @@ namespace PlanningTool
                 return;
             }
 
-            // TODO: check performance of both SpriteRenderer and MeshRenderer, use best one
-            // RectangleSprite = PUIUtils.LoadSprite(RectangleImageAssemblyPath);
-
             InitializeShader();
             var grey = new Color(0.96f, 0.96f, 0.96f, 0.5f);
             var tex = LoadResourceFileTexture(RectanglePath);
