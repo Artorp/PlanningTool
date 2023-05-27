@@ -1,0 +1,37 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What is the issue you encountered?
+      placeholder: Tell us what you expected to happen, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: A list of steps to reproduce the bug
+      placeholder: 1. ...
+    validations:
+      required: true
+  - type: textarea
+    id: playerlog
+    attributes:
+      label: Player.log
+      description: |
+        Attach the full output log file player.log to help us understand the issue. The file can be located at
+          Windows: %userprofile%\AppData\LocalLow\Klei\Oxygen Not Included\Player.log
+          Mac: ~/Library/Logs/Unity/Player.log
+          Linux: ~/.config/unity3d/Klei/Oxygen Not Included/Player.log
+        Attach it by dragging the file over the text area (after clicking it once), or clicking the bottom part of the text area.
+    validations:
+      required: true

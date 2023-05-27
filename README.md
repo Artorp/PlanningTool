@@ -2,11 +2,15 @@
 
 A planning tool mod that lets you drag shapes, copy paste plans, and build your base with ease.
 
+## Report issues
+
+Use the issue tab to report any issues with the mod. Please use the "Bug Report" form template when submitting an issue, describe the steps required to reproduce the bug, and include the player.log file.
+
 ## Contribute translations
 
 Translations are welcome and I've made an effort to make every string translatable. If you wish to translate Planning Tool to your language or wish to improve on an existing translation read this section.
 
-1. Fork and clone this repository.
+1. Clone or download this repository
 2. Download and install [poedit](https://poedit.net/).
 3. Open `Source/PlanningTool/translations/planningtool_template.pot` with poedit.
    - Alternatively open an existing translation .po file and choose Translation > Update from POT file...
@@ -14,7 +18,10 @@ Translations are welcome and I've made an effort to make every string translatab
 5. Choose the target language.
 6. Translate the strings using poedit.
 7. Save the translation as "language_code.po" where language_code is the language code for your chosen language (e.g. en_US, da_DK, etc), poedit should automatically fill this out.
-8. `git add` and `git commit`, push to your fork and create a pull request.
+8. Zip the .po file, or rename extension to .txt, so that it can be attached to a github comment
+9. Create a new issue using the "Submit Translation" issue form template
+
+I also welcome pull requests if you know what you are doing.
 
 Official guide for translating ONI for reference: https://forums.kleientertainment.com/forums/topic/74765-creatingusing-translation-files-updated-august-22nd-2017/
 

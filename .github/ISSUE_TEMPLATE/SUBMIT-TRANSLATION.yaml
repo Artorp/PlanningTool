@@ -1,0 +1,25 @@
+name: Submit Translation
+description: Submit a *.po translation file
+title: "[Translation]: "
+labels: ["translation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing to the mod!
+  - type: textarea
+    id: comments
+    attributes:
+      label: Additional comments
+      placeholder: If you have any additional comments
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: Translation file
+      description: |
+        Please attach the translation file here. Github's text area attachments only support a few file types (.txt, .zip, others), please either add it to a zip archive or rename extension to .txt so that I can rename it back to .po.
+      placeholder: Drag zipped / renamed translation file here
+    validations:
+      required: true
