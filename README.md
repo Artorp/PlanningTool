@@ -2,6 +2,22 @@
 
 A planning tool mod that lets you drag shapes, copy paste plans, and build your base with ease.
 
+## Contribute translations
+
+Translations are welcome and I've made an effort to make every string translatable. If you wish to translate Planning Tool to your language or wish to improve on an existing translation read this section.
+
+1. Fork and clone this repository.
+2. Download and install [poedit](https://poedit.net/).
+3. Open `Source/PlanningTool/translations/planningtool_template.pot` with poedit.
+   - Alternatively open an existing translation .po file and choose Translation > Update from POT file...
+4. Click create new translation.
+5. Choose the target language.
+6. Translate the strings using poedit.
+7. Save the translation as "language_code.po" where language_code is the language code for your chosen language (e.g. en_US, da_DK, etc), poedit should automatically fill this out.
+8. `git add` and `git commit`, push to your fork and create a pull request.
+
+Official guide for translating ONI for reference: https://forums.kleientertainment.com/forums/topic/74765-creatingusing-translation-files-updated-august-22nd-2017/
+
 ## Development setup
 
 The project has been tested to successfully be imported into Visual Studio 2019 and Rider without problems.
