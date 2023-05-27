@@ -328,6 +328,26 @@ msgctxt "PlanningTool.PTStrings.SETTINGS.AUTO_SWITCH_TO_TOOLTIP"
 msgid "Which filter to switch to when selecting cancel tool with planning tool active. Does nothing if the previous setting is disabled."
 msgstr ""
 
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SIMPLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SIMPLE"
+msgid "Simple"
+msgstr ""
+
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SKETCH
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SKETCH"
+msgid "Sketch"
+msgstr ""
+
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TITLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TITLE"
+msgid "Graphic style"
+msgstr ""
+
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TOOLTIP
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TOOLTIP"
+msgid "Choose a style for the appearance of the plans."
+msgstr ""
+
 #. PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE
 msgctxt "PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE"
 msgid "Auto-switch Cancel Tool Filter"

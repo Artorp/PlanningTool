@@ -148,7 +148,7 @@
       <Content Include="mod_info.yaml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Resources\Circle.png">
+      <Content Include="Resources\plans_circle_simple.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Resources\cursor_arrow_planning.png">
@@ -160,13 +160,22 @@
       <Content Include="Resources\cursor_pipette_invalid.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
-      <Content Include="Resources\Diamond.png">
+      <Content Include="Resources\plans_diamond_simple.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\plans_circle_sketch.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\plans_diamond_sketch.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\plans_rectangle_sketch.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="Resources\radial_menu_element.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Resources\Rectangle.png">
+      <Content Include="Resources\plans_rectangle_simple.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Resources\SelectionOutline.png">

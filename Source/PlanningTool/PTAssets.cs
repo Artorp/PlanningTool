@@ -9,13 +9,16 @@ namespace PlanningTool
     {
         public static bool IsInitialized;
 
-        public const string RectanglePath = "Rectangle.png";
+        public const string RectanglePrefix = "plans_rectangle";
+        public const string CirclePrefix = "plans_circle";
+        public const string DiamondPrefix = "plans_diamond";
+        public const string SketchStyleSuffix = "_sketch";
+        public const string SimpleStyleSuffix = "_simple";
+        public const string PlanFileExtension = ".png";
         public static Material RectangleMaterial;
         public static Sprite RectangleSprite;
-        public const string CirclePath = "Circle.png";
         public static Material CircleMaterial;
         public static Sprite CircleSprite;
-        public const string DiamondPath = "Diamond.png";
         public static Material DiamondMaterial;
         public static Sprite DiamondSprite;
         public const string SelectionOutlinePath = "SelectionOutline.png";
@@ -60,17 +63,9 @@ namespace PlanningTool
             }
 
             InitializeShader();
+            LoadShapeTextures(ModOptions.Options);
+            Texture2D tex = LoadResourceFileTexture(SelectionOutlinePath);
             var grey = new Color(0.96f, 0.96f, 0.96f, 0.5f);
-            var tex = LoadResourceFileTexture(RectanglePath);
-            RectangleMaterial = CreateMaterialWithTexture(tex, grey);
-            RectangleSprite = Sprite.Create(tex, new Rect(0f, 0f, tex.width, tex.height), new Vector2(0.5f, 0.5f));
-            tex = LoadResourceFileTexture(CirclePath);
-            CircleMaterial = CreateMaterialWithTexture(tex, grey);
-            CircleSprite = Sprite.Create(tex, new Rect(0f, 0f, tex.width, tex.height), new Vector2(0.5f, 0.5f));
-            tex = LoadResourceFileTexture(DiamondPath);
-            DiamondMaterial = CreateMaterialWithTexture(tex, grey);
-            DiamondSprite = Sprite.Create(tex, new Rect(0f, 0f, tex.width, tex.height), new Vector2(0.5f, 0.5f));
-            tex = LoadResourceFileTexture(SelectionOutlinePath);
             SelectionOutlineMaterial = CreateMaterialWithTexture(tex, grey);
             WhiteBGSprite = PUIUtils.LoadSpriteFile(AsInResourceFolder(WhiteBGPath));
             CursorPlanning = LoadResourceFileTexture(CursorPlanningPath);
@@ -89,6 +84,25 @@ namespace PlanningTool
             RadialMenuElement = LoadResourceFileTexture(RadialMenuElementPath);
 
             IsInitialized = true;
+        }
+
+        public static void LoadShapeTextures(ModOptions options)
+        {
+            if (options == null) options = new ModOptions();
+            var style = options.Style == ModOptions.PlanStyle.Sketch ? SketchStyleSuffix : SimpleStyleSuffix;
+            var rectanglePath = RectanglePrefix + style + PlanFileExtension;
+            var circlePath = CirclePrefix + style + PlanFileExtension;
+            var diamondPath = DiamondPrefix + style + PlanFileExtension;
+            var grey = new Color(0.96f, 0.96f, 0.96f, 0.5f);
+            var tex = LoadResourceFileTexture(rectanglePath);
+            RectangleMaterial = CreateMaterialWithTexture(tex, grey);
+            RectangleSprite = Sprite.Create(tex, new Rect(0f, 0f, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+            tex = LoadResourceFileTexture(circlePath);
+            CircleMaterial = CreateMaterialWithTexture(tex, grey);
+            CircleSprite = Sprite.Create(tex, new Rect(0f, 0f, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+            tex = LoadResourceFileTexture(diamondPath);
+            DiamondMaterial = CreateMaterialWithTexture(tex, grey);
+            DiamondSprite = Sprite.Create(tex, new Rect(0f, 0f, tex.width, tex.height), new Vector2(0.5f, 0.5f));
         }
 
         private static void InitializeShader()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -10,6 +11,7 @@ namespace PlanningTool
     public class ModOptions : IOptions
     {
         public static ModOptions Options { get; private set; }
+        public static event Action<ModOptions> OnOptionsChangedEvent;
 
         [Option("PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE", "PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TOOLTIP")]
         [JsonProperty]
@@ -19,6 +21,11 @@ namespace PlanningTool
         [JsonProperty]
         [JsonConverter(typeof(StringEnumConverter))]
         public AutoSwitchTarget AutoSwitchTo { get; set; }
+
+        [Option("PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TITLE", "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TOOLTIP")]
+        [JsonProperty]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public PlanStyle Style { get; set; }
 
         public ModOptions()
         {
@@ -34,6 +41,7 @@ namespace PlanningTool
         public void OnOptionsChanged()
         {
             LoadOptions();
+            OnOptionsChangedEvent?.Signal(Options);
         }
 
         public static void LoadOptions()
@@ -47,6 +55,14 @@ namespace PlanningTool
             Plans,
             [Option("STRINGS.UI.TOOLS.FILTERLAYERS.ALL")]
             All
+        }
+
+        public enum PlanStyle
+        {
+            [Option("PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SKETCH")]
+            Sketch,
+            [Option("PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SIMPLE")]
+            Simple
         }
     }
 }

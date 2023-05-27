@@ -18,6 +18,7 @@ namespace PlanningTool
 
         private static void InitializePlanningTileSprite()
         {
+            if (planningTileSprite != null) Object.Destroy(planningTileSprite);
             planningTileSprite = new GameObject("planningTileSprite");
             planningTileSprite.SetActive(false);
             planningTileSprite.AddComponent<SpriteRenderer>().sprite = PTAssets.RectangleSprite;
@@ -28,6 +29,7 @@ namespace PlanningTool
         private static void InitializePlanningTileMesh()
         {
             // based on CommonPlacerConfig.CreatePrefab
+            if (planningTileMesh != null) Object.Destroy(planningTileMesh);
             planningTileMesh = new GameObject("planningTileMesh");
             planningTileMesh.SetActive(false);
             GameObject gameObject = new GameObject("Mask");

@@ -33,6 +33,11 @@ namespace PlanningTool
             PTAssets.Initialize();
             PTObjectTemplates.CreateTemplates();
             ToolKeyBindings.SetActionsIgnoreConflicts();
+            ModOptions.OnOptionsChangedEvent += options =>
+            {
+                PTAssets.LoadShapeTextures(options);
+                PTObjectTemplates.CreateTemplates();
+            };
         }
 
         private static void AddStrings()
