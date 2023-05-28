@@ -107,7 +107,10 @@ namespace PlanningTool
 
         public static GameObject CreateSquareButton(string name, Sprite sprite, GameObject parent)
         {
+            if (ToolMenu.Instance.sandboxToolIconPrefab == null)
+                Debug.LogWarning("[PlanningTool] ToolMenu.Instance.sandboxToolIconPrefab was null, planning tool submenu likely to fail");
             var button = Util.KInstantiateUI(ToolMenu.Instance.sandboxToolIconPrefab, parent, true);
+            ValidateButtonPrefab(button);
             button.name = name;
             button.transform.Find("FG").GetComponent<Image>().sprite = sprite;
             var lt = button.transform.Find("Text")?.GetComponent<LocText>();
@@ -115,6 +118,48 @@ namespace PlanningTool
             var tComp = button.GetComponent<KToggle>();
             tComp.artExtension.animator = null;
             return button;
+        }
+
+        /// <summary>
+        /// If sandboxToolIconPrefab changes in the future, this method will give warnings so that the changes can be addressed
+        /// </summary>
+        /// <param name="button">instantiation of ToolMenu.Instance.sandboxToolIconPrefab</param>
+        private static void ValidateButtonPrefab(GameObject button)
+        {
+            if (button == null)
+            {
+                Debug.LogWarning("[PlanningTool] Instantiation of sandboxToolIconPrefab was null, planning tool submenu likely to fail");
+                return;
+            }
+
+            if (button.transform.Find("FG") == null)
+            {
+                Debug.LogWarning("[PlanningTool] sandboxToolIconPrefab.[name=FG] was null, planning tool submenu likely to fail");
+                return;
+            }
+
+            if (button.transform.Find("FG").GetComponent<Image>() == null)
+            {
+                Debug.LogWarning("[PlanningTool] sandboxToolIconPrefab.FG had no Image component, planning tool submenu likely to fail");
+                return;
+            }
+
+            if (button.transform.Find("Text") == null)
+            {
+                Debug.LogWarning("[PlanningTool] sandboxToolIconPrefab.[name=Text] was null, planning tool submenu likely to fail");
+                return;
+            }
+
+            if (button.transform.Find("Text").GetComponent<LocText>() == null)
+            {
+                Debug.LogWarning("[PlanningTool] sandboxToolIconPrefab.Text had no LocText component, planning tool submenu likely to fail");
+                return;
+            }
+
+            if (button.GetComponent<KToggle>() == null)
+            {
+                Debug.LogWarning("[PlanningTool] sandboxToolIconPrefab had no KToggle component, planning tool submenu likely to fail");
+            }
         }
     }
 }
