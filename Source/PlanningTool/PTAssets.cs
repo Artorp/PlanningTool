@@ -62,7 +62,7 @@ namespace PlanningTool
                 return;
             }
 
-            InitializeShader();
+            SelectedShader = FindBlendedShader();
             LoadShapeTextures(ModOptions.Options);
             Texture2D tex = LoadResourceFileTexture(SelectionOutlinePath);
             var grey = new Color(0.96f, 0.96f, 0.96f, 0.5f);
@@ -105,7 +105,7 @@ namespace PlanningTool
             DiamondSprite = Sprite.Create(tex, new Rect(0f, 0f, tex.width, tex.height), new Vector2(0.5f, 0.5f));
         }
 
-        private static void InitializeShader()
+        private static Shader FindBlendedShader()
         {
             // attempt to find suiting shader with blended transparency
             var blendedShader = Shader.Find("Klei/BuildingCell");
@@ -119,7 +119,7 @@ namespace PlanningTool
             if (blendedShader == null)
             {
                 Debug.LogWarning(
-                    "[PlanningTool] Unable to find shader 'Klei/BuildingCell', attempting fallback to non-blended shader 'Klei/Unlit Transparent'");
+                    "[PlanningTool] Unable to find shader 'Klei/Area Visualizer', attempting fallback to non-blended shader 'Klei/Unlit Transparent'");
                 blendedShader = Shader.Find("Klei/Unlit Transparent");
             }
 
@@ -129,7 +129,7 @@ namespace PlanningTool
                 blendedShader = Assets.instance.digPlacerAssets.materials[0].shader;
             }
 
-            SelectedShader = blendedShader;
+            return blendedShader;
         }
 
         public static Material CreateMaterialWithTexture(Texture2D texture, Color color)

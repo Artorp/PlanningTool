@@ -66,9 +66,9 @@ namespace PlanningTool
             Debug.Log($"[PlanningTool] Loading {PlanState.Count} saved plans from save file.");
             foreach (var item in PlanState.Values)
             {
-                var gameObject = PlanningToolInterface.CreatePlanTile(item);
-                PlanGrid.Plans[item.Cell] = gameObject;
-                gameObject.SetActive(!HidePlans);
+                var go = PlanningToolInterface.CreatePlanTile(item);
+                PlanGrid.Plans[item.Cell] = go;
+                go.SetActive(!HidePlans);
             }
         }
 

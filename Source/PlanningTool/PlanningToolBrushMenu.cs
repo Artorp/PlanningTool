@@ -49,7 +49,18 @@ namespace PlanningTool
             }.Build();
 
             row.transform.SetParent(transform, false);
-            row.transform.SetSiblingIndex(row.transform.GetSiblingIndex() - 2); // move to just below the priority screen (todo: find priority screen by name, then move it)
+             // move to just below the priority screen
+            var priorityScreen = transform.transform.Find("PriorityScreen");
+            if (priorityScreen == null)
+            {
+                Debug.LogWarning("[PlanningTool] Can't find child 'PriorityScreen' of ToolMenu.Instance, menu ordering might be wrong");
+                row.transform.SetSiblingIndex(row.transform.GetSiblingIndex() - 2);
+            }
+            else
+            {
+                var targetSiblingIndex = priorityScreen.transform.GetSiblingIndex() + 1;
+                row.transform.SetSiblingIndex(targetSiblingIndex);
+            }
 
             // tooltip header text style
             var TooltipHeaderField = AccessTools.Field(typeof(ToolMenu), "TooltipHeader");

@@ -5,6 +5,9 @@ namespace PlanningTool
 {
     public static class PTStrings
     {
+        /// <summary>
+        /// Use to generate translation template .pot file alongside the .dll file
+        /// </summary>
         public static void GenerateTemplate()
         {
             var outputFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

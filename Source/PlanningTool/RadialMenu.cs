@@ -154,7 +154,7 @@ namespace PlanningTool
 
     public class RadialMenuOption
     {
-        [CanBeNull] public string Label; // TODO: also add text color??
+        [CanBeNull] public string Label;
         public Color? Color;
         public Color? HighlightColor;
         [CanBeNull] public Sprite Icon;

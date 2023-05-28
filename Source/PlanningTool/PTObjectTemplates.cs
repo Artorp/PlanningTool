@@ -7,8 +7,8 @@ namespace PlanningTool
 {
     public class PTObjectTemplates
     {
-        protected static GameObject planningTileSprite;
-        protected static GameObject planningTileMesh;
+        protected static GameObject PlanningTileSprite;
+        protected static GameObject PlanningTileMesh;
 
         public static void CreateTemplates()
         {
@@ -18,22 +18,22 @@ namespace PlanningTool
 
         private static void InitializePlanningTileSprite()
         {
-            if (planningTileSprite != null) Object.Destroy(planningTileSprite);
-            planningTileSprite = new GameObject("planningTileSprite");
-            planningTileSprite.SetActive(false);
-            planningTileSprite.AddComponent<SpriteRenderer>().sprite = PTAssets.RectangleSprite;
-            planningTileSprite.SetLayerRecursively(LayerMask.NameToLayer("PlaceWithDepth"));
-            Object.DontDestroyOnLoad(planningTileSprite);
+            if (PlanningTileSprite != null) Object.Destroy(PlanningTileSprite);
+            PlanningTileSprite = new GameObject("PlanningTileSprite");
+            PlanningTileSprite.SetActive(false);
+            PlanningTileSprite.AddComponent<SpriteRenderer>().sprite = PTAssets.RectangleSprite;
+            PlanningTileSprite.SetLayerRecursively(LayerMask.NameToLayer("PlaceWithDepth"));
+            Object.DontDestroyOnLoad(PlanningTileSprite);
         }
 
         private static void InitializePlanningTileMesh()
         {
             // based on CommonPlacerConfig.CreatePrefab
-            if (planningTileMesh != null) Object.Destroy(planningTileMesh);
-            planningTileMesh = new GameObject("planningTileMesh");
-            planningTileMesh.SetActive(false);
+            if (PlanningTileMesh != null) Object.Destroy(PlanningTileMesh);
+            PlanningTileMesh = new GameObject("PlanningTileMesh");
+            PlanningTileMesh.SetActive(false);
             GameObject gameObject = new GameObject("Mask");
-            gameObject.transform.parent = planningTileMesh.transform;
+            gameObject.transform.parent = PlanningTileMesh.transform;
             gameObject.transform.SetLocalPosition(new Vector3(0.0f, 0.5f, -3.537f));
             gameObject.transform.eulerAngles = new Vector3(0.0f, 180f, 0.0f);
             gameObject.AddComponent<MeshFilter>().sharedMesh = Assets.instance.commonPlacerAssets.mesh;
@@ -63,14 +63,14 @@ namespace PlanningTool
                     easingMultiplier = 1f
                 }
             };
-            planningTileSprite.SetLayerRecursively(LayerMask.NameToLayer("PlaceWithDepth"));
+            PlanningTileSprite.SetLayerRecursively(LayerMask.NameToLayer("PlaceWithDepth"));
 
-            Object.DontDestroyOnLoad(planningTileMesh);
+            Object.DontDestroyOnLoad(PlanningTileMesh);
         }
 
         public static GameObject CreatePlanningTileSprite(string id)
         {
-            var go = Object.Instantiate(planningTileSprite);
+            var go = Object.Instantiate(PlanningTileSprite);
             go.name = id;
             go.SetLayerRecursively(LayerMask.NameToLayer("PlaceWithDepth"));
             return go;
@@ -78,7 +78,7 @@ namespace PlanningTool
 
         public static GameObject CreatePlanningTileMesh(string id, PlanShape shape, PlanColor planColor, bool useActiveAlpha = true)
         {
-            var go = Object.Instantiate(planningTileMesh);
+            var go = Object.Instantiate(PlanningTileMesh);
             go.name = id;
             var meshRenderer = go.transform.Find("Mask").GetComponent<MeshRenderer>();
             if (shape == PlanShape.Circle)
