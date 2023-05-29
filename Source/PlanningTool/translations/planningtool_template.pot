@@ -348,6 +348,16 @@ msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TOOLTIP"
 msgid "Choose a style for the appearance of the plans."
 msgstr ""
 
+#. PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TITLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TITLE"
+msgid "Remove plan on construction"
+msgstr ""
+
+#. PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP
+msgctxt "PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP"
+msgid "When a building is constructed on top of a previously marked plan, remove that plan."
+msgstr ""
+
 #. PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE
 msgctxt "PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE"
 msgid "Auto-switch Cancel Tool Filter"

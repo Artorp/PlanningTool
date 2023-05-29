@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using HarmonyLib;
+using Klei.AI;
 using UnityEngine;
 
 namespace PlanningTool.HarmonyPatches
@@ -130,6 +131,98 @@ namespace PlanningTool.HarmonyPatches
             // Note: ResetFilter assigns currentFilterTargets to the called filter dict, so reassign it back to filterTargets (shouldn't affect anything anyway)
             resetFilterMethod.Invoke(__instance, new object[]{___overlayFilterTargets});
             ___currentFilterTargets = ___filterTargets;
+        }
+    }
+
+    /// <summary>
+    /// Subscribe to GameplayEventManager.Instance.NewBuilding, and once a new building is constructed remove a plan
+    /// on the building cells if the option is set.
+    /// </summary>
+    [HarmonyPatch(typeof(GameplayEventManager))]
+    public class RemovePlanTileOnBuildingBuiltPatch
+    {
+        public static int SubscriptionId;
+
+        [HarmonyPatch("OnPrefabInit")]
+        [HarmonyPostfix]
+        public static void OnPrefabInit_SetupSubscriber()
+        {
+            var instance = GameplayEventManager.Instance;
+            if (instance == null)
+            {
+                Debug.LogWarning("[PlanningTool] GameplayEventManager.Instance was null after OnPrefabInit (?).");
+                return;
+            }
+
+            // Triggered by Constructable.FinishConstruction
+            if (SubscriptionId != 0)
+            {
+                Debug.LogWarning($"[PlanningTool] SubscriptionId {SubscriptionId} was already defined, this shouldn't happen. Were there two instances of GameplayEventManager created? Unsubscribing.");
+                instance.Unsubscribe(SubscriptionId);
+            }
+            SubscriptionId = instance.Subscribe((int)GameHashes.NewBuilding, NewBuildingHandler);
+        }
+
+        [HarmonyPatch("OnCleanUp")]
+        [HarmonyPrefix]
+        public static void OnCleanUp_RemoveSubscriber()
+        {
+            if (SubscriptionId == 0) return;
+            if (GameplayEventManager.Instance != null)
+                GameplayEventManager.Instance.Unsubscribe(SubscriptionId);
+            SubscriptionId = 0;
+        }
+
+        [HarmonyPatch("DestroyInstance")]
+        [HarmonyPrefix]
+        public static void DestroyInstance_RemoveSubscriber()
+        {
+            if (SubscriptionId == 0) return;
+            if (GameplayEventManager.Instance != null)
+                GameplayEventManager.Instance.Unsubscribe(SubscriptionId);
+            SubscriptionId = 0;
+        }
+
+        public static void NewBuildingHandler(object o)
+        {
+            if (!(o is BonusEvent.GameplayEventData gameplayEventData))
+            {
+                Debug.LogWarning("[PlanningTool] Received GameHashes.NewBuilding event with malformed data.");
+                return;
+            }
+
+            if (!ModOptions.Options.RemovePlansOnConstruction)
+                return;
+
+            // See: BuildingDef.UnmarkArea
+            if (gameplayEventData.workable == null)
+            {
+                Debug.LogWarning("[PlanningTool] gameplayEventData.workable was null.");
+                return;
+            }
+
+            if (gameplayEventData.building == null)
+            {
+                Debug.LogWarning("[PlanningTool] gameplayEventData.building was null.");
+                return;
+            }
+
+            var cell = Grid.PosToCell(gameplayEventData.workable.transform.GetPosition());
+            var building = gameplayEventData.building;
+            var orientation = building.Orientation;
+            if (cell == Grid.InvalidCell) return;
+            for (var i = 0; i < building.Def.PlacementOffsets.Length; i++)
+            {
+                var rotatedCellOffset = Rotatable.GetRotatedCellOffset(building.Def.PlacementOffsets[i], orientation);
+                var offsetCell = Grid.OffsetCell(cell, rotatedCellOffset);
+                var go = PlanGrid.Plans[offsetCell];
+                if (go != null)
+                {
+                    PlanGrid.Plans[offsetCell] = null;
+                    SaveLoadPlans.Instance.PlanState.Remove(offsetCell);
+                    Object.Destroy(go);
+                }
+            }
         }
     }
 

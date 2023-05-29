@@ -107,6 +107,10 @@ namespace PlanningTool
 
         public static class SETTINGS
         {
+            public static LocString REMOVE_PLAN_ON_CONSTRUCTION_TITLE = "Remove plan on construction";
+            public static LocString REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP =
+                "When a building is constructed on top of a previously marked plan, remove that plan.";
+
             public static LocString SWITCH_PLAN_FILTER_TITLE = "Auto-switch Cancel Tool Filter";
             public static LocString SWITCH_PLAN_FILTER_TOOLTIP =
                 "If the cancel tool is selected while the planning tool is active and the filter is not 'Plans' or 'All', the cancel tool filter will automatically be set to the below setting.\n" +

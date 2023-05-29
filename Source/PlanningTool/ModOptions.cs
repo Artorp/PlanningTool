@@ -10,8 +10,25 @@ namespace PlanningTool
     [ModInfo("https://github.com/Artorp/PlanningTool")]
     public class ModOptions : IOptions
     {
-        public static ModOptions Options { get; private set; }
+        private static ModOptions _options;
+        public static ModOptions Options
+        {
+            get
+            {
+                if (_options == null)
+                {
+                    LoadOptions();
+                }
+
+                return _options;
+            }
+        }
+
         public static event Action<ModOptions> OnOptionsChangedEvent;
+
+        [Option("PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TITLE", "PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP")]
+        [JsonProperty]
+        public bool RemovePlansOnConstruction { get; set; }
 
         [Option("PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE", "PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TOOLTIP")]
         [JsonProperty]
@@ -29,6 +46,7 @@ namespace PlanningTool
 
         public ModOptions()
         {
+            RemovePlansOnConstruction = true;
             SwitchPlanFilter = true;
             AutoSwitchTo = AutoSwitchTarget.Plans;
         }
@@ -46,7 +64,7 @@ namespace PlanningTool
 
         public static void LoadOptions()
         {
-            Options = POptions.ReadSettings<ModOptions>() ?? new ModOptions();
+            _options = POptions.ReadSettings<ModOptions>() ?? new ModOptions();
         }
 
         public enum AutoSwitchTarget
