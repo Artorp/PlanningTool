@@ -1,0 +1,400 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. PlanningTool.PTStrings.ACTION_PLANNING_TOOL_NAME
+msgctxt "PlanningTool.PTStrings.ACTION_PLANNING_TOOL_NAME"
+msgid "Start planning"
+msgstr "Planla"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_LABEL"
+msgid "Copy"
+msgstr "Kopyala"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_BODY"
+msgid "Copy plans {Hotkey}"
+msgstr "Planı kopyala {Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_HEADER"
+msgid "Copy"
+msgstr "Kopyala"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_LABEL"
+msgid "Cut"
+msgstr "Kes"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_BODY"
+msgid "Cut plans {Hotkey}"
+msgstr "Planı kes {hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_HEADER"
+msgid "Cut"
+msgstr "Kes"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_LABEL"
+msgid "Export"
+msgstr "Dışa Aktar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_BODY"
+msgid "Place the plan currently on the game's clipboard to your system's clipboard"
+msgstr ""
+"Şu anda oyunun panosunda bulunan planı sisteminizin panosuna yerleştirin"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_HEADER"
+msgid "Export"
+msgstr "Dışa Aktar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_LABEL"
+msgid "Hide / show"
+msgstr "Göster/Gizle"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_BODY"
+msgid "Toggle visibility of placed plans {Hotkey}"
+msgstr "Yerleştirilen planların görünürlüğünü değiştir {Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_HEADER"
+msgid "Hide / Show Plans"
+msgstr "Göster/Gizle"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_LABEL"
+msgid "Import"
+msgstr "İçe Aktar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_BODY"
+msgid "Attempt to import a plan from the system's clipboard to the game's clipboard\nImport errors are logged to the game's player.log file."
+msgstr ""
+"Sistemin panosundan oyunun panosuna bir plan aktarma girişimi\n"
+"İçe aktarma hataları oyunun player.log dosyasına kaydedilir."
+
+#. PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_HEADER"
+msgid "Import"
+msgstr "İçe Aktar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_LABEL"
+msgid "Paste"
+msgstr "Yapıştır"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_BODY"
+msgid "Paste previously copied plans {Hotkey}"
+msgstr "Önceden kopyalanan planları yapıştırın {Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_HEADER"
+msgid "Paste"
+msgstr "Yapıştır"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_LABEL"
+msgid "Sample"
+msgstr "Örnek"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_BODY"
+msgid "Copy shape and color from already placed plan {Hotkey}"
+msgstr ""
+"Halihazırda yerleştirilmiş olan plandan şekli ve rengi kopyalayın {Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_HEADER"
+msgid "Sample"
+msgstr "Örnek"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TEXT
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TEXT"
+msgid "Transparency:\n{0:0.00}"
+msgstr ""
+"Şeffaflık:\n"
+"{0:0.00}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TOOLTIP
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TOOLTIP"
+msgid "Change the transparency of plans"
+msgstr "Planların şeffaflığını değiştirin"
+
+#. PlanningTool.PTStrings.COLORS.BLACK
+msgctxt "PlanningTool.PTStrings.COLORS.BLACK"
+msgid "Black"
+msgstr "Siyah"
+
+#. PlanningTool.PTStrings.COLORS.BLUE
+msgctxt "PlanningTool.PTStrings.COLORS.BLUE"
+msgid "Blue"
+msgstr "Mavi"
+
+#. PlanningTool.PTStrings.COLORS.CYAN
+msgctxt "PlanningTool.PTStrings.COLORS.CYAN"
+msgid "Cyan"
+msgstr "Turkuaz"
+
+#. PlanningTool.PTStrings.COLORS.GRAY
+msgctxt "PlanningTool.PTStrings.COLORS.GRAY"
+msgid "Gray"
+msgstr "Gri"
+
+#. PlanningTool.PTStrings.COLORS.GREEN
+msgctxt "PlanningTool.PTStrings.COLORS.GREEN"
+msgid "Green"
+msgstr "Yeşil"
+
+#. PlanningTool.PTStrings.COLORS.MAGENTA
+msgctxt "PlanningTool.PTStrings.COLORS.MAGENTA"
+msgid "Magenta"
+msgstr "Pembe"
+
+#. PlanningTool.PTStrings.COLORS.ORANGE
+msgctxt "PlanningTool.PTStrings.COLORS.ORANGE"
+msgid "Orange"
+msgstr "Turuncu"
+
+#. PlanningTool.PTStrings.COLORS.RED
+msgctxt "PlanningTool.PTStrings.COLORS.RED"
+msgid "Red"
+msgstr "Kırmızı"
+
+#. PlanningTool.PTStrings.COLORS.VIOLET
+msgctxt "PlanningTool.PTStrings.COLORS.VIOLET"
+msgid "Violet"
+msgstr "Mor"
+
+#. PlanningTool.PTStrings.COLORS.WHITE
+msgctxt "PlanningTool.PTStrings.COLORS.WHITE"
+msgid "White"
+msgstr "Beyaz"
+
+#. PlanningTool.PTStrings.COLORS.YELLOW
+msgctxt "PlanningTool.PTStrings.COLORS.YELLOW"
+msgid "Yellow"
+msgstr "Sarı"
+
+#. PlanningTool.PTStrings.HOVER_CARD.COPY_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.COPY_ACTION_NAME"
+msgid "Copy plan"
+msgstr "Planı Kopyala"
+
+#. PlanningTool.PTStrings.HOVER_CARD.COPY_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.COPY_HOTKEY"
+msgid "{Hotkey} - Copy"
+msgstr "{Hotkey} - Kopyala"
+
+#. PlanningTool.PTStrings.HOVER_CARD.CUT_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.CUT_ACTION_NAME"
+msgid "Cut plan"
+msgstr "Planı kes"
+
+#. PlanningTool.PTStrings.HOVER_CARD.CUT_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.CUT_HOTKEY"
+msgid "{Hotkey} - Cut"
+msgstr "{Hotkey} - Kes"
+
+#. PlanningTool.PTStrings.HOVER_CARD.FLIP_HORIZONTALLY_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.FLIP_HORIZONTALLY_HOTKEY"
+msgid "{Hotkey} - Flip horizontally"
+msgstr "{Hotkey} - Yatay çevir"
+
+#. PlanningTool.PTStrings.HOVER_CARD.PASTE_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.PASTE_ACTION_NAME"
+msgid "Paste plan"
+msgstr "Planı Yapıştır"
+
+#. PlanningTool.PTStrings.HOVER_CARD.PASTE_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.PASTE_HOTKEY"
+msgid "{Hotkey} - Paste"
+msgstr "{Hotkey} - Yapıştır"
+
+#. PlanningTool.PTStrings.HOVER_CARD.PLANNING_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.PLANNING_ACTION_NAME"
+msgid "Place plan"
+msgstr "Planı yerleştir"
+
+#. PlanningTool.PTStrings.HOVER_CARD.ROTATE_LEFT_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.ROTATE_LEFT_HOTKEY"
+msgid "{Hotkey} - Rotate left"
+msgstr "{Hotkey} - Sola döndür"
+
+#. PlanningTool.PTStrings.HOVER_CARD.ROTATE_RIGHT_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.ROTATE_RIGHT_HOTKEY"
+msgid "{Hotkey} - Rotate right"
+msgstr "{Hotkey} - Sağa döndür"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SAMPLE_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SAMPLE_ACTION_NAME"
+msgid "Sample plan"
+msgstr "Örenk plan"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SAMPLE_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SAMPLE_HOTKEY"
+msgid "{Hotkey} - Sample"
+msgstr "{Hotkey} - Örnek"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SWITCH_COLOR_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SWITCH_COLOR_HOTKEY"
+msgid "{Hotkey} - Switch color"
+msgstr "{Hotkey} - Rengi değiştir"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SWITCH_SHAPE_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SWITCH_SHAPE_HOTKEY"
+msgid "{Hotkey} - Switch shape"
+msgstr "{Hotkey} - Şekli değiştir"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.COPY_PLAN
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.COPY_PLAN"
+msgid "Copy plan"
+msgstr "Planı kopyala"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.CUT_PLAN
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.CUT_PLAN"
+msgid "Cut plan"
+msgstr "Planı kes"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.FLIP_CLIPBOARD
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.FLIP_CLIPBOARD"
+msgid "Flip clipboard"
+msgstr "Panoyu çevir"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.GROUP_NAME
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.GROUP_NAME"
+msgid "Planning tool (selected)"
+msgstr "Planlama aracı (seçildi)"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.HIDE_SHOW
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.HIDE_SHOW"
+msgid "Hide / show plans"
+msgstr "Göster / Gizle"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.PASTE_PLAN
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.PASTE_PLAN"
+msgid "Paste plan"
+msgstr "Planı yapıştır"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.ROTATE_CLIPBOARD_CCW
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.ROTATE_CLIPBOARD_CCW"
+msgid "Rotate clipboard counter clockwise"
+msgstr "Panoyu saat yönünün tersine döndür"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.ROTATE_CLIPBOARD_CW
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.ROTATE_CLIPBOARD_CW"
+msgid "Rotate clipboard clockwise"
+msgstr "Panoyu saat yönünde döndür"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SAMPLE_TOOL
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SAMPLE_TOOL"
+msgid "Sample plan"
+msgstr "Örnek plan"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SWITCH_COLOR
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SWITCH_COLOR"
+msgid "Switch plan color"
+msgstr "Plan rengini değiştir"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SWITCH_SHAPE
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SWITCH_SHAPE"
+msgid "Switch plan shape"
+msgstr "Plan şeklini değiştir"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_FILTER_ITEM
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_FILTER_ITEM"
+msgid "Plans"
+msgstr "Planlar"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_NAME
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_NAME"
+msgid "Planning"
+msgstr "Planlama"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_TOOLTIP
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_TOOLTIP"
+msgid "Create a plan {0}"
+msgstr "Plan oluştur {0}"
+
+#. PlanningTool.PTStrings.SETTINGS.AUTO_SWITCH_TO_TITLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.AUTO_SWITCH_TO_TITLE"
+msgid "Auto-switch to"
+msgstr "otomatik geçiş"
+
+#. PlanningTool.PTStrings.SETTINGS.AUTO_SWITCH_TO_TOOLTIP
+msgctxt "PlanningTool.PTStrings.SETTINGS.AUTO_SWITCH_TO_TOOLTIP"
+msgid "Which filter to switch to when selecting cancel tool with planning tool active. Does nothing if the previous setting is disabled."
+msgstr ""
+"Planlama aracı etkinken iptal aracını seçerken hangi filtreye geçileceği. "
+"Önceki ayar devre dışı bırakılırsa hiçbir şey yapmaz."
+
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SIMPLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SIMPLE"
+msgid "Simple"
+msgstr "Basit"
+
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SKETCH
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SKETCH"
+msgid "Sketch"
+msgstr "Kroki"
+
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TITLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TITLE"
+msgid "Graphic style"
+msgstr "Grafik stili"
+
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TOOLTIP
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TOOLTIP"
+msgid "Choose a style for the appearance of the plans."
+msgstr "Planların görünümü için bir stil seçin."
+
+#. PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TITLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TITLE"
+msgid "Remove plan on construction"
+msgstr "İnşaat planını kaldır"
+
+#. PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP
+msgctxt "PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP"
+msgid "When a building is constructed on top of a previously marked plan, remove that plan."
+msgstr ""
+"Önceden işaretlenmiş bir planın üzerine bir bina inşa edildiğinde, o planı "
+"kaldırın."
+
+#. PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE"
+msgid "Auto-switch Cancel Tool Filter"
+msgstr "Otomatik Geçiş Filtresi İptal Aracı"
+
+#. PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TOOLTIP
+msgctxt "PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TOOLTIP"
+msgid "If the cancel tool is selected while the planning tool is active and the filter is not 'Plans' or 'All', the cancel tool filter will automatically be set to the below setting.\nThis should save you a click if you left the cancel tool on something else, and ensure the cancel tool will always remove a plan when selected from planning mode."
+msgstr ""
+"Planlama aracı etkinken iptal aracı seçilirse ve filtre 'Planlar' veya "
+"'Tümü' değilse, iptal aracı filtresi otomatik olarak aşağıdaki ayara "
+"getirilir.\n"
+"Bu, iptal aracını başka bir şeyde bıraktıysanız size bir tıklama "
+"kazandırmalı ve planlama modundan seçildiğinde iptal aracının her zaman bir "
+"planı kaldırmasını sağlamalıdır."
+
+#. PlanningTool.PTStrings.SHAPES.CIRCLE
+msgctxt "PlanningTool.PTStrings.SHAPES.CIRCLE"
+msgid "Circle"
+msgstr "Dönüş"
+
+#. PlanningTool.PTStrings.SHAPES.DIAMOND
+msgctxt "PlanningTool.PTStrings.SHAPES.DIAMOND"
+msgid "Diamond"
+msgstr "Elmas"
+
+#. PlanningTool.PTStrings.SHAPES.RECTANGLE
+msgctxt "PlanningTool.PTStrings.SHAPES.RECTANGLE"
+msgid "Rectangle"
+msgstr "Dikdörtgen"
