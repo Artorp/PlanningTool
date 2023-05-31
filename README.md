@@ -1,6 +1,10 @@
 # Planning Tool
 
-A planning tool mod that lets you drag shapes, copy paste plans, and build your base with ease.
+Planning Tool is a mod for Oxygen Not Included that lets you plan out a layout of your base, similar to planning tools for other games like RimWorld and Prison Architect. You can use this mod to design your base before you start building, or to experiment with different ideas or layouts.
+
+<img src="Preview/preview.png" width=400px height=400px>
+
+[Planning Tool on Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2982316671)
 
 ## Report issues
 
