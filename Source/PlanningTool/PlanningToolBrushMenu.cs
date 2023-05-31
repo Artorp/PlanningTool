@@ -22,7 +22,11 @@ namespace PlanningTool
         private List<PlanShape> _planShapes;
         private List<Sprite> _planShapeSprites;
 
-        public static void DestroyInstance() {
+        public static void DestroyInstance()
+        {
+            // Can happen if new game started, user then presses back during dupe selection
+            if (Instance == null)
+                return;
             if (Instance.RadialMenuObject != null)
             {
                 Instance.RadialMenuObject.transform.SetParent(null);
