@@ -387,14 +387,14 @@ msgstr ""
 #. PlanningTool.PTStrings.SHAPES.CIRCLE
 msgctxt "PlanningTool.PTStrings.SHAPES.CIRCLE"
 msgid "Circle"
-msgstr "Dönüş"
+msgstr "Oval"
 
 #. PlanningTool.PTStrings.SHAPES.DIAMOND
 msgctxt "PlanningTool.PTStrings.SHAPES.DIAMOND"
 msgid "Diamond"
-msgstr "Elmas"
+msgstr "Karo"
 
 #. PlanningTool.PTStrings.SHAPES.RECTANGLE
 msgctxt "PlanningTool.PTStrings.SHAPES.RECTANGLE"
 msgid "Rectangle"
-msgstr "Dikdörtgen"
+msgstr "Kare"
