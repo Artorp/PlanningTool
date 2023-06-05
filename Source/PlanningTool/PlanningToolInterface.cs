@@ -393,6 +393,7 @@ namespace PlanningTool
 
         private static void AdjustCancelFilterIfNeeded(InterfaceTool new_tool)
         {
+            if (new_tool == null) return;
             if (new_tool.name != CancelTool.Instance.name || !ModOptions.Options.SwitchPlanFilter) return;
             var overlayFilterTargetsField = AccessTools.Field(typeof(CancelTool), "overlayFilterTargets");
             if (overlayFilterTargetsField == null)
