@@ -83,57 +83,6 @@ namespace PlanningTool.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(CancelTool))]
-    public class CancelTool_Patch
-    {
-        public static string PLANNINGTOOL_PLAN = nameof(PLANNINGTOOL_PLAN);
-
-        [HarmonyPatch("GetDefaultFilters")]
-        [HarmonyPostfix]
-        public static void GetDefaultFiltersPatch(Dictionary<string, ToolParameterMenu.ToggleState> filters)
-        {
-            filters.Add(PLANNINGTOOL_PLAN, ToolParameterMenu.ToggleState.Off);
-        }
-
-        [HarmonyPatch("OnDragTool")]
-        [HarmonyPostfix]
-        public static void OnDragToolPatch(int cell, CancelTool __instance)
-        {
-            var go = PlanGrid.Plans[cell];
-            if (go != null && __instance.IsActiveLayer(PLANNINGTOOL_PLAN))
-            {
-                PlanGrid.Plans[cell] = null;
-                SaveLoadPlans.Instance.PlanState.Remove(cell);
-                Object.Destroy(go);
-            }
-        }
-
-        [HarmonyPatch("OnPrefabInit")]
-        [HarmonyPostfix]
-        public static void OnPrefabInitPatch(CancelTool __instance, Dictionary<string, ToolParameterMenu.ToggleState> ___filterTargets, Dictionary<string, ToolParameterMenu.ToggleState> ___overlayFilterTargets, ref Dictionary<string, ToolParameterMenu.ToggleState> ___currentFilterTargets)
-        {
-            var resetFilterMethod = AccessTools.Method(typeof(CancelTool), "ResetFilter",
-                new[] { typeof(Dictionary<string, ToolParameterMenu.ToggleState>) });
-            if (resetFilterMethod == null)
-            {
-                Debug.LogWarning("[PlanningTool] Unable to find CancelTool.ResetFilter");
-                return;
-            }
-
-            if (___filterTargets == null || ___overlayFilterTargets == null || ___currentFilterTargets == null)
-            {
-                Debug.LogWarning("[PlanningTool] Fields in CancelTool do not match expected values, should all be initialized at this point.");
-                return;
-            }
-
-            // PlanningToolInterface.SelectPlansAsToolFilter modifies overlayFilterTargets but it is not populated until the tool is selected for the first time,
-            // so populate it earlier to allow changes to stick on first tool switch.
-            // Note: ResetFilter assigns currentFilterTargets to the called filter dict, so reassign it back to filterTargets (shouldn't affect anything anyway)
-            resetFilterMethod.Invoke(__instance, new object[]{___overlayFilterTargets});
-            ___currentFilterTargets = ___filterTargets;
-        }
-    }
-
     /// <summary>
     /// Subscribe to GameplayEventManager.Instance.NewBuilding, and once a new building is constructed remove a plan
     /// on the building cells if the option is set.

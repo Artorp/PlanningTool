@@ -19,8 +19,6 @@ namespace PlanningTool
         public static LocString PLANNING_TOOL_NAME = "Planning";
         public static LocString PLANNING_TOOL_TOOLTIP = "Create a plan {0}";
 
-        public static LocString PLANNING_TOOL_FILTER_ITEM = "Plans";
-
         public static class PLANNING_TOOL_ACTIVE_BINDINGS
         {
             public static LocString GROUP_NAME = "Planning tool (selected)";
@@ -115,15 +113,6 @@ namespace PlanningTool
             public static LocString REMOVE_PLAN_ON_CONSTRUCTION_TITLE = "Remove plan on construction";
             public static LocString REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP =
                 "When a building is constructed on top of a previously marked plan, remove that plan.";
-
-            public static LocString SWITCH_PLAN_FILTER_TITLE = "Auto-switch Cancel Tool Filter";
-            public static LocString SWITCH_PLAN_FILTER_TOOLTIP =
-                "If the cancel tool is selected while the planning tool is active and the filter is not 'Plans' or 'All', the cancel tool filter will automatically be set to the below setting.\n" +
-                "This should save you a click if you left the cancel tool on something else, and ensure the cancel tool will always remove a plan when selected from planning mode.";
-
-            public static LocString AUTO_SWITCH_TO_TITLE = "Auto-switch to";
-            public static LocString AUTO_SWITCH_TO_TOOLTIP =
-                "Which filter to switch to when selecting cancel tool with planning tool active. Does nothing if the previous setting is disabled.";
 
             public static LocString PLAN_STYLE_TITLE = "Graphic style";
             public static LocString PLAN_STYLE_TOOLTIP = "Choose a style for the appearance of the plans.";

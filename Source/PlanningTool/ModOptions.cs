@@ -31,15 +31,6 @@ namespace PlanningTool
         [JsonProperty]
         public bool RemovePlansOnConstruction { get; set; }
 
-        [Option("PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE", "PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TOOLTIP")]
-        [JsonProperty]
-        public bool SwitchPlanFilter { get; set; }
-
-        [Option("PlanningTool.PTStrings.SETTINGS.AUTO_SWITCH_TO_TITLE", "PlanningTool.PTStrings.SETTINGS.AUTO_SWITCH_TO_TOOLTIP")]
-        [JsonProperty]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public AutoSwitchTarget AutoSwitchTo { get; set; }
-
         [Option("PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TITLE", "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TOOLTIP")]
         [JsonProperty]
         [JsonConverter(typeof(StringEnumConverter))]
@@ -48,8 +39,6 @@ namespace PlanningTool
         public ModOptions()
         {
             RemovePlansOnConstruction = true;
-            SwitchPlanFilter = true;
-            AutoSwitchTo = AutoSwitchTarget.Plans;
         }
 
         public IEnumerable<IOptionsEntry> CreateOptions()
@@ -66,14 +55,6 @@ namespace PlanningTool
         public static void LoadOptions()
         {
             _options = POptions.ReadSettings<ModOptions>() ?? new ModOptions();
-        }
-
-        public enum AutoSwitchTarget
-        {
-            [Option("PlanningTool.PTStrings.PLANNING_TOOL_FILTER_ITEM")]
-            Plans,
-            [Option("STRINGS.UI.TOOLS.FILTERLAYERS.ALL")]
-            All
         }
 
         public enum PlanStyle

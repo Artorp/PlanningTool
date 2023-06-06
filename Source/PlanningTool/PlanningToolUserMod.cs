@@ -4,7 +4,6 @@ using PeterHan.PLib.Actions;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Database;
 using PeterHan.PLib.Options;
-using PlanningTool.HarmonyPatches;
 
 namespace PlanningTool
 {
@@ -43,10 +42,6 @@ namespace PlanningTool
         {
             // KeyBinding strings
             ToolKeyBindings.AddStrings();
-
-            // see: ToolParameterMenu.PopulateMenu
-            Strings.Add("STRINGS.UI.TOOLS.FILTERLAYERS." + CancelTool_Patch.PLANNINGTOOL_PLAN,
-                PTStrings.PLANNING_TOOL_FILTER_ITEM);
         }
     }
 }

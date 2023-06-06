@@ -328,11 +328,6 @@ msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SWITCH_SHAPE"
 msgid "Switch plan shape"
 msgstr ""
 
-#. PlanningTool.PTStrings.PLANNING_TOOL_FILTER_ITEM
-msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_FILTER_ITEM"
-msgid "Plans"
-msgstr ""
-
 #. PlanningTool.PTStrings.PLANNING_TOOL_NAME
 msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_NAME"
 msgid "Planning"
@@ -341,16 +336,6 @@ msgstr ""
 #. PlanningTool.PTStrings.PLANNING_TOOL_TOOLTIP
 msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_TOOLTIP"
 msgid "Create a plan {0}"
-msgstr ""
-
-#. PlanningTool.PTStrings.SETTINGS.AUTO_SWITCH_TO_TITLE
-msgctxt "PlanningTool.PTStrings.SETTINGS.AUTO_SWITCH_TO_TITLE"
-msgid "Auto-switch to"
-msgstr ""
-
-#. PlanningTool.PTStrings.SETTINGS.AUTO_SWITCH_TO_TOOLTIP
-msgctxt "PlanningTool.PTStrings.SETTINGS.AUTO_SWITCH_TO_TOOLTIP"
-msgid "Which filter to switch to when selecting cancel tool with planning tool active. Does nothing if the previous setting is disabled."
 msgstr ""
 
 #. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SIMPLE
@@ -381,16 +366,6 @@ msgstr ""
 #. PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP
 msgctxt "PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP"
 msgid "When a building is constructed on top of a previously marked plan, remove that plan."
-msgstr ""
-
-#. PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE
-msgctxt "PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE"
-msgid "Auto-switch Cancel Tool Filter"
-msgstr ""
-
-#. PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TOOLTIP
-msgctxt "PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TOOLTIP"
-msgid "If the cancel tool is selected while the planning tool is active and the filter is not 'Plans' or 'All', the cancel tool filter will automatically be set to the below setting.\nThis should save you a click if you left the cancel tool on something else, and ensure the cancel tool will always remove a plan when selected from planning mode."
 msgstr ""
 
 #. PlanningTool.PTStrings.SHAPES.CIRCLE
