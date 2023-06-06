@@ -8,6 +8,7 @@ namespace PlanningTool
 {
     [JsonObject(MemberSerialization.OptIn)]
     [ModInfo("https://github.com/Artorp/PlanningTool")]
+    [ConfigFile(SharedConfigLocation: true)]
     public class ModOptions : IOptions
     {
         private static ModOptions _options;
