@@ -98,6 +98,21 @@ msgctxt "PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_HEADER"
 msgid "Paste"
 msgstr ""
 
+#. PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_LABEL"
+msgid "Remove"
+msgstr ""
+
+#. PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_TOOLTIP_BODY"
+msgid "Remove plans {Hotkey}"
+msgstr ""
+
+#. PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_TOOLTIP_HEADER"
+msgid "Remove"
+msgstr ""
+
 #. PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_LABEL
 msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_LABEL"
 msgid "Sample"
@@ -218,6 +233,11 @@ msgctxt "PlanningTool.PTStrings.HOVER_CARD.PLANNING_ACTION_NAME"
 msgid "Place plan"
 msgstr ""
 
+#. PlanningTool.PTStrings.HOVER_CARD.REMOVE_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.REMOVE_ACTION_NAME"
+msgid "Remove plan"
+msgstr ""
+
 #. PlanningTool.PTStrings.HOVER_CARD.ROTATE_LEFT_HOTKEY
 msgctxt "PlanningTool.PTStrings.HOVER_CARD.ROTATE_LEFT_HOTKEY"
 msgid "{Hotkey} - Rotate left"
@@ -276,6 +296,11 @@ msgstr ""
 #. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.PASTE_PLAN
 msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.PASTE_PLAN"
 msgid "Paste plan"
+msgstr ""
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.REMOVE_PLAN
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.REMOVE_PLAN"
+msgid "Remove plan"
 msgstr ""
 
 #. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.ROTATE_CLIPBOARD_CCW

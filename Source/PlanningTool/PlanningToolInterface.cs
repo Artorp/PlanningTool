@@ -50,6 +50,13 @@ namespace PlanningTool
             }
         }
 
+        protected override string GetConfirmSound()
+        {
+            if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.RemovePlan)
+                return "Tile_Confirm_NegativeTool";
+            return base.GetConfirmSound();
+        }
+
         public event Action<bool> OnToolActive;
 
         public static void DestroyInstance() => Instance = null;
@@ -193,7 +200,20 @@ namespace PlanningTool
             {
                 ToolSamplePlan(cell);
             }
+            else if (PlanningToolSettings.Instance.PlanningMode == PlanningToolSettings.PlanningToolMode.RemovePlan)
+                ToolRemovePlan(cell);
             _cellLastDragThisClick = cell;
+        }
+
+        private void ToolRemovePlan(int cell)
+        {
+            var go = PlanGrid.Plans[cell];
+            if (go != null)
+            {
+                PlanGrid.Plans[cell] = null;
+                SaveLoadPlans.Instance.PlanState.Remove(cell);
+                Destroy(go);
+            }
         }
 
         private void ToolSamplePlan(int cell)
@@ -345,6 +365,9 @@ namespace PlanningTool
                 PlanningToolSettings.Instance.OnPlanningToolModeChanged += toolMode =>
                 {
 
+                    if (toolMode != PlanningToolSettings.PlanningToolMode.DragPlan)
+                        PlaySound(GlobalAssets.GetSound("hud_click"));
+
                     SetAllCursors(defaultCursor, defaultCursorOffset);
                     if (toolMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
                     {
@@ -355,6 +378,12 @@ namespace PlanningTool
                     {
                         SetAllCursors(PTAssets.CursorPipette, defaultCursorOffset);
                         SetMode(Mode.Brush);
+                        _visualizerClipboard.SetActive(false);
+                    }
+                    else if (toolMode == PlanningToolSettings.PlanningToolMode.RemovePlan)
+                    {
+                        SetAllCursors(PTAssets.CursorEraser, defaultCursorOffset);
+                        SetMode(Mode.Box);
                         _visualizerClipboard.SetActive(false);
                     }
                     else
@@ -375,6 +404,8 @@ namespace PlanningTool
                 isInitialized = true;
             }
 
+            if (PlanningToolSettings.Instance.PlanningMode != PlanningToolSettings.PlanningToolMode.DragPlan)
+                PlanningToolSettings.Instance.PlanningMode = PlanningToolSettings.PlanningToolMode.DragPlan;
             ToolActive = true;
             KScreenManager.Instance.RefreshStack();
             PlanningToolBrushMenu.Instance.row.SetActive(true);

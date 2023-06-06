@@ -148,7 +148,7 @@ namespace PlanningTool
 
         public enum PlanningToolMode
         {
-            DragPlan, CopyArea, CutArea, SamplePlan, PlaceClipboard
+            DragPlan, CopyArea, CutArea, SamplePlan, PlaceClipboard, RemovePlan
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +13,10 @@ namespace PlanningTool
                 case PlanningToolSettings.PlanningToolMode.DragPlan:
                     ToolName = PTStrings.PLANNING_TOOL_NAME;
                     ActionName = PTStrings.HOVER_CARD.PLANNING_ACTION_NAME;
+                    break;
+                case PlanningToolSettings.PlanningToolMode.RemovePlan:
+                    ToolName = PTStrings.BRUSH_MENU.REMOVE_BUTTON_LABEL;
+                    ActionName = PTStrings.HOVER_CARD.REMOVE_ACTION_NAME;
                     break;
                 case PlanningToolSettings.PlanningToolMode.CopyArea:
                     ToolName = PTStrings.BRUSH_MENU.COPY_BUTTON_LABEL;

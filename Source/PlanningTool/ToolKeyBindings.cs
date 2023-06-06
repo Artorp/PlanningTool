@@ -10,6 +10,7 @@ namespace PlanningTool
         public static PAction ClipBoardRotateCCWAction { get; private set; }
         public static PAction ClipBoardRotateCWAction { get; private set; }
         public static PAction ClipBoardFlipAction { get; private set; }
+        public static PAction RemovePlanAction { get; private set; }
         public static PAction CopyPlanAction { get; private set; }
         public static PAction CutPlanAction { get; private set; }
         public static PAction PastePlanAction { get; private set; }
@@ -33,6 +34,8 @@ namespace PlanningTool
                 PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.ROTATE_CLIPBOARD_CW, new PKeyBinding(KKeyCode.E));
             ClipBoardFlipAction = _createNonConflict(actionManager, "planningtool.clipboard_flip",
                 PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.FLIP_CLIPBOARD, new PKeyBinding(KKeyCode.F));
+            RemovePlanAction = _createNonConflict(actionManager, "planningtool.remove_plan",
+                PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.REMOVE_PLAN, new PKeyBinding(KKeyCode.C));
             CopyPlanAction = _createNonConflict(actionManager, "planningtool.copy_plan",
                 PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.COPY_PLAN, new PKeyBinding(KKeyCode.R));
             CutPlanAction = _createNonConflict(actionManager, "planningtool.cut_plan",

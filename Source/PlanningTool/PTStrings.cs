@@ -28,6 +28,7 @@ namespace PlanningTool
             public static LocString ROTATE_CLIPBOARD_CW = "Rotate clipboard clockwise";
             public static LocString FLIP_CLIPBOARD = "Flip clipboard";
             public static LocString SAMPLE_TOOL = "Sample plan";
+            public static LocString REMOVE_PLAN = "Remove plan";
             public static LocString COPY_PLAN = "Copy plan";
             public static LocString CUT_PLAN = "Cut plan";
             public static LocString PASTE_PLAN = "Paste plan";
@@ -43,6 +44,9 @@ namespace PlanningTool
             public static LocString HIDE_BUTTON_TOOLTIP_BODY = "Toggle visibility of placed plans {Hotkey}";
             public static LocString SLIDER_TEXT = "Transparency:\n{0:0.00}";
             public static LocString SLIDER_TOOLTIP = "Change the transparency of plans";
+            public static LocString REMOVE_BUTTON_LABEL = "Remove";
+            public static LocString REMOVE_BUTTON_TOOLTIP_HEADER = "Remove";
+            public static LocString REMOVE_BUTTON_TOOLTIP_BODY = "Remove plans {Hotkey}";
             public static LocString COPY_BUTTON_LABEL = "Copy";
             public static LocString COPY_BUTTON_TOOLTIP_HEADER = "Copy";
             public static LocString COPY_BUTTON_TOOLTIP_BODY = "Copy plans {Hotkey}";
@@ -90,6 +94,7 @@ namespace PlanningTool
         public static class HOVER_CARD
         {
             public static LocString PLANNING_ACTION_NAME = "Place plan";
+            public static LocString REMOVE_ACTION_NAME = "Remove plan";
             public static LocString COPY_ACTION_NAME = "Copy plan";
             public static LocString CUT_ACTION_NAME = "Cut plan";
             public static LocString PASTE_ACTION_NAME = "Paste plan";

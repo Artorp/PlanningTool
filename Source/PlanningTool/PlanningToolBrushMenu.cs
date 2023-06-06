@@ -198,6 +198,30 @@ namespace PlanningTool
             }.BuildWithFixedSize(new Vector2(3f, 42f));
             verticalBar.transform.SetParent(miscToolsRow.transform, false);
 
+            var removePlansButton = PTObjectTemplates.CreateSquareButton(PTStrings.BRUSH_MENU.REMOVE_BUTTON_LABEL, PTAssets.IconToolEraser, null);
+            var removePlansButtonToolTip = removePlansButton.GetComponent<ToolTip>();
+            removePlansButtonToolTip.AddMultiStringTooltip(PTStrings.BRUSH_MENU.REMOVE_BUTTON_TOOLTIP_HEADER, tooltipHeaderStyle);
+            removePlansButtonToolTip.AddMultiStringTooltip(GameUtil.ReplaceHotkeyString(PTStrings.BRUSH_MENU.REMOVE_BUTTON_TOOLTIP_BODY, ToolKeyBindings.RemovePlanAction.GetKAction()), null);
+            var removePlansButtonKToggle = removePlansButton.GetComponent<KToggle>();
+            removePlansButtonKToggle.onClick += () =>
+            {
+                if (removePlansButtonKToggle.isOn && Settings.PlanningMode != PlanningToolSettings.PlanningToolMode.RemovePlan)
+                {
+                    Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.RemovePlan;
+                } else if (!removePlansButtonKToggle.isOn &&
+                           Settings.PlanningMode != PlanningToolSettings.PlanningToolMode.DragPlan)
+                {
+                    Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.DragPlan;
+                }
+            };
+            Settings.OnPlanningToolModeChanged += mode =>
+            {
+                var isRemoving = mode == PlanningToolSettings.PlanningToolMode.RemovePlan;
+                if (removePlansButtonKToggle.isOn != isRemoving)
+                    removePlansButtonKToggle.isOn = isRemoving;
+            };
+            removePlansButtonKToggle.transform.SetParent(miscToolsRow.transform, false);
+
             var copyButton = PTObjectTemplates.CreateSquareButton(PTStrings.BRUSH_MENU.COPY_BUTTON_LABEL, PTAssets.IconToolCopy, null);
             var copyButtonToolTip = copyButton.GetComponent<ToolTip>();
             copyButtonToolTip.AddMultiStringTooltip(PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_HEADER, tooltipHeaderStyle);
@@ -425,6 +449,10 @@ namespace PlanningTool
             {
                 Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.SamplePlan;
             }
+            else if (e.TryConsume(ToolKeyBindings.RemovePlanAction.GetKAction()))
+            {
+                Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.RemovePlan;
+            }
             else if (e.TryConsume(ToolKeyBindings.CopyPlanAction.GetKAction()))
             {
                 Settings.PlanningMode = PlanningToolSettings.PlanningToolMode.CopyArea;
@@ -523,7 +551,8 @@ namespace PlanningTool
                     (Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard ||
                      Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CopyArea ||
                      Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.CutArea ||
-                     Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.SamplePlan))
+                     Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.SamplePlan ||
+                     Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.RemovePlan))
                 {
                     // cancel while placing clipboard or other submenu tools should just go back to drag mode
                     PlaySound(GlobalAssets.GetSound("Tile_Cancel"));
