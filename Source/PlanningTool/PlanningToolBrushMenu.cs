@@ -421,8 +421,10 @@ namespace PlanningTool
             if (e.Consumed)
                 return;
 
-            if (!e.Consumed && PlanningToolInterface.Instance.ToolActive &&
-                Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
+            if (!PlanningToolInterface.Instance.ToolActive)
+                return;
+
+            if (Settings.PlanningMode == PlanningToolSettings.PlanningToolMode.PlaceClipboard)
             {
                 if (e.TryConsume(ToolKeyBindings.ClipBoardRotateCCWAction.GetKAction()))
                 {
