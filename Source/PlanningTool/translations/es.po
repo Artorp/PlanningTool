@@ -1,0 +1,305 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Ferchu\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"X-Generator: Poedit 3.7\n"
+
+#. PlanningTool.PTStrings.ACTION_PLANNING_TOOL_NAME
+msgctxt "PlanningTool.PTStrings.ACTION_PLANNING_TOOL_NAME"
+msgid "Start planning"
+msgstr "Iniciar planificación"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_LABEL"
+msgid "Copy"
+msgstr "Copiar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_BODY"
+msgid "Copy plans {Hotkey}"
+msgstr "Copiar planes {Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_HEADER"
+msgid "Copy"
+msgstr "Copiar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_LABEL"
+msgid "Cut"
+msgstr "Cortar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_BODY"
+msgid "Cut plans {Hotkey}"
+msgstr "Cortar planes {Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_HEADER"
+msgid "Cut"
+msgstr "Cortar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_LABEL"
+msgid "Export"
+msgstr "Exportar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_BODY"
+msgid "Place the plan currently on the game's clipboard to your system's clipboard"
+msgstr "Coloca el plan que está actualmente en el portapapeles del juego en el portapapeles del sistema"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_HEADER"
+msgid "Export"
+msgstr "Exportar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_LABEL"
+msgid "Hide / show"
+msgstr "Ocultar / mostrar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_BODY"
+msgid "Toggle visibility of placed plans {Hotkey}"
+msgstr "Alternar visibilidad de los planes colocados {Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_HEADER"
+msgid "Hide / Show Plans"
+msgstr "Ocultar / Mostrar planes"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_LABEL"
+msgid "Import"
+msgstr "Importar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_BODY"
+msgid ""
+"Attempt to import a plan from the system's clipboard to the game's clipboard\n"
+"Import errors are logged to the game's player.log file."
+msgstr ""
+"Intentar importar un plan desde el portapapeles del sistema al portapapeles del juego\n"
+"Los errores de importación se registran en el archivo player.log del juego."
+
+#. PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_HEADER"
+msgid "Import"
+msgstr "Importar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_LABEL"
+msgid "Paste"
+msgstr "Pegar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_BODY"
+msgid "Paste previously copied plans {Hotkey}"
+msgstr "Pegar planes previamente copiados {Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_HEADER"
+msgid "Paste"
+msgstr "Pegar"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_LABEL"
+msgid "Sample"
+msgstr "Muestra"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_BODY"
+msgid "Copy shape and color from already placed plan {Hotkey}"
+msgstr "Copiar forma y color de un plan ya colocado {Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_HEADER"
+msgid "Sample"
+msgstr "Muestra"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TEXT
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TEXT"
+msgid ""
+"Transparency:\n"
+"{0:0.00}"
+msgstr ""
+"Transparencia:\n"
+"{0:0.00}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TOOLTIP
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TOOLTIP"
+msgid "Change the transparency of plans"
+msgstr "Cambiar la transparencia de los planes"
+
+#. PlanningTool.PTStrings.COLORS.BLACK
+msgctxt "PlanningTool.PTStrings.COLORS.BLACK"
+msgid "Black"
+msgstr "Negro"
+
+#. PlanningTool.PTStrings.COLORS.BLUE
+msgctxt "PlanningTool.PTStrings.COLORS.BLUE"
+msgid "Blue"
+msgstr "Azul"
+
+#. PlanningTool.PTStrings.COLORS.CYAN
+msgctxt "PlanningTool.PTStrings.COLORS.CYAN"
+msgid "Cyan"
+msgstr "Cian"
+
+#. PlanningTool.PTStrings.COLORS.GRAY
+msgctxt "PlanningTool.PTStrings.COLORS.GRAY"
+msgid "Gray"
+msgstr "Gris"
+
+#. PlanningTool.PTStrings.COLORS.GREEN
+msgctxt "PlanningTool.PTStrings.COLORS.GREEN"
+msgid "Green"
+msgstr "Verde"
+
+#. PlanningTool.PTStrings.COLORS.MAGENTA
+msgctxt "PlanningTool.PTStrings.COLORS.MAGENTA"
+msgid "Magenta"
+msgstr "Magenta"
+
+#. PlanningTool.PTStrings.COLORS.ORANGE
+msgctxt "PlanningTool.PTStrings.COLORS.ORANGE"
+msgid "Orange"
+msgstr "Naranja"
+
+#. PlanningTool.PTStrings.COLORS.RED
+msgctxt "PlanningTool.PTStrings.COLORS.RED"
+msgid "Red"
+msgstr "Rojo"
+
+#. PlanningTool.PTStrings.COLORS.VIOLET
+msgctxt "PlanningTool.PTStrings.COLORS.VIOLET"
+msgid "Violet"
+msgstr "Violeta"
+
+#. PlanningTool.PTStrings.COLORS.WHITE
+msgctxt "PlanningTool.PTStrings.COLORS.WHITE"
+msgid "White"
+msgstr "Blanco"
+
+#. PlanningTool.PTStrings.COLORS.YELLOW
+msgctxt "PlanningTool.PTStrings.COLORS.YELLOW"
+msgid "Yellow"
+msgstr "Amarillo"
+
+#. PlanningTool.PTStrings.HOVER_CARD.COPY_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.COPY_ACTION_NAME"
+msgid "Copy plan"
+msgstr "Copiar plan"
+
+#. PlanningTool.PTStrings.HOVER_CARD.COPY_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.COPY_HOTKEY"
+msgid "{Hotkey} - Copy"
+msgstr "{Hotkey} - Copiar"
+
+#. PlanningTool.PTStrings.HOVER_CARD.CUT_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.CUT_ACTION_NAME"
+msgid "Cut plan"
+msgstr "Cortar plan"
+
+#. PlanningTool.PTStrings.HOVER_CARD.CUT_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.CUT_HOTKEY"
+msgid "{Hotkey} - Cut"
+msgstr "{Hotkey} - Cortar"
+
+#. PlanningTool.PTStrings.HOVER_CARD.FLIP_HORIZONTALLY_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.FLIP_HORIZONTALLY_HOTKEY"
+msgid "{Hotkey} - Flip horizontally"
+msgstr "{Hotkey} - Voltear horizontalmente"
+
+#. PlanningTool.PTStrings.HOVER_CARD.PASTE_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.PASTE_ACTION_NAME"
+msgid "Paste plan"
+msgstr "Pegar plan"
+
+#. PlanningTool.PTStrings.HOVER_CARD.PASTE_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.PASTE_HOTKEY"
+msgid "{Hotkey} - Paste"
+msgstr "{Hotkey} - Pegar"
+
+#. PlanningTool.PTStrings.HOVER_CARD.PLANNING_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.PLANNING_ACTION_NAME"
+msgid "Place plan"
+msgstr "Colocar plan"
+
+#. PlanningTool.PTStrings.HOVER_CARD.ROTATE_LEFT_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.ROTATE_LEFT_HOTKEY"
+msgid "{Hotkey} - Rotate left"
+msgstr "{Hotkey} - Girar a la izquierda"
+
+#. PlanningTool.PTStrings.HOVER_CARD.ROTATE_RIGHT_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.ROTATE_RIGHT_HOTKEY"
+msgid "{Hotkey} - Rotate right"
+msgstr "{Hotkey} - Girar a la derecha"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SAMPLE_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SAMPLE_ACTION_NAME"
+msgid "Sample plan"
+msgstr "Muestra de plan"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SAMPLE_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SAMPLE_HOTKEY"
+msgid "{Hotkey} - Sample"
+msgstr "{Hotkey} - Muestra"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SWITCH_COLOR_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SWITCH_COLOR_HOTKEY"
+msgid "{Hotkey} - Switch color"
+msgstr "{Hotkey} - Cambiar color"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SWITCH_SHAPE_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SWITCH_SHAPE_HOTKEY"
+msgid "{Hotkey} - Switch shape"
+msgstr "{Hotkey} - Cambiar forma"
+
+#. PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TITLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TITLE"
+msgid "Remove plan on construction"
+msgstr "Eliminar plan al construir"
+
+#. PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP
+msgctxt "PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP"
+msgid "When a building is constructed on top of a previously marked plan, remove that plan."
+msgstr "Cuando se construya un edificio sobre un plan previamente marcado, eliminar ese plan."
+
+#. PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TITLE"
+msgid "Auto-switch Cancel Tool Filter"
+msgstr "Cambio automático del filtro de herramienta Cancelar"
+
+#. PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TOOLTIP
+msgctxt "PlanningTool.PTStrings.SETTINGS.SWITCH_PLAN_FILTER_TOOLTIP"
+msgid ""
+"If the cancel tool is selected while the planning tool is active and the filter is not 'Plans' or 'All', the cancel tool filter will automatically be set to the below setting.\n"
+"This should save you a click if you left the cancel tool on something else, and ensure the cancel tool will always remove a plan when selected from planning mode."
+msgstr ""
+"Si la herramienta Cancelar está seleccionada mientras la herramienta de planificación está activa y el filtro no está en \"Planes\" o \"Todos\", el filtro de la herramienta Cancelar se ajustará automáticamente a la configuración siguiente.  \n"
+"Esto te ahorrará un clic si dejaste la herramienta Cancelar en otra opción, y garantizará que la herramienta Cancelar siempre elimine un plan cuando se seleccione desde el modo planificación."
+
+#. PlanningTool.PTStrings.SHAPES.CIRCLE
+msgctxt "PlanningTool.PTStrings.SHAPES.CIRCLE"
+msgid "Circle"
+msgstr "Círculo"
+
+#. PlanningTool.PTStrings.SHAPES.DIAMOND
+msgctxt "PlanningTool.PTStrings.SHAPES.DIAMOND"
+msgid "Diamond"
+msgstr "Diamante"
+
+#. PlanningTool.PTStrings.SHAPES.RECTANGLE
+msgctxt "PlanningTool.PTStrings.SHAPES.RECTANGLE"
+msgid "Rectangle"
+msgstr "Rectángulo"
