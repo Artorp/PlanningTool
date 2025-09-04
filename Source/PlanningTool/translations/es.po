@@ -286,7 +286,7 @@ msgid ""
 "If the cancel tool is selected while the planning tool is active and the filter is not 'Plans' or 'All', the cancel tool filter will automatically be set to the below setting.\n"
 "This should save you a click if you left the cancel tool on something else, and ensure the cancel tool will always remove a plan when selected from planning mode."
 msgstr ""
-"Si la herramienta Cancelar está seleccionada mientras la herramienta de planificación está activa y el filtro no está en \"Planes\" o \"Todos\", el filtro de la herramienta Cancelar se ajustará automáticamente a la configuración siguiente.  \n"
+"Si la herramienta Cancelar está seleccionada mientras la herramienta de planificación está activa y el filtro no está en \"Planes\" o \"Todos\", el filtro de la herramienta Cancelar se ajustará automáticamente a la configuración siguiente.\n"
 "Esto te ahorrará un clic si dejaste la herramienta Cancelar en otra opción, y garantizará que la herramienta Cancelar siempre elimine un plan cuando se seleccione desde el modo planificación."
 
 #. PlanningTool.PTStrings.SHAPES.CIRCLE
