@@ -4,8 +4,8 @@
     <Target Name="ILRepacker" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
 
         <ItemGroup>
-            <InputAssemblies Include="$(OutputPath)\PlanningTool.dll" />
-            <InputAssemblies Include="$(OutputPath)\PLib.dll" />
+            <InputAssemblies Include="$(TargetPath)" />
+            <InputAssemblies Include="$(PkgPLib)\lib\netstandard2.1\PLib.dll" />
         </ItemGroup>
 
         <ILRepack
@@ -14,7 +14,7 @@
                 InternalizeExclude=""
                 InputAssemblies="@(InputAssemblies)"
                 TargetKind="Dll"
-                OutputFile="$(OutputPath)\$(AssemblyName).dll"
+                OutputFile="$(TargetPath)"
                 LibraryPath="$(OxygenNotIncludedDllsPath)"
         />
 
@@ -23,6 +23,7 @@
             <FilesToDelete Include="$(TargetDir)PlanningTool.pdb" />
             <FilesToDelete Include="$(TargetDir)PLib.dll" />
             <FilesToDelete Include="$(TargetDir)PLib.xml" />
+            <FilesToDelete Include="$(TargetDir)$(AssemblyName).deps.json" />
         </ItemGroup>
         <Delete Files="@(FilesToDelete)">
             <Output TaskParameter="DeletedFiles" ItemName="DeletedList" />

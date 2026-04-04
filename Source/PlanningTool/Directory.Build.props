@@ -5,5 +5,7 @@
         <Deterministic>true</Deterministic>
         <OxygenNotIncludedDllsPath>C:\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed</OxygenNotIncludedDllsPath>
         <ReferencePath>$(OxygenNotIncludedDllsPath);</ReferencePath>
+        <!-- Suppress warnings about System.IO.Compression and System.Net.Http version mismatch between Assembly-CSharp.dll and our refs -->
+        <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB3277</MSBuildWarningsAsMessages>
     </PropertyGroup>
 </Project>
