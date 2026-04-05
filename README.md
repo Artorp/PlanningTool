@@ -31,13 +31,13 @@ Official guide for translating ONI for reference: https://forums.kleientertainme
 
 ## Development setup
 
-The project has been tested to successfully be imported into Visual Studio 2019 and Rider without problems.
+The project has been tested to successfully be imported into Visual Studio 2022 without problems.
 
-Clone the repository into a folder of your choice. Open the solution file (*.sln) with either Visual Studio or Rider. If your installation of Oxygen Not Included is installed in another place than the default Steam folder on C:, open `Directory.Build.props` and modify the OxygenNotIncludedDllsPath attribute to point to the correct `Managed` folder in Oxygen Not Included directory (it should contain Assembly-CSharp.dll among others).
+Clone the repository into a folder of your choice. Open the solution file (*.sln) with Visual Studio. If your installation of Oxygen Not Included is installed in another place than the default Steam folder on C:, open `Directory.Build.props` and modify the OxygenNotIncludedDllsPath attribute to point to the correct `Managed` folder in Oxygen Not Included directory (it should contain Assembly-CSharp.dll among others).
 
-Nuget packages are defined in packages.config and should be automatically installed first time you open the solution.
+Nuget packages are defined in the csproj file, as the project uses the standard SDK setup.
 
-Two configurations are defined, `Debug` and `Release`. Release is configured to merge PLib.dll into the final file using ILRepack.
+Two configurations are defined, `Debug` and `Release`. Release is configured to merge PLib.dll into the final file using ILRepack. Debug will probably fail since PLab.dll from nuget is not set up to be copied by default.
 
 Build the solution, Build > Build Solution. The build output directory is set to Dist at the git repository root. Copy or create a junction link to Klei's local mods location: `%userprofile%\Documents\Klei\OxygenNotIncluded\mods\Dev`
 
@@ -50,5 +50,3 @@ This section will describe the configuration files included in this repository.
 Since PLib.dll is required and the recommended way to include the dll is to bundle it, ILRepack is used to merge the output assembly with PLib to end up with a single dll.
 
 `ILRepack.targets` defines the ILRepack build step that merges dlls, as well as deleting left over files. ILRepack will only run as part of the Release configuration.
-
-`ILRepack.Config.props` defines a few properties to match the recommended build settings per PLib docs.
