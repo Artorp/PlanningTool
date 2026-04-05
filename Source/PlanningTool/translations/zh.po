@@ -1,0 +1,397 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+"X-Generator: Poedit 3.4.4\n"
+
+#. PlanningTool.PTStrings.ACTION_PLANNING_TOOL_NAME
+msgctxt "PlanningTool.PTStrings.ACTION_PLANNING_TOOL_NAME"
+msgid "Start planning"
+msgstr "开始规划"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_LABEL"
+msgid "Copy"
+msgstr "复制"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_BODY"
+msgid "Copy plans {Hotkey}"
+msgstr "复制规划{Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.COPY_BUTTON_TOOLTIP_HEADER"
+msgid "Copy"
+msgstr "复制"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_LABEL"
+msgid "Cut"
+msgstr "剪切"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_BODY"
+msgid "Cut plans {Hotkey}"
+msgstr "剪切规划{Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.CUT_BUTTON_TOOLTIP_HEADER"
+msgid "Cut"
+msgstr "剪切"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_LABEL"
+msgid "Export"
+msgstr "导出"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_BODY"
+msgid ""
+"Place the plan currently on the game's clipboard to your system's clipboard"
+msgstr "将当前游戏剪贴板的规划复制到系统剪贴板上"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.EXPORT_BUTTON_TOOLTIP_HEADER"
+msgid "Export"
+msgstr "导出"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_LABEL"
+msgid "Hide / show"
+msgstr "隐藏/显示"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_BODY"
+msgid "Toggle visibility of placed plans {Hotkey}"
+msgstr "切换已放置的规划的可见性{Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.HIDE_BUTTON_TOOLTIP_HEADER"
+msgid "Hide / Show Plans"
+msgstr "隐藏/显示规划"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_LABEL"
+msgid "Import"
+msgstr "导入"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_BODY"
+msgid "Attempt to import a plan from the system's clipboard to the game's clipboard\nImport errors are logged to the game's player.log file."
+msgstr ""
+"尝试将系统剪贴板上的规划导入到游戏剪贴板中\n"
+"导入出错会记录在游戏的玩家日志文件中。"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.IMPORT_BUTTON_TOOLTIP_HEADER"
+msgid "Import"
+msgstr "导入"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_LABEL"
+msgid "Paste"
+msgstr "粘贴"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_BODY"
+msgid "Paste previously copied plans {Hotkey}"
+msgstr "粘贴之前之前复制的规划{Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.PASTE_BUTTON_TOOLTIP_HEADER"
+msgid "Paste"
+msgstr "粘贴"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_LABEL"
+msgid "Remove"
+msgstr "移除"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_TOOLTIP_BODY"
+msgid "Remove plans {Hotkey}"
+msgstr "移除规划{Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.REMOVE_BUTTON_TOOLTIP_HEADER"
+msgid "Remove"
+msgstr "移除"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_LABEL
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_LABEL"
+msgid "Sample"
+msgstr "取样"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_BODY
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_BODY"
+msgid "Copy shape and color from already placed plan {Hotkey}"
+msgstr "从已放置的规划中复制形状和颜色{Hotkey}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_HEADER
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SAMPLE_BUTTON_TOOLTIP_HEADER"
+msgid "Sample"
+msgstr "取样"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TEXT
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TEXT"
+msgid "Transparency:\n{0:0.00}"
+msgstr "透明度：\n{0:0.00}"
+
+#. PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TOOLTIP
+msgctxt "PlanningTool.PTStrings.BRUSH_MENU.SLIDER_TOOLTIP"
+msgid "Change the transparency of plans"
+msgstr "改变规划的透明度"
+
+#. PlanningTool.PTStrings.COLORS.BLACK
+msgctxt "PlanningTool.PTStrings.COLORS.BLACK"
+msgid "Black"
+msgstr "黑色"
+
+#. PlanningTool.PTStrings.COLORS.BLUE
+msgctxt "PlanningTool.PTStrings.COLORS.BLUE"
+msgid "Blue"
+msgstr "蓝色"
+
+#. PlanningTool.PTStrings.COLORS.CYAN
+msgctxt "PlanningTool.PTStrings.COLORS.CYAN"
+msgid "Cyan"
+msgstr "青色"
+
+#. PlanningTool.PTStrings.COLORS.GRAY
+msgctxt "PlanningTool.PTStrings.COLORS.GRAY"
+msgid "Gray"
+msgstr "灰色"
+
+#. PlanningTool.PTStrings.COLORS.GREEN
+msgctxt "PlanningTool.PTStrings.COLORS.GREEN"
+msgid "Green"
+msgstr "绿色"
+
+#. PlanningTool.PTStrings.COLORS.MAGENTA
+msgctxt "PlanningTool.PTStrings.COLORS.MAGENTA"
+msgid "Magenta"
+msgstr "品红"
+
+#. PlanningTool.PTStrings.COLORS.ORANGE
+msgctxt "PlanningTool.PTStrings.COLORS.ORANGE"
+msgid "Orange"
+msgstr "橙色"
+
+#. PlanningTool.PTStrings.COLORS.RED
+msgctxt "PlanningTool.PTStrings.COLORS.RED"
+msgid "Red"
+msgstr "红色"
+
+#. PlanningTool.PTStrings.COLORS.VIOLET
+msgctxt "PlanningTool.PTStrings.COLORS.VIOLET"
+msgid "Violet"
+msgstr "蓝紫"
+
+#. PlanningTool.PTStrings.COLORS.WHITE
+msgctxt "PlanningTool.PTStrings.COLORS.WHITE"
+msgid "White"
+msgstr "白色"
+
+#. PlanningTool.PTStrings.COLORS.YELLOW
+msgctxt "PlanningTool.PTStrings.COLORS.YELLOW"
+msgid "Yellow"
+msgstr "黄色"
+
+#. PlanningTool.PTStrings.HOVER_CARD.COPY_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.COPY_ACTION_NAME"
+msgid "Copy plan"
+msgstr "复制规划"
+
+#. PlanningTool.PTStrings.HOVER_CARD.COPY_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.COPY_HOTKEY"
+msgid "{Hotkey} - Copy"
+msgstr "{Hotkey} - 复制"
+
+#. PlanningTool.PTStrings.HOVER_CARD.CUT_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.CUT_ACTION_NAME"
+msgid "Cut plan"
+msgstr "剪切规划"
+
+#. PlanningTool.PTStrings.HOVER_CARD.CUT_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.CUT_HOTKEY"
+msgid "{Hotkey} - Cut"
+msgstr "{Hotkey} - 剪切"
+
+#. PlanningTool.PTStrings.HOVER_CARD.FLIP_HORIZONTALLY_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.FLIP_HORIZONTALLY_HOTKEY"
+msgid "{Hotkey} - Flip horizontally"
+msgstr "{Hotkey} - 水平翻转"
+
+#. PlanningTool.PTStrings.HOVER_CARD.PASTE_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.PASTE_ACTION_NAME"
+msgid "Paste plan"
+msgstr "粘贴规划"
+
+#. PlanningTool.PTStrings.HOVER_CARD.PASTE_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.PASTE_HOTKEY"
+msgid "{Hotkey} - Paste"
+msgstr "{Hotkey} - 粘贴"
+
+#. PlanningTool.PTStrings.HOVER_CARD.PLANNING_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.PLANNING_ACTION_NAME"
+msgid "Place plan"
+msgstr "放置规划"
+
+#. PlanningTool.PTStrings.HOVER_CARD.REMOVE_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.REMOVE_ACTION_NAME"
+msgid "Remove plan"
+msgstr "移除规划"
+
+#. PlanningTool.PTStrings.HOVER_CARD.ROTATE_LEFT_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.ROTATE_LEFT_HOTKEY"
+msgid "{Hotkey} - Rotate left"
+msgstr "{Hotkey} - 向左旋转"
+
+#. PlanningTool.PTStrings.HOVER_CARD.ROTATE_RIGHT_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.ROTATE_RIGHT_HOTKEY"
+msgid "{Hotkey} - Rotate right"
+msgstr "{Hotkey} - 向右旋转"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SAMPLE_ACTION_NAME
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SAMPLE_ACTION_NAME"
+msgid "Sample plan"
+msgstr "取样规划"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SAMPLE_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SAMPLE_HOTKEY"
+msgid "{Hotkey} - Sample"
+msgstr "{Hotkey} - 取样"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SWITCH_COLOR_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SWITCH_COLOR_HOTKEY"
+msgid "{Hotkey} - Switch color"
+msgstr "{Hotkey} - 切换颜色"
+
+#. PlanningTool.PTStrings.HOVER_CARD.SWITCH_SHAPE_HOTKEY
+msgctxt "PlanningTool.PTStrings.HOVER_CARD.SWITCH_SHAPE_HOTKEY"
+msgid "{Hotkey} - Switch shape"
+msgstr "{Hotkey} - 切换形状"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.COPY_PLAN
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.COPY_PLAN"
+msgid "Copy plan"
+msgstr "复制规划"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.CUT_PLAN
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.CUT_PLAN"
+msgid "Cut plan"
+msgstr "剪切规划"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.FLIP_CLIPBOARD
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.FLIP_CLIPBOARD"
+msgid "Flip clipboard"
+msgstr "翻转剪贴板"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.GROUP_NAME
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.GROUP_NAME"
+msgid "Planning tool (selected)"
+msgstr "规划工具（已选中）"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.HIDE_SHOW
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.HIDE_SHOW"
+msgid "Hide / show plans"
+msgstr "隐藏/显示规划"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.PASTE_PLAN
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.PASTE_PLAN"
+msgid "Paste plan"
+msgstr "粘贴规划"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.REMOVE_PLAN
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.REMOVE_PLAN"
+msgid "Remove plan"
+msgstr "移除规划"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.ROTATE_CLIPBOARD_CCW
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.ROTATE_CLIPBOARD_CCW"
+msgid "Rotate clipboard counter clockwise"
+msgstr "逆时针旋转剪贴板"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.ROTATE_CLIPBOARD_CW
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.ROTATE_CLIPBOARD_CW"
+msgid "Rotate clipboard clockwise"
+msgstr "顺时针旋转剪贴板"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SAMPLE_TOOL
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SAMPLE_TOOL"
+msgid "Sample plan"
+msgstr "取样规划"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SWITCH_COLOR
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SWITCH_COLOR"
+msgid "Switch plan color"
+msgstr "切换规划颜色"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SWITCH_SHAPE
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_ACTIVE_BINDINGS.SWITCH_SHAPE"
+msgid "Switch plan shape"
+msgstr "切换规划形状"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_NAME
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_NAME"
+msgid "Planning"
+msgstr "规划"
+
+#. PlanningTool.PTStrings.PLANNING_TOOL_TOOLTIP
+msgctxt "PlanningTool.PTStrings.PLANNING_TOOL_TOOLTIP"
+msgid "Create a plan {0}"
+msgstr "创建一个规划{0}"
+
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SIMPLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SIMPLE"
+msgid "Simple"
+msgstr "简单"
+
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SKETCH
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_SKETCH"
+msgid "Sketch"
+msgstr "草图"
+
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TITLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TITLE"
+msgid "Graphic style"
+msgstr "图样形式"
+
+#. PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TOOLTIP
+msgctxt "PlanningTool.PTStrings.SETTINGS.PLAN_STYLE_TOOLTIP"
+msgid "Choose a style for the appearance of the plans."
+msgstr "为规划的展示选择一种形式"
+
+#. PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TITLE
+msgctxt "PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TITLE"
+msgid "Remove plan on construction"
+msgstr "移除建筑物上的规划"
+
+#. PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP
+msgctxt "PlanningTool.PTStrings.SETTINGS.REMOVE_PLAN_ON_CONSTRUCTION_TOOLTIP"
+msgid "When a building is constructed on top of a previously marked plan, remove that plan."
+msgstr "当建筑物在之前标记好的规划上建成时，移除该规划"
+
+#. PlanningTool.PTStrings.SHAPES.CIRCLE
+msgctxt "PlanningTool.PTStrings.SHAPES.CIRCLE"
+msgid "Circle"
+msgstr "圆形"
+
+#. PlanningTool.PTStrings.SHAPES.DIAMOND
+msgctxt "PlanningTool.PTStrings.SHAPES.DIAMOND"
+msgid "Diamond"
+msgstr "菱形"
+
+#. PlanningTool.PTStrings.SHAPES.RECTANGLE
+msgctxt "PlanningTool.PTStrings.SHAPES.RECTANGLE"
+msgid "Rectangle"
+msgstr "矩形"
