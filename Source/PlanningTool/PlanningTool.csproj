@@ -8,7 +8,6 @@
     <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.44.2" />
     <PackageReference Include="Lib.Harmony.Ref" Version="2.4.2" />
     <PackageReference Include="PLib" Version="4.24.0" GeneratePathProperty="true" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
@@ -17,6 +16,10 @@
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>$(OxygenNotIncludedDllsPath)\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(OxygenNotIncludedDllsPath)\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
